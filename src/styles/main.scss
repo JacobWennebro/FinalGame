@@ -1,0 +1,28 @@
+// Fonts
+@import './fonts.scss';
+
+// Commons
+@import './commons.scss';
+
+@import './environments/Desktop.scss';
+
+*, *:after, *:before {
+    box-sizing: content-box;
+    margin: 0;
+    padding: 0;
+}
+
+body,html {
+    box-sizing: inherit;
+    margin: 0;
+    height: 100%;
+    font-family: VT323;
+    user-select: none;
+    overflow: hidden;
+}
+
+#game, .game-view {
+    width: 100vw;
+    height: 100vh;
+    background-color: #FFF;
+}

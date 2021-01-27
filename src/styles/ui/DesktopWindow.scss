@@ -1,0 +1,71 @@
+.app-window {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    background: linear-gradient(0deg, rgba(39,57,218,1) 0%, rgba(193,223,255,1) 100%);
+    border: 2px solid rgb(110, 125, 255);
+    border-radius: 4px;
+    min-height: 50vh;
+    min-width: 20vw;
+    max-width: 70vw;
+    width: 40vw;
+    padding: 0 0.3rem 0.3rem 0.3rem;
+    resize: both;
+    overflow: auto;
+
+    /* When window is fullscreen */
+    &.fullscreen {
+        width: 100%;
+        height: calc(100% - 2.5rem);
+        min-width: 100%;
+        min-height: calc(100% - 2.5rem);
+        top: 0;
+        left: 0;
+        transform: translate(0) !important;
+        border: 0;
+    }
+
+    /* Top bar in app window */
+    &__bar {
+        width: 100%;
+        height: 2rem;
+        flex-shrink: 0;
+        
+        &__title {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.3rem;
+            display: inline-block;
+        }
+
+        &__actions {
+            float: right;
+            height: 100%;
+            width: auto;
+
+            .app-window__bar__button {
+                display: inline-block;
+                background-color: #FFF;
+                width: 20px;
+                height: 20px;
+                margin: 0 2px;
+                border: 1px solid #FFF;
+
+                &.minimize, &.hide {
+                    background: linear-gradient(0deg, rgba(39,57,218,1) 0%, rgba(193,223,255,1) 100%);
+                }
+
+                &.close {
+                    background: linear-gradient(0deg, rgba(218,39,39,1) 0%, rgba(255,193,193,1) 100%);
+                }
+
+            }
+        }
+    }
+
+    &__view {
+        flex: 1;
+        background-color: #FFF;
+    }
+}

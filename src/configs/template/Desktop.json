@@ -1,0 +1,20 @@
+{
+    "wallpaper": "blue",
+    "apps": [
+        {
+            "title": "NetExplorer",
+            "icon": "browser.png",
+            "id": "app.browser"
+        },
+        {
+            "title": "Notepad",
+            "icon": "notepad.png",
+            "id": "app.notepad"
+        },
+        {
+            "title": "Webcam",
+            "icon": "camera.png",
+            "id": "app.camera"
+        }
+    ]
+}
