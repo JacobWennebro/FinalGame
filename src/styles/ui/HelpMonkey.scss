@@ -3,8 +3,9 @@
     bottom: 0;
     right: 0;
     animation: play 3.5s steps(5) infinite;
-    cursor: pointer;
+    cursor: $cr-pointer;
     z-index: 10;
+    z-index: 1;
 
     &__bubble:not(:empty) {
         position: absolute;

@@ -3,9 +3,11 @@ export interface App {
 }
 
 export interface ConfigTypes {
-    computer_username: string,
+    computer_username: string
+    production: boolean
+    game_state: string
     desktop_config: {
-        wallpaper: string,
+        wallpaper: string
         apps: App[]
     }
 }

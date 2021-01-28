@@ -1,0 +1,16 @@
+.pause-screen {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    display: none;
+    background-color: #000;
+    z-index: 999;
+    color: #FFF;
+    text-align: center;
+
+    &.active {
+        display: block;
+    }
+}

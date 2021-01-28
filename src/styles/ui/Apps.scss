@@ -1,0 +1,69 @@
+@keyframes webcamButtonPopup {
+    from {transform: translateY(50%)}
+    to {transform: translateY(0%);}
+}  
+
+.app {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+
+    &#webcam {
+        background-color: #000;
+        
+        canvas {
+            width: 100%;
+            height: 100%;
+        }
+        
+        video {
+            display: none;
+            //filter: contrast(550%);
+        }
+
+        &:hover {
+            .webcam-button-overlay {
+                display: block;
+            }
+        }
+
+        .webcam-button-overlay {
+            display: none;
+            animation: webcamButtonPopup 0.4s forwards;
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            padding: 1rem;
+            text-align: center;
+            &__button {
+                width: 3rem;
+                height: 3rem;
+                border-radius: 33vw;
+                background-color: darkblue;
+                display: inline-block;
+                margin: 0 1rem;
+                border: 1px solid transparent;
+                &:hover {
+                    cursor: pointer;
+                    border: 1px solid #FFF;
+                }
+            }
+        }
+    }
+
+    &#notepad {
+        textarea {
+            font-family: VT323;
+            font-size: 1.4rem;
+            width: 100%;
+            height: 100%;
+            outline: none;
+            border: 0;
+            padding: 1rem;
+            background-color: #ECE9D8;
+            color: #333;
+            resize: none;
+        }
+    }
+}

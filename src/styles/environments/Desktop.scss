@@ -2,6 +2,7 @@
 @import '../ui/Taskbar.scss';
 @import '../ui/DesktopWindow.scss';
 @import '../ui/HelpMonkey.scss';
+@import '../ui/Apps.scss';
 
 $app-size: 4rem;
 
@@ -14,6 +15,16 @@ $app-size: 4rem;
         flex: 1;
         position: relative;
         
+        &__window__container {
+            position: absolute;
+            pointer-events: none;
+            width: 100vw;
+            height: calc(100vh - 2.5rem);
+            top: 0;
+            left: 0;
+            z-index: 2;
+        }
+
         &#wallpaper {
             background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(120,173,213,1) 100%);
 
@@ -45,6 +56,12 @@ $app-size: 4rem;
                 padding: 8px;
                 font-size: 0.8rem;
                 box-sizing: content-box;
+                user-select: none;
+
+                &:hover {
+                    outline: 1px solid rgb(98, 130, 155);
+                    background-color: rgba(153, 187, 214, 0.7);  
+                }
 
                 &:focus, &:active {
                     outline: 1px solid rgb(98, 130, 155);

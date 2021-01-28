@@ -1,13 +1,30 @@
-import React, { Component } from 'react'
+import React, { Component, useRef } from 'react'
 import Draggable from 'react-draggable'
 
+
 export default function DesktopWindow(props: {children?: any, title?: string, content?: any, id: string, active: boolean, icon?: string, close: () => void, hide: () => void, visibility: boolean}) {
+
+    const windowRef = useRef<HTMLDivElement>();
+
+    function toggleZIndex() {
+        const allAppWindows = document.getElementsByClassName("app-window");
+        for(let i=0; i < allAppWindows.length; i++) {
+            const w = allAppWindows[i] as HTMLDivElement;
+            w.style.zIndex = String(i);
+        }
+
+        windowRef.current.style.zIndex = String(allAppWindows.length+1);
+    }
+
     return props.active ? (
         <Draggable
         handle=".app-window__bar"
-        defaultPosition={{x: 0, y: 0}}
-        scale={1}>
-            <div className="app-window" style={{visibility: props.visibility ? "visible" : "hidden"}}>
+        defaultPosition={{x: 200, y: 200}}
+        scale={1}
+        onStart={() => toggleZIndex()}
+        bounds="parent"
+        >
+            <div ref={windowRef} className="app-window" style={{visibility: props.visibility ? "visible" : "hidden"}}>
                 
                 <div className="app-window__bar">
                     <img className="app-window__bar__icon v-center" src={"../../assets/icons/" + props.icon}/>

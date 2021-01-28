@@ -1,3 +1,6 @@
+// Variables
+@import './variables.scss';
+
 // Fonts
 @import './fonts.scss';
 
@@ -5,6 +8,7 @@
 @import './commons.scss';
 
 @import './environments/Desktop.scss';
+@import './environments/PauseScreen.scss';
 
 *, *:after, *:before {
     box-sizing: border-box;
@@ -19,10 +23,28 @@ body,html {
     font-family: VT323;
     user-select: none;
     overflow: hidden;
+    cursor: $cr-default;
+    &.progress-state {
+        cursor: $cr-progress !important;
+    }
+}
+
+img {
+    pointer-events: none;
+}
+
+#debugInfo {
+    font-family: $debug-font;
+    position: absolute;
 }
 
 #game, .game-view {
     width: 100vw;
     height: 100vh;
     background-color: #FFF;
+}
+
+::selection {
+    color: #FFF;
+    background-color: #3368C4;
 }

@@ -23,7 +23,7 @@
 
         &:hover {
             filter: brightness(95%);
-            cursor: pointer;
+            cursor: $cr-pointer;
         }
     }
 
@@ -43,7 +43,7 @@
             }
 
             &:hover {
-                cursor: pointer;
+                cursor: $cr-pointer;
                 filter: brightness(90%);
             }
 

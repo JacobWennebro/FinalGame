@@ -5,14 +5,17 @@
     background: linear-gradient(0deg, rgba(39,57,218,1) 0%, rgba(193,223,255,1) 100%);
     border: 2px solid rgb(110, 125, 255);
     border-radius: 4px;
-    min-height: 50vh;
+    min-height: 30vh;
+    height: 50vh;
     min-width: 20vw;
     max-width: 70vw;
     width: 40vw;
     padding: 0 0.3rem 0.3rem 0.3rem;
-    resize: both;
     overflow: auto;
     z-index: 11;
+    overflow: hidden;
+    pointer-events: all;
+    resize: both;
 
     /* When window is fullscreen */
     &.fullscreen {
@@ -71,8 +74,10 @@
 
     &__view {
         flex: 1;
-        background-color: #FFF;
+        background-color: #ECE9D8;
         display: flex;
         align-items: stretch;
+        border: 2px solid rgb(110, 125, 255);
+
     }
 }
