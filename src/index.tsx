@@ -6,8 +6,6 @@ import './styles/main.scss'
 
 import { updateWallpaper } from './scripts/DesktopManager';
 
-updateWallpaper("blue");
-
 // Update to utilize player save when implemented
 import DesktopConfig from './configs/template/Desktop.json';
 

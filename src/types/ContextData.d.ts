@@ -1,7 +1,11 @@
-export default interface ContextData {
-    computer_username: String,
+export interface App {
+    title: string, icon: string, id: string
+}
+
+export interface ConfigTypes {
+    computer_username: string,
     desktop_config: {
-        wallpaper: String,
-        apps: {title: String, icon: String, id: String}[]
+        wallpaper: string,
+        apps: App[]
     }
 }

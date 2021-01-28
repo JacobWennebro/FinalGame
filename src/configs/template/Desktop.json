@@ -1,5 +1,5 @@
 {
-    "wallpaper": "blue",
+    "wallpaper": "linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(120,173,213,1) 100%)",
     "apps": [
         {
             "title": "NetExplorer",
@@ -14,7 +14,15 @@
         {
             "title": "Webcam",
             "icon": "camera.png",
-            "id": "app.camera"
+            "id": "app.webcam"
+        },
+        {
+            "title": "Pictures",
+            "icon": "folder.png",
+            "id": "app.pictures"
         }
+    ],
+    "active_apps": [
+
     ]
 }

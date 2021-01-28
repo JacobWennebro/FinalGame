@@ -12,6 +12,7 @@
     padding: 0 0.3rem 0.3rem 0.3rem;
     resize: both;
     overflow: auto;
+    z-index: 11;
 
     /* When window is fullscreen */
     &.fullscreen {
@@ -37,6 +38,10 @@
             transform: translateY(-50%);
             font-size: 1.3rem;
             display: inline-block;
+        }
+
+        &__icon {
+            margin-right: 0.5rem;
         }
 
         &__actions {
@@ -67,5 +72,7 @@
     &__view {
         flex: 1;
         background-color: #FFF;
+        display: flex;
+        align-items: stretch;
     }
 }

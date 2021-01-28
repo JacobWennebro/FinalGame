@@ -4,6 +4,8 @@
     width: 100%;
     height: 2.5rem;
     background: linear-gradient(0deg, rgba(0,25,255,1) 0%, #0f87f6 100%);
+    display: grid;
+    grid-template-columns: 8rem auto;
 
     &__start__button {
         font-family: VT323;
@@ -17,10 +19,39 @@
         outline: none;
         font-style: italic;
         font-weight: bold;
+        margin-right: 1rem;
 
         &:hover {
             filter: brightness(95%);
             cursor: pointer;
+        }
+    }
+
+    &__activity {
+        height: 100%;
+        display: inline-block;
+
+        .taskbar__app {
+            height: 100%;
+            display: inline-block;
+            color: #FFF;
+            background: linear-gradient(0deg, #0f87f6 0%, rgba(0,25,255,1) 100%);
+            padding: 0 0.5rem;
+
+            &:not(:last-child) {
+                border-right: darkblue 1px solid;
+            }
+
+            &:hover {
+                cursor: pointer;
+                filter: brightness(90%);
+            }
+
+            &__title {
+                display: inline-block;
+                transform: translateY(-70%);
+                margin-left: 0.5rem;
+            }
         }
     }
 

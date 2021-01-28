@@ -1,0 +1,24 @@
+.help-monkey {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    animation: play 3.5s steps(5) infinite;
+    cursor: pointer;
+    z-index: 10;
+
+    &__bubble:not(:empty) {
+        position: absolute;
+        top: -2.5rem;
+        border-radius: 8px;
+        left: 0;
+        width: 100%;
+        padding: 0.3rem;
+        background-color: #FFF;
+        transform: translateX(-75%);
+    }
+}
+
+@keyframes play {
+    0% { background-position: 0px; }
+    100% { background-position: 480px }
+}

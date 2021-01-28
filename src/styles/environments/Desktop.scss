@@ -1,6 +1,7 @@
 // UI imports
 @import '../ui/Taskbar.scss';
 @import '../ui/DesktopWindow.scss';
+@import '../ui/HelpMonkey.scss';
 
 $app-size: 4rem;
 
@@ -11,7 +12,8 @@ $app-size: 4rem;
 
     &__board {
         flex: 1;
-
+        position: relative;
+        
         &#wallpaper {
             background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(120,173,213,1) 100%);
 
@@ -42,6 +44,8 @@ $app-size: 4rem;
                 outline: none;
                 padding: 8px;
                 font-size: 0.8rem;
+                box-sizing: content-box;
+
                 &:focus, &:active {
                     outline: 1px solid rgb(98, 130, 155);
                     background-color: rgba(120,173,213,0.7);
