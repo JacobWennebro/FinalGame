@@ -31,9 +31,9 @@ export default function DesktopWindow(props: {children?: any, title?: string, co
                     <span className="app-window__bar__title text-style-1 v-center">{props.title || "Title"}</span>
 
                     <div className="app-window__bar__actions v-center-all">
-                        <div onClick={props.hide} className="app-window__bar__button hide"></div>
-                        <div className="app-window__bar__button minimize"></div>
-                        <div onClick={props.close} className="app-window__bar__button close"></div>
+                        <div onClick={props.hide} className="app-window__bar__button hide c-item"></div>
+                        <div className="app-window__bar__button minimize c-item"></div>
+                        <div onClick={props.close} className="app-window__bar__button close c-item"></div>
                     </div>
                 </div>
 

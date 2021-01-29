@@ -8,6 +8,134 @@
     width: 100%;
     overflow: hidden;
 
+    &#browser {
+        .browser {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 100%;
+
+            &__bar {
+                background: $gc-main-blue;
+                width: 100%;
+                min-height: 3rem;
+                height: auto;
+                flex-shrink: 0;
+                display: grid;
+                grid-template-columns: 4rem 3rem auto 5rem;
+                padding: 0 1rem;
+                border-bottom: 2px solid rgb(110, 125, 255);
+
+                &__pagination {
+                    text-align: center;
+
+                    &__button {
+                        display: inline-block;
+                        width: 20px;
+                        height: 20px;
+                        border-radius: 33vw;
+                        background: $gc-main-blue;
+                        margin: 0 0.25rem;
+                        border: 2px solid rgb(110, 125, 255);
+                        &:hover {
+                            filter: brightness(90%);
+                            cursor: $cr-pointer;
+                        }
+                    }
+                }
+
+                &__security {
+                    width: 2rem;
+                    height: 100%;
+                    position: relative;
+                    margin-left: 1rem;
+                    &__icon {
+                        height: 34px;
+                        border: 2px solid rgb(110, 125, 255);
+                        border-right: 0;
+                        background-color: #fff;
+                        img {
+                            display: block;
+                            height: 50%;
+                            width: auto;
+                            margin: auto;
+                        }
+                    }
+                }
+
+                &__search {
+                    position: relative;
+                    
+                    &__input {
+                        display: block;
+                        height: 34px;
+                        padding: 0.5rem;
+                        padding-left: 0;
+                        width: 100%;
+                        margin: auto;
+                        border: 2px solid rgb(110, 125, 255);
+                        border-left: 0;
+                        background-color: #fff;
+                        outline: none;
+                        overflow: hidden;
+                        white-space: nowrap;
+                        text-overflow: ellipsis;
+                        cursor: text;
+                        &:empty:before {
+                            content: 'Search the internet with a URL';
+                            color: gray;
+                        }
+                    }
+
+                    &__suggestions {
+                        display: none;
+                        position: absolute;
+                        background: #FFF;
+                        width: calc(100%);
+                        margin: auto;
+                        left: 0;
+                        right: 0;
+                        border: 2px solid rgb(110, 125, 255);
+                        margin-top: 4px;
+                        span {
+                            display: block;
+                            padding: 0.35rem;
+                            &:before {
+                                content: 'https://'
+                            }
+                            &:hover {
+                                background-color: $selection-color;
+                                color: #FFF;
+                                cursor: $cr-pointer;
+                                text-decoration: underline;
+                            }
+                        }
+                    }
+                }
+
+                /* # Selector found in app.browser/app.tsx for dynamic targetting
+
+                &__search[input-value="exa"] .browser__bar__search__input:after {
+                    content: 'mple.com';
+                    background-color: $selection-color;
+                    color: #FFF;
+                }
+                */
+
+                &__search:not([input-value=""]) .browser__bar__search__suggestions.active:not(:empty) {
+                    display: block !important;
+                }
+
+            }
+    
+            &__view {
+                flex: 1;
+                display: flex;
+                align-items: stretch;
+            }
+        }
+    }
+
     &#webcam {
         background-color: #000;
         

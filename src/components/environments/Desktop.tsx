@@ -7,6 +7,7 @@ import { App, ConfigTypes } from '../../types/ContextData';
 
 import Notepad from '../apps/app.notepad/app'
 import Webcam from '../apps/app.webcam/app'
+import Browser from '../apps/app.browser/app'
 
 import HelpMonkey from '../ui/HelpMonkey';
 
@@ -32,7 +33,7 @@ export default class Desktop extends Component<props, state> {
             time: 0,
             apps: {
                 "app.browser": {
-                    content: (<h1>Browser</h1>),
+                    content: (<Browser/>),
                     active: false,
                     visible: true,
                 },

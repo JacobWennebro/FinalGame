@@ -1,7 +1,7 @@
 const electron = require('electron');
 const path = require('path');
 
-const {app, BrowserWindow, globalShortcut, ipcMain } = electron;
+const { app, BrowserWindow, globalShortcut, ipcMain, session } = electron;
 
 let w;
 
@@ -9,7 +9,7 @@ app.on('ready', () => {
 
     // Initialize the game window
     w = new BrowserWindow({
-        icon: "./icon.png",
+        //icon: "./icon.png",
         webPreferences: {
             nodeIntegration: true
         }
@@ -20,38 +20,37 @@ app.on('ready', () => {
     ipcMain.on("retrieve-data", (event, arg) => {
         let val = "";
 
-        switch(arg) {
+        switch (arg) {
             case "isPackaged":
                 val = app.isPackaged;
-            break;
+                break;
             case "isFullscreen":
                 val = w.isFullScreen();
-            break;
+                break;
         }
 
         return event.returnValue = val;
     });
 
-    
+
     ipcMain.on("window-action", (event, arg) => {
         let val = "";
 
-        switch(arg) {
+        switch (arg) {
             case "toggleFullscreen":
                 const a = !w.isFullScreen();
                 w.setFullScreen(a);
                 val = a;
-            break;
+                break;
         }
 
         return event.returnValue = val;
     });
 
+    if (app.isPackaged) {
 
-    if(app.isPackaged) {
-        
         w.loadURL(path.join(__dirname, "./dist/index.html"));
-        
+
     } else {
         w.loadURL("http://localhost:8080");
     }

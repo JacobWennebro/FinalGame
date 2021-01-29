@@ -26,8 +26,7 @@ const App = () => {
         document.onkeyup = (e) => {
             if (e.key === "F11") {
                 const isFullscreen = ipc.sendSync("window-action", "toggleFullscreen");
-                setGameState(isFullscreen ? "ingame" : "paused");
-                console.log("a");
+                if(state.production) setGameState(isFullscreen ? "ingame" : "paused");
             }
         };
     }, [gameState, setGameState]);

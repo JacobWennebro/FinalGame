@@ -14,7 +14,7 @@
     transform: translateY(-50%);
 }
 
-.v-center-all * {
+.v-center-all *:not(div), .v-center-all div.c-item {
     position: relative;
     top: 50%;
     transform: translateY(-50%);

@@ -41,7 +41,7 @@ $app-size: 4rem;
         padding: 2rem;
         display: grid;
         grid-column-gap: 2px;
-        grid-template-columns: repeat(10, minmax(100px, 1fr) );
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr) );
         grid-template-rows: repeat(auto-fill, auto);
         grid-auto-flow: row;
         grid-auto-rows: auto;

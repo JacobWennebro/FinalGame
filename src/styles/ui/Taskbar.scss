@@ -3,7 +3,7 @@
     flex-shrink: 0;
     width: 100%;
     height: 2.5rem;
-    background: linear-gradient(0deg, rgba(0,25,255,1) 0%, #0f87f6 100%);
+    background: $gc-main-blue;
     display: grid;
     grid-template-columns: 8rem auto;
 
