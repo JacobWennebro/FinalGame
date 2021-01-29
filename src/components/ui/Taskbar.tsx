@@ -1,8 +1,10 @@
 import React from 'react'
+import FormatTime from '../../scripts/FormatTime';
 import { App } from '../../types/ContextData';
+import app from '../apps/app.notepad/app';
 import TaskbarApp from './TaskbarApp'
 
-export default function Taskbar(props: { active_apps: any, apps: App[], toggleVisibility: (id: string) => void }) {
+export default function Taskbar(props: { active_apps: any, apps: App[], toggleVisibility: (id: string) => void, time: number }) {
     return (
         <div className="taskbar">
             <button className="taskbar__start__button text-style-1">Start</button>
@@ -14,6 +16,10 @@ export default function Taskbar(props: { active_apps: any, apps: App[], toggleVi
 
                     return app.active ? <TaskbarApp key={id} toggleVisibility={() => props.toggleVisibility(id)} title={appmeta.title} icon={appmeta.icon}/> : <React.Fragment/>;
                 })}
+            </div>
+
+            <div className="taskbar__time">
+                <span className="v-center">{FormatTime(props.time)}</span>
             </div>
         </div>
     )

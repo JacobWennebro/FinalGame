@@ -10,6 +10,7 @@ import Webcam from '../apps/app.webcam/app'
 import Browser from '../apps/app.browser/app'
 
 import HelpMonkey from '../ui/HelpMonkey';
+import FormatTime from '../../scripts/FormatTime';
 
 interface props {
     Consumer: React.Consumer<{}>
@@ -30,7 +31,7 @@ export default class Desktop extends Component<props, state> {
         this.AppClickEvent = this.AppClickEvent.bind(this);
 
         this.state = {
-            time: 0,
+            time: 850, // Ingame start time (later load from save file)
             apps: {
                 "app.browser": {
                     content: (<Browser/>),
@@ -133,7 +134,8 @@ export default class Desktop extends Component<props, state> {
 
         /* Game System time */
         setInterval(() => {
-            this.setState({ time: this.state.time + 1 });
+            const hours = Math.floor(this.state.time/60);
+            this.setState({ time: (hours >= 24) ? 0 : this.state.time + 1  });
         }, 2000)
 
     }
@@ -146,7 +148,7 @@ export default class Desktop extends Component<props, state> {
 
                         {/* Desktop window container */}
                         <div className="desktop__board" id="wallpaper" style={{ background: data.desktop_config.wallpaper as string }}>
-                            {!data.production ? (<span id="debugInfo">Developer mode | Game clock: {this.state.time}</span>) : (<React.Fragment/>)}
+                            {!data.production ? (<span id="debugInfo">Developer mode | Game clock: {this.state.time} | Formatted clock {FormatTime(this.state.time)}</span>) : (<React.Fragment/>)}
                             <div className="desktop__board__window__container">
                                 {data.desktop_config.apps.map((app: App) => (
                                     <DesktopWindow
@@ -174,7 +176,7 @@ export default class Desktop extends Component<props, state> {
                             </div>
                         </div>
 
-                        <Taskbar toggleVisibility={this.toggleVisibility} apps={data.desktop_config.apps} active_apps={this.state.apps} />
+                        <Taskbar time={this.state.time} toggleVisibility={this.toggleVisibility} apps={data.desktop_config.apps} active_apps={this.state.apps} />
                     </div>
                 )}
             </this.props.Consumer>
