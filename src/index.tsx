@@ -12,6 +12,9 @@ const Context = React.createContext({});
 
 const ipc = window.require('electron').ipcRenderer;
 
+const a = require("./scripts/DesktopManager");
+console.log(a);
+
 const App = () => {
 
     const [state, setState] = useState({
@@ -40,7 +43,7 @@ const App = () => {
                 <button onClick={() => ipc.sendSync("window-action", "toggleFullscreen")}>Resume game</button>
             </div>
 
-            <Desktop Consumer={Context.Consumer} />
+            <Desktop production={state.production} Consumer={Context.Consumer} />
         </Context.Provider>
     )
 };

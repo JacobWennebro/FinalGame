@@ -1,4 +1,4 @@
-import React, { Component, MouseEvent, Suspense, useState } from 'react'
+import React, { Component, KeyboardEvent, MouseEvent, Suspense, useState } from 'react'
 import Taskbar from '../ui/Taskbar'
 
 import DesktopAppIcon from '../ui/DesktopAppIcon';
@@ -14,14 +14,19 @@ import FormatTime from '../../scripts/FormatTime';
 
 interface props {
     Consumer: React.Consumer<{}>
+    production: boolean
 }
 
 interface state {
     time: number
+    time_speed: number
     apps: any
+    adware_popups: any[]
 }
 
 export default class Desktop extends Component<props, state> {
+    timeInterval: NodeJS.Timeout
+
     constructor(props) {
         super(props);
 
@@ -32,9 +37,11 @@ export default class Desktop extends Component<props, state> {
 
         this.state = {
             time: 850, // Ingame start time (later load from save file)
+            time_speed: 2000,
+            adware_popups: [],
             apps: {
                 "app.browser": {
-                    content: (<Browser/>),
+                    content: (<Browser Consumer={this.props.Consumer}/>),
                     active: false,
                     visible: true,
                 },
@@ -107,7 +114,6 @@ export default class Desktop extends Component<props, state> {
                 this.setState(state);
             }, 250)
     
-            //console.log(this.state.apps[id].clicks);
         }
 
     }
@@ -130,14 +136,57 @@ export default class Desktop extends Component<props, state> {
         this.setState(state);
     }
 
+    setTimeSpeed(speed: number) {
+        if(this.timeInterval) clearInterval(this.timeInterval);
+
+        this.timeInterval = setInterval(() => {
+            const hours = Math.floor(this.state.time/60);
+            const minutes = Math.floor(this.state.time - (hours*60));
+
+            if(hours+1 >= 24 && minutes >= 59) this.setState({time: 0});
+            else this.setState({ time: (hours+1 > 24) ? 0 : this.state.time + 1  });
+        }, speed);
+    }
+
+    componentDidUpdate() {
+        this.setTimeSpeed(this.state.time_speed);
+    }
+
+    componentWillUnmount() {
+        document.body.onkeydown = null;
+        document.body.onkeyup = null;
+    }
+
     componentDidMount() {
 
-        /* Game System time */
-        setInterval(() => {
-            const hours = Math.floor(this.state.time/60);
-            this.setState({ time: (hours >= 24) ? 0 : this.state.time + 1  });
-        }, 2000)
+        /* Game System time speed */
+        this.setState({ time_speed: 2000 });
 
+        if(!this.props.production) {
+
+            const developerHotKeys = (e: KeyboardEventInit) => {
+                    // @ts-ignore
+                    if(e.type === "keydown" && e.key === "t" && e.ctrlKey) {
+                        this.setState({ time_speed: 1 });
+                    } else {
+                        this.setState({ time_speed: 2000 });
+                    }
+            }
+
+            document.body.onkeydown = developerHotKeys;
+            document.body.onkeyup = developerHotKeys;
+        }
+
+
+        /*
+        let virus = setInterval(() => {
+            if(this.state.adware_popups.length <= 30) this.setState({ adware_popups: [...this.state.adware_popups, (<div>:D</div>)]})
+            
+            const errorSound = new Audio('./assets/audio/UI_ERROR.mp3');
+            errorSound.volume = 0.1;
+            errorSound.play();
+        }, 50);
+        */
     }
 
     render() {
@@ -154,15 +203,34 @@ export default class Desktop extends Component<props, state> {
                                     <DesktopWindow
                                         key={app.id}
                                         active={this.state.apps[app.id] ? this.state.apps[app.id].active : false}
-                                        id={app.id}
                                         title={app.title}
                                         icon={app.icon}
                                         content={this.state.apps[app.id] ? this.state.apps[app.id].content : ""}
                                         visibility={this.state.apps[app.id] ? this.state.apps[app.id].visible : true}
                                         close={() => this.closeApp(app.id)}
                                         hide={() => this.toggleVisibility(app.id)}
+                                        Consumer={this.props.Consumer}
                                     />
                                 ))}
+
+                                {/* Virus */}
+                                {this.state.adware_popups.map(ad => {
+                                    
+                                    const index = this.state.adware_popups.findIndex(e => e == ad );
+
+                                    return (<DesktopWindow
+                                        key={"a"}
+                                        active={true}
+                                        title={"Application Error"}
+                                        content={ad}
+                                        visibility={true}
+                                        close={() => console.log("a")}
+                                        hide={() => console.log("b")}
+                                        x={25*(Math.floor(index/10)*8+1) + (25*index)}
+                                        y={50*(Math.floor((index % 10)/10)+1) + (25*(index % 10))}
+                                        Consumer={this.props.Consumer}
+                                    />)
+                                })}
                             </div>
                             
                             {/* Bonzo buddy ? */}

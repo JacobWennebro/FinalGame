@@ -1,0 +1,18 @@
+.ad-container .ad {
+    width: 100% !important;
+    height: 100% !important;
+}
+
+.ad {
+    width: 5rem;
+    height: 5rem;
+}
+
+body:not(.progress-state) span.hyperlink {
+    cursor: $cr-pointer !important;
+}
+
+span.hyperlink {
+    color: blue;
+    text-decoration: underline;
+}

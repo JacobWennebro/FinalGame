@@ -1,86 +1,224 @@
-import React, { ChangeEvent, KeyboardEvent, MouseEvent, useState } from 'react'
+import React, { Component, Consumer, ConsumerProps, createRef, KeyboardEvent, lazy, LegacyRef, MouseEvent, Ref, RefObject, Suspense, useState } from 'react'
+import loadable from '@loadable/component'
+import { ConfigTypes } from '../../../types/ContextData'
+import Sites from '../../../configs/Sites.json'
 
-export default function app() {
+interface state {
+    input: string
+    visible_suggestions: boolean
+    active_url: string
+    active_sublink: string
+    active_site_secure: boolean
+}
 
-    const [state, setState] = useState({
-        input: "",
-        visible_suggestions: false
-    });
+export default class app extends Component<{Consumer: Consumer<{}>}, state> {
+    searchHistory: string[]
+    spanInputElement = createRef<HTMLSpanElement>();
+    inputElement: HTMLSpanElement
 
-    function SearchbarAutocomplete(e: MouseEvent|KeyboardEvent) {
-        const address = testAddress.filter(a => a.startsWith(state.input))[0];
-        const t = e.target as HTMLSpanElement;
+    constructor(props) {
+        super(props);
+        
+        this.searchHistory = ["example.com"];
 
-        if(address && t.innerText !== address && state.input.length >= 3 && testAddress.filter(a => a.startsWith(state.input)).length > 0) t.innerText = address.length > 0 ? address : undefined;
-        setState({...state, input: t.innerText});
+        this.Searchbar = this.Searchbar.bind(this);
+        this.SearchbarAutocomplete = this.SearchbarAutocomplete.bind(this);
+        this.SearchbarClickAutoComplete = this.SearchbarClickAutoComplete.bind(this);
+        this.SearchbarMoveCursorToEnd = this.SearchbarMoveCursorToEnd.bind(this);
+        this.SearchbarRestrictions = this.SearchbarRestrictions.bind(this);
+        this.GoToWebpage = this.GoToWebpage.bind(this);
+        this.DynamicWebpageLoader = this.DynamicWebpageLoader.bind(this);
+
+        this.state = {
+            input: "",
+            visible_suggestions: false,
+            active_url: "example.com",
+            active_sublink: "",
+            active_site_secure: true
+        }
     }
 
-    function Searchbar(e: KeyboardEvent<HTMLSpanElement>) {
+    SearchbarAutocomplete(e: MouseEvent | KeyboardEvent) {
+        const addresses = this.searchHistory.filter(a => a.startsWith(this.state.input));
+        const targetAddress = addresses[0]
         const t = e.target as HTMLSpanElement;
 
+        if (targetAddress && t.innerText !== targetAddress && this.state.input.length >= 3 && addresses.length > 0) {
+            t.innerText = targetAddress.length > 0 ? targetAddress : undefined;
+            this.setState({ input: t.innerText });
+            this.SearchbarMoveCursorToEnd(t);
+        }
+    }
+
+    SearchbarClickAutoComplete(e: MouseEvent<HTMLSpanElement>) {
+        const autoCompletes = this.searchHistory.filter(a => a.startsWith(this.state.input) && a !== this.state.input);
+        const t = e.currentTarget;
+        if (autoCompletes.length > 0 && window.getSelection().getRangeAt(0).endOffset == t.innerText.length) {
+            e.preventDefault();
+            this.SearchbarAutocomplete(e);
+        }
+    }
+
+    Searchbar(e: KeyboardEvent<HTMLSpanElement>) {
+        const t = e.target as HTMLSpanElement;
+        const autoCompletes = this.searchHistory.filter(a => a.startsWith(this.state.input) && a !== this.state.input);
+
+        // Max 40 characters
         if (t.innerText.length > 40 && e.key.length == 1 && !e.ctrlKey) e.preventDefault();
-        else if(e.key === "ArrowRight") SearchbarAutocomplete(e);
 
-        setState({...state, input: t.innerText});
+        // Autocomplete macros
+        else if (["Tab", "ArrowRight"].includes(e.key) && autoCompletes.length > 0 && window.getSelection().getRangeAt(0).endOffset == t.innerText.length) {
+            e.preventDefault();
+            this.SearchbarAutocomplete(e);
+        }
+
+        // Cancel non-character keys
+        if (e.key.length > 1) return;
+
+        this.setState({ input: (t.innerText + e.key).toLowerCase() });
     }
 
-    function SearchbarRestrictions(e: KeyboardEvent<HTMLSpanElement>) {
-        if(e.key === "Enter") {
+    SearchbarMoveCursorToEnd(contentEditableElement) {
+        let range, selection;
+        if (document.createRange) {
+            range = document.createRange();
+            range.selectNodeContents(contentEditableElement);
+            range.collapse(false);
+            selection = window.getSelection();
+            selection.removeAllRanges();
+            selection.addRange(range);
+        }
+    }
+
+    SearchbarRestrictions(e: KeyboardEvent<HTMLSpanElement>) {
+
+        if (e.key === "Enter") {
             e.preventDefault();
 
-            console.log("Requested access to " + state.input);
+            const autoCompletes = this.searchHistory.filter(a => a.startsWith(this.state.input));
+            let input = this.state.input;
+
+            if (autoCompletes.length > 0) {
+                this.SearchbarAutocomplete(e);
+                input = autoCompletes[0];
+            }
+
+            this.GoToWebpage(input);
+            this.setState({ input });
+
         }
-        else if(e.currentTarget.innerText.length > 40 && !e.ctrlKey && e.key !== "Backspace") e.preventDefault();
+        else if (e.key === "Backspace") {
+            const t = e.currentTarget;
+
+            this.setState({ input: t.innerText.substr(0, t.innerText.length - 1) });
+        }
+        else if (e.currentTarget.innerText.length > 40 && !e.ctrlKey) e.preventDefault();
     }
 
-    const testAddress = [
-        "microsoft.com",
-        "google.com"
-    ];
+    CancelFocus() {
+        const tmp = document.createElement("input");
+        document.body.appendChild(tmp);
+        tmp.focus();
+        document.body.removeChild(tmp);     
+    }
 
-    return (
-        <div className="app" id="browser">
-            <div className="browser">
-                <div className="browser__bar">
+    GoToWebpage(address: string) {
+        if(address === this.state.active_url + this.state.active_sublink ? "/"+this.state.active_sublink : "") return;
 
-                    <div className="browser__bar__pagination">
-                        <div className="browser__bar__pagination__button v-center"></div>
-                        <div className="browser__bar__pagination__button v-center"></div>
-                    </div>
+        this.CancelFocus();
+        const inputElement = this.spanInputElement.current;
 
-                    <div className="browser__bar__security">
-                        <div className="browser__bar__security__icon v-center">
-                            <img className="v-center render-as-pixels" src={"../../assets/icons/padlock-secure.png"}/>
+        document.body.classList.add("progress-state");
+        inputElement.classList.add("progress-state");
+        
+        setTimeout(() => {
+            const sublinks = address.split("/");
+            const domain = sublinks[0];
+            sublinks.shift();
+
+            const targetSite = Sites.filter(s => s.url == domain)[0];
+            const path = sublinks.join("");
+
+            this.setState({ 
+                active_url: domain, 
+                active_sublink: (domain !== "notfound") ? path : "index", 
+                active_site_secure: targetSite ? targetSite.secure : false
+            });
+
+            inputElement.innerText = address;
+
+            document.body.classList.remove("progress-state");
+            inputElement.classList.remove("progress-state");
+        }, Math.round(Math.random() * 2000));
+    }
+
+    DynamicWebpageLoader(props: { production: boolean, site: string, path?: string }) {
+        let DynamicComp = (<div>hello</div>)
+    
+        const targetSite = Sites.filter(s => s.url == props.site)[0];
+        let site = props.site;
+    
+        if(!targetSite || targetSite && props.path && !targetSite.paths.includes(props.path)) site = "notfound";
+    
+        if (props.production) DynamicComp = loadable(() => import(`../../sites/${site}/${(props.path && site !== "notfound") ? props.path : "index"}`), {
+            fallback: (<div>xd</div>)
+        });
+    
+        else DynamicComp = require(`../../sites/${site}/${(props.path && site !== "notfound") ? props.path : "index"}`).default;
+    
+        // @ts-ignore
+        return (<DynamicComp redirect={this.GoToWebpage} production={props.production} exists={targetSite != undefined} site={props.site}/>);
+    }
+
+    render() {
+        return (
+            <div className="app" id="browser">
+                <div className="browser" active-url={this.state.active_url}>
+                    <div className="browser__bar">
+
+                        <div className="browser__bar__pagination">
+                            <div className="browser__bar__pagination__button v-center"></div>
+                            <div className="browser__bar__pagination__button v-center"></div>
                         </div>
-                    </div>
 
-                    <div className="browser__bar__search" input-value={state.input}>
-                        {(state.input.length >= 3 && testAddress.filter(a => a.startsWith(state.input)).length > 0) ? (
-                            <style>{`
-                                .browser__bar__search[input-value="${testAddress.filter(a => a.startsWith(state.input))[0].substr(0, state.input.length)}"] .browser__bar__search__input:after {
-                                    content: '${testAddress.filter(a => a.startsWith(state.input))[0].substr(state.input.length)}';
+                        <div className="browser__bar__security">
+                            <div className="browser__bar__security__icon v-center">
+                                <img className="v-center render-as-pixels" src={`../../assets/icons/${this.state.active_site_secure ? "padlock-secure" : "padlock-unsecure"}.png`} />
+                            </div>
+                        </div>
+
+                        <div className="browser__bar__search" input-value={this.state.input}>
+                            {(this.state.input.length >= 3 && this.searchHistory.filter(a => a.startsWith(this.state.input)).length > 0) ? (
+                                <style>{`
+                                .browser__bar__search[input-value="${this.searchHistory.filter(a => a.startsWith(this.state.input))[0].substr(0, this.state.input.length)}"] .browser__bar__search__input:not(:empty):after {
+                                    content: '${this.searchHistory.filter(a => a.startsWith(this.state.input))[0].substr(this.state.input.length)}';
                                     background-color: #3368C4;
                                     color: #FFF;
                                 }
                             `}</style>
-                        ) : <React.Fragment/>}
+                            ) : <React.Fragment />}
 
-                        <span onClick={e => SearchbarAutocomplete(e)} onFocus={() => setState({...state, visible_suggestions: true})} onBlur={() => setState({...state, visible_suggestions: false})} onKeyDown={SearchbarRestrictions} onKeyUp={Searchbar} contentEditable={true} className="browser__bar__search__input v-center"></span>
-                        <div className={`browser__bar__search__suggestions ${state.visible_suggestions ? "active" : ""}`}>
-                            <span>hello.com</span>
-                            <span>hello.com</span>
+                            <span ref={this.spanInputElement} onClick={this.SearchbarClickAutoComplete} onFocus={() => this.setState({ visible_suggestions: true })} onBlur={() => this.setState({ visible_suggestions: false })} onKeyDown={(e) => { this.SearchbarRestrictions(e); this.Searchbar(e); }} contentEditable={true} className={`browser__bar__search__input v-center ${this.state.active_site_secure ? "secure" : ""}`}></span>
+                            <div className={`browser__bar__search__suggestions ${this.state.visible_suggestions ? "active" : ""}`}>
+                                <span>hello.com</span>
+                                <span>hello.com</span>
+                            </div>
                         </div>
+
+                        <div className="browser__bar__bookmarks">
+
+                        </div>
+
                     </div>
-
-                    <div className="browser__bar__bookmarks">
-
+                    <div className="browser__view">
+                        <this.props.Consumer>
+                            {(data: ConfigTypes) => (
+                                <this.DynamicWebpageLoader site={this.state.active_url} path={this.state.active_sublink} production={data.production} />
+                            )}
+                        </this.props.Consumer>
                     </div>
-
-                </div>
-                <div className="browser__view">
-
                 </div>
             </div>
-        </div>
-    )
+        )
+    }
 }

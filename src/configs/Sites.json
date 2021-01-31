@@ -1,0 +1,21 @@
+[
+    {
+        "url":"example.com",
+        "secure": true,
+        "paths": []
+    },
+    {
+        "url":"jacob.com",
+        "secure": true,
+        "paths": [
+            "test"
+        ]
+    },
+    {
+        "url":"myface.com",
+        "secure": true,
+        "paths": [
+            "jordan"
+        ]
+    }
+]

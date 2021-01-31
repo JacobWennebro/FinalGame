@@ -49,20 +49,24 @@ app.on('ready', () => {
 
     if (app.isPackaged) {
 
-        w.loadURL(path.join(__dirname, "./dist/index.html"));
+        w.loadFile(path.join(__dirname, "./compiled/index.html"));
 
+        globalShortcut.register("Ctrl+R", () => {
+            w.loadURL(path.join(__dirname, "./compiled/index.html"));
+        });
+        
     } else {
         w.loadURL("http://localhost:8080");
+
+        globalShortcut.register("Ctrl+R", () => {
+            w.loadURL("http://localhost:8080");
+        });
     }
 
     w.setFullScreen(true);
 
     globalShortcut.register("Ctrl+F12", () => {
         w.isFocused() && w.webContents.toggleDevTools();
-    });
-
-    globalShortcut.register("Ctrl+R", () => {
-        w.loadURL("http://localhost:8080");
     });
 
 });

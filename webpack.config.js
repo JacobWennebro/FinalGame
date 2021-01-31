@@ -11,7 +11,7 @@ module.exports = (env, argv) => {
         entry: "./src/index.tsx",
         output: {
             filename: "game.js",
-            path: path.resolve(__dirname, "dist"),
+            path: path.resolve(__dirname, "compiled"),
         },
         plugins: [
             new HtmlWebpackPlugin({
@@ -48,7 +48,7 @@ module.exports = (env, argv) => {
                 },
                 {
                     test: /\.png|svg|jpg|gif|ttf|cur$/,
-                    use: ["file-loader"],
+                    use: ["file-loader"]
                 },
             ],
         },

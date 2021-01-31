@@ -1,8 +1,8 @@
-import React, { Component, useRef } from 'react'
+import React, { Component, Consumer, useRef } from 'react'
 import Draggable from 'react-draggable'
 
 
-export default function DesktopWindow(props: {children?: any, title?: string, content?: any, id: string, active: boolean, icon?: string, close: () => void, hide: () => void, visibility: boolean}) {
+export default function DesktopWindow(props: {children?: any, title?: string, content?: any, active: boolean, icon?: string, close: () => void, hide: () => void, visibility: boolean, x?: number, y?: number, Consumer: Consumer<{}>}) {
 
     const windowRef = useRef<HTMLDivElement>();
 
@@ -19,7 +19,7 @@ export default function DesktopWindow(props: {children?: any, title?: string, co
     return props.active ? (
         <Draggable
         handle=".app-window__bar"
-        defaultPosition={{x: 200, y: 200}}
+        defaultPosition={{x: props.x || 200, y: props.y || 200}}
         scale={1}
         onStart={() => toggleZIndex()}
         bounds="parent"
@@ -27,7 +27,7 @@ export default function DesktopWindow(props: {children?: any, title?: string, co
             <div ref={windowRef} className="app-window" style={{visibility: props.visibility ? "visible" : "hidden"}}>
                 
                 <div className="app-window__bar">
-                    <img className="app-window__bar__icon v-center" src={"../../assets/icons/" + props.icon}/>
+                    {props.icon ? (<img className="app-window__bar__icon v-center" src={"../../assets/icons/" + props.icon}/>) : (null)}
                     <span className="app-window__bar__title text-style-1 v-center">{props.title || "Title"}</span>
 
                     <div className="app-window__bar__actions v-center-all">

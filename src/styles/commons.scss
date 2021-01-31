@@ -19,3 +19,7 @@
     top: 50%;
     transform: translateY(-50%);
 }
+
+body:not(.progress-state) .hoverable {
+    cursor: $cr-pointer !important;
+}

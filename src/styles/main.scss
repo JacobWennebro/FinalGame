@@ -7,6 +7,9 @@
 // Commons
 @import './commons.scss';
 
+// Web components
+@import './webcomponents.scss';
+
 @import './environments/Desktop.scss';
 @import './environments/PauseScreen.scss';
 
@@ -21,12 +24,13 @@ body,html {
     margin: 0;
     height: 100%;
     font-family: VT323;
-    user-select: none;
     overflow: hidden;
     cursor: $cr-default;
-    &.progress-state {
-        cursor: $cr-progress !important;
-    }
+    user-select: none;
+}
+
+.progress-state {
+    cursor: $cr-progress !important;
 }
 
 img {
