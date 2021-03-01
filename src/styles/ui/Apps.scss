@@ -16,7 +16,7 @@
             height: 100%;
 
             &__bar {
-                background: $gc-main-blue;
+                background: #2157d6;
                 width: 100%;
                 min-height: 3rem;
                 height: auto;
@@ -35,7 +35,7 @@
                         width: 20px;
                         height: 20px;
                         border-radius: 33vw;
-                        background: $gc-main-blue;
+                        background: #FFF;
                         margin: 0 0.25rem;
                         border: 2px solid rgb(110, 125, 255);
                         &:hover {
@@ -83,7 +83,6 @@
                         white-space: nowrap;
                         text-overflow: ellipsis;
                         cursor: text;
-                        //text-transform: lowercase;
                         &:empty:before {
                             content: 'Search the internet with a URL';
                             color: gray;

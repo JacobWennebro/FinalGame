@@ -17,10 +17,12 @@ console.log(a);
 
 const App = () => {
 
+    process.env.PRODUCTION = ipc.sendSync("retrieve-data", "isPackaged");
+
     const [state, setState] = useState({
         computer_username: os.userInfo().username,
         desktop_config: DesktopConfig,
-        production: ipc.sendSync("retrieve-data", "isPackaged"),
+        production: process.env.PRODUCTION === "true",
     });
 
     const [gameState, setGameState] = useState("ingame");

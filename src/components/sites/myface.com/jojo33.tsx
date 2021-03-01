@@ -6,7 +6,7 @@ export default class jordan extends Component<{redirect: (url: string) => void}>
     render() {
         return (
             <Layout redirect={this.props.redirect}>
-                <Profile gender="male" age={12} town="Santa Monica" state="California" country="United States"/>
+                <Profile avatar="female.png" username="jojo33" name="Jordan Simpson" gender="male" age={21} town="Santa Monica" state="California" country="United States"/>
             </Layout>
         )
     }

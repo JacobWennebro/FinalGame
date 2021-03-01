@@ -1,5 +1,6 @@
 import React, { Component, Consumer, useRef } from 'react'
 import Draggable from 'react-draggable'
+import Image from './Image';
 
 
 export default function DesktopWindow(props: {children?: any, title?: string, content?: any, active: boolean, icon?: string, close: () => void, hide: () => void, visibility: boolean, x?: number, y?: number, Consumer: Consumer<{}>}) {
@@ -24,10 +25,10 @@ export default function DesktopWindow(props: {children?: any, title?: string, co
         onStart={() => toggleZIndex()}
         bounds="parent"
         >
-            <div ref={windowRef} className="app-window" style={{visibility: props.visibility ? "visible" : "hidden"}}>
+            <div ref={windowRef} className="app-window" window-title={props.title} style={{visibility: props.visibility ? "visible" : "hidden"}}>
                 
                 <div className="app-window__bar">
-                    {props.icon ? (<img className="app-window__bar__icon v-center" src={"../../assets/icons/" + props.icon}/>) : (null)}
+                    {props.icon ? (<Image className="app-window__bar__icon v-center" src={"icons/" + props.icon}/>) : (null)}
                     <span className="app-window__bar__title text-style-1 v-center">{props.title || "Title"}</span>
 
                     <div className="app-window__bar__actions v-center-all">

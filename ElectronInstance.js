@@ -54,6 +54,8 @@ app.on('ready', () => {
         globalShortcut.register("Ctrl+R", () => {
             w.loadURL(path.join(__dirname, "./compiled/index.html"));
         });
+
+        w.setFullScreen(true);
         
     } else {
         w.loadURL("http://localhost:8080");
@@ -62,8 +64,6 @@ app.on('ready', () => {
             w.loadURL("http://localhost:8080");
         });
     }
-
-    w.setFullScreen(true);
 
     globalShortcut.register("Ctrl+F12", () => {
         w.isFocused() && w.webContents.toggleDevTools();

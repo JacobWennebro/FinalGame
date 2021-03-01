@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
 import fs from 'original-fs';
-import path from 'path';
 
-export default class Ad extends Component<{nsfw: boolean, production: boolean}> {
+export default class Ad extends Component<{nsfw: boolean, banner: boolean}> {
     private ads: string[]
     ad: string
 
     constructor(props) {
         super(props);
 
-        if(this.props.production) {
-
+        if(process.env.PRODUCTION === "true") {
+            console.log("a");
         } else {
-            this.ads = fs.readdirSync("./src/assets/images/" + (this.props.nsfw ? "ads-nsfw" : "ads"));
+            console.log(this.props.nsfw ? `${this.props.banner ? "banner-" : ""}ads-nsfw` : `${this.props.banner ? "banner-" : ""}ads`);
+
+            this.ads = fs.readdirSync("./src/assets/images/" + (this.props.nsfw ? `${this.props.banner ? "banner-" : ""}ads-nsfw` : `${this.props.banner ? "banner-" : ""}ads`));
             console.log(this.ads);
         }
 
@@ -23,7 +24,7 @@ export default class Ad extends Component<{nsfw: boolean, production: boolean}> 
         return (
             <div className="ad render-as-pixels" style={
                 {
-                    background:`url(./assets/images/${this.props.nsfw ? "ads-nsfw" : "ads"}/${this.ad}) left center / cover`,
+                    background:`url(./assets/images/${this.props.nsfw ? `${this.props.banner ? "banner-" : ""}ads-nsfw` : `${this.props.banner ? "banner-" : ""}ads`}/${this.ad}) left center / cover`,
                 }
             }>
                 

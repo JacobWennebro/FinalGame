@@ -2,6 +2,7 @@ import React, { Component, Consumer, ConsumerProps, createRef, KeyboardEvent, la
 import loadable from '@loadable/component'
 import { ConfigTypes } from '../../../types/ContextData'
 import Sites from '../../../configs/Sites.json'
+import Image from '../../ui/Image'
 
 interface state {
     input: string
@@ -183,7 +184,7 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
 
                         <div className="browser__bar__security">
                             <div className="browser__bar__security__icon v-center">
-                                <img className="v-center render-as-pixels" src={`../../assets/icons/${this.state.active_site_secure ? "padlock-secure" : "padlock-unsecure"}.png`} />
+                                <Image className="v-center render-as-pixels" src={`icons/${this.state.active_site_secure ? "padlock-secure" : "padlock-unsecure"}.png`} />
                             </div>
                         </div>
 
