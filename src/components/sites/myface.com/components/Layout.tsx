@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Ad from '../../../webcomponents/Ad';
 import '../myface.scss';
 
 export default class Layout extends Component<{redirect: (url: string) => void}> {
@@ -17,7 +16,6 @@ export default class Layout extends Component<{redirect: (url: string) => void}>
                     </div>
                 </header>
                 <div className="view margin page-wrapper">
-                    <Ad banner={true} nsfw={false}/>
                     {this.props.children}
                 </div>
             </div>

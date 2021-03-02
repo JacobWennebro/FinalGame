@@ -33,8 +33,8 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
         this.state = {
             input: "",
             visible_suggestions: false,
-            active_url: "example.com",
-            active_sublink: "",
+            active_url: "myface.com",
+            active_sublink: "user/mayacooper89",
             active_site_secure: true
         }
     }
@@ -124,7 +124,7 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
     }
 
     GoToWebpage(address: string) {
-        if(address === this.state.active_url + this.state.active_sublink ? "/"+this.state.active_sublink : "") return;
+        //if(address === this.state.active_url + this.state.active_sublink ? "/"+this.state.active_sublink : "") return;
 
         this.CancelFocus();
         const inputElement = this.spanInputElement.current;
@@ -138,7 +138,7 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
             sublinks.shift();
 
             const targetSite = Sites.filter(s => s.url == domain)[0];
-            const path = sublinks.join("");
+            const path = sublinks.join("/");
 
             this.setState({ 
                 active_url: domain, 
@@ -160,15 +160,14 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
         let site = props.site;
     
         if(!targetSite || targetSite && props.path && !targetSite.paths.includes(props.path)) site = "notfound";
-    
-        if (props.production) DynamicComp = loadable(() => import(`../../sites/${site}/${(props.path && site !== "notfound") ? props.path : "index"}`), {
+
+        if (props.production) DynamicComp = loadable(() => import(`../../sites/${site}/pages/${(props.path && site !== "notfound") ? props.path.split("/")[0] : "index"}`), {
             fallback: (<div>xd</div>)
         });
-    
-        else DynamicComp = require(`../../sites/${site}/${(props.path && site !== "notfound") ? props.path : "index"}`).default;
-    
+        else DynamicComp = require(`../../sites/${site}/pages/${(props.path && site !== "notfound") ? props.path.split("/")[0] : "index"}`).default;
+
         // @ts-ignore
-        return (<DynamicComp redirect={this.GoToWebpage} production={props.production} exists={targetSite != undefined} site={props.site}/>);
+        return (<DynamicComp redirect={this.GoToWebpage} production={props.production} exists={targetSite != undefined} site={props.site} path={props.path}/>);
     }
 
     render() {

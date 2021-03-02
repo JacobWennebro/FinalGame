@@ -1,0 +1,46 @@
+[
+    {
+        "username":"jw",
+        "avatar":"jacob.png",
+        "name":"Jacob Wennebro",
+        "gender":"male",
+        "age": 17,
+        "town":"Umeå",
+        "state":"Västerbotten",
+        "country":"Sweden",
+        "biography":"coderman"
+    },
+    {
+        "username":"mayacooper89",
+        "avatar":"maya.png",
+        "name":"Maya Cooper",
+        "gender":"female",
+        "age": 19,
+        "town":"Pittsburgh",
+        "state":"Pennsylvania",
+        "country":"United States",
+        "biography":"Hello"
+    },
+    {
+        "username":"fishermanpat",
+        "avatar":"patrick.png",
+        "name":"Patrick Marley",
+        "gender":"male",
+        "age": 46,
+        "town":"Pittsburgh",
+        "state":"Pennsylvania",
+        "country":"United States",
+        "biography":"fish fish fish!"
+    },
+    {
+        "username":"tj945",
+        "avatar":"tj.png",
+        "name":"Tj Marley",
+        "gender":"male",
+        "age": 19,
+        "town":"Pittsburgh",
+        "state":"Pennsylvania",
+        "country":"United States",
+        "biography":"im epic"
+    }
+]

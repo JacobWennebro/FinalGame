@@ -11,6 +11,7 @@ import Browser from '../apps/app.browser/app'
 
 import HelpMonkey from '../ui/HelpMonkey';
 import FormatTime from '../../scripts/FormatTime';
+import devmode from '../../devmode.json';
 
 interface props {
     Consumer: React.Consumer<{}>
@@ -162,6 +163,7 @@ export default class Desktop extends Component<props, state> {
         /* Game System time speed */
         this.setState({ time_speed: 2000 });
 
+        /* Developer features */
         if(!this.props.production) {
 
             const developerHotKeys = (e: KeyboardEventInit) => {
@@ -175,12 +177,14 @@ export default class Desktop extends Component<props, state> {
 
             document.body.onkeydown = developerHotKeys;
             document.body.onkeyup = developerHotKeys;
+
+            if(devmode.appDebugger.enabled) this.openApp(devmode.appDebugger.app);
         }
 
 
         /*
         let virus = setInterval(() => {
-            if(this.state.adware_popups.length <= 30) this.setState({ adware_popups: [...this.state.adware_popups, (<div>:D</div>)]})
+            if(this.state.adware_popups.length <= 30) this.setState({ adware_popups: [...this.state.adware_popups, (<Ad nsfw={true} banner={false}/>)]})
             
             const errorSound = new Audio('./assets/audio/UI_ERROR.mp3');
             errorSound.volume = 0.1;

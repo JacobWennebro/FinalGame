@@ -6,6 +6,13 @@
 .ad {
     width: 5rem;
     height: 5rem;
+    outline: 2px solid gray;
+    cursor: pointer;
+
+    &.ad-banner {
+        width: calc(256px * 3);
+        margin: 1rem 0;
+    }
 }
 
 body:not(.progress-state) span.hyperlink {

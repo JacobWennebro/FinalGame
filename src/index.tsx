@@ -13,7 +13,6 @@ const Context = React.createContext({});
 const ipc = window.require('electron').ipcRenderer;
 
 const a = require("./scripts/DesktopManager");
-console.log(a);
 
 const App = () => {
 

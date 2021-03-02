@@ -46,6 +46,12 @@ $lightblue: #79A7D7;
     }
 
     .myface-profile {
+        overflow-x: hidden;
+
+        .ad-banner {
+            margin: 1rem auto;
+        }
+
         &__heading {
             font-weight: 100;
             margin-bottom: 0.5rem;
@@ -59,7 +65,8 @@ $lightblue: #79A7D7;
             grid-template-columns: 16rem auto;
             grid-column-gap: 1rem;
             line-height: 22px;
-            margin: 1rem 0;
+            margin: auto;
+            max-width: 70vw;
         }
 
         &__about {
@@ -80,7 +87,7 @@ $lightblue: #79A7D7;
                 }
             }
 
-            &__contact {
+            &__biography {
                 width: 100%;
                 min-height: 20%;
                 background-color: $lightblue;
@@ -93,10 +100,13 @@ $lightblue: #79A7D7;
                     font-weight: 100;
                 }
 
-                &__links {
+                &__content {
                     background: #F5F5F5;
                     min-height: 10vh;
                     width: 100%;
+                    padding: 0.5rem;
+                    color: #333;
+                    user-select: text;
                 }
             }
 
@@ -113,6 +123,10 @@ $lightblue: #79A7D7;
 
         &__feed {
             background-color: #F5F5F5;
+            max-width: 50vw;
+            &__contents {
+                padding: 0.5rem;
+            }
         }
 
     }

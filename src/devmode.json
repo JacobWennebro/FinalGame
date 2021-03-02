@@ -1,0 +1,6 @@
+{
+    "appDebugger": {
+        "enabled": true,
+        "app":"app.browser"
+    }
+}

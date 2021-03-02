@@ -1,14 +1,16 @@
 import React, { Component } from 'react'
+import Ad from '../../../webcomponents/Ad'
 
-export default class Profile extends Component<{username: string, name: string, gender: string, age: number, town: string, state: string, country: string, avatar: string}> {
+export default class Profile extends Component<{username: string, name: string, gender: string, age: number, town: string, state: string, country: string, avatar: string, biography: string}> {
     render() {
         return (
             <div className="myface-profile">
                 
-                <div className="myface-profile__seperator">
+                <Ad banner={true} nsfw={false}/>
 
+                <div className="myface-profile__seperator">
                     <div className="myface-profile__about">
-                        <h2 className="myface-profile__heading">{this.props.username}</h2>
+                        <h2 className="myface-profile__heading">@{this.props.username}</h2>
 
                         <div className="myface-profile__about__details">
                             <div className="myface-profile__about__details__picture render-as-pixels" style={{background:`url(./assets/images/avatars/${this.props.avatar}) left center / cover`}}></div>
@@ -23,10 +25,10 @@ export default class Profile extends Component<{username: string, name: string, 
                             </div>
                         </div>
 
-                        <div className="myface-profile__about__contact">
+                        <div className="myface-profile__about__biography">
                             <h3>Biography</h3>
-                            <div className="myface-profile__about__contact__links">
-
+                            <div className="myface-profile__about__biography__content">
+                                <p>{this.props.biography}</p>
                             </div>
                         </div>
 
@@ -39,7 +41,9 @@ export default class Profile extends Component<{username: string, name: string, 
 
                     <div className="myface-profile__feed">
                         <h2 className="myface-profile__heading">{this.props.username}'s feed</h2>
-
+                        <div className="myface-profile__feed__contents">
+                            {this.props.children}
+                        </div>
                     </div>
 
                 </div>

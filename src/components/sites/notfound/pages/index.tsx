@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import Ad from '../../webcomponents/Ad';
-import './notfound.scss'
+import '../notfound.scss'
 
 export default class index extends Component<{exists: boolean, site: string, production: boolean, redirect: (url: string) => void}> {
     componentDidMount() {
