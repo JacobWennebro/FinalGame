@@ -17,9 +17,9 @@ export default class Ad extends Component<{nsfw: boolean, banner: boolean}> {
     }
     render() {
         return (
-            <div className={`ad render-as-pixels ${this.props.banner ? "ad-banner" : ""}`} style={
+            <div data-link="adservice.net" className={`ad render-as-pixels ${this.props.banner ? "ad-banner" : ""}`} style={
                 {
-                    background:`url(./assets/images/${this.props.nsfw ? `${this.props.banner ? "banner-" : ""}ads-nsfw` : `${this.props.banner ? "banner-" : ""}ads`}/${"casino-1.gif"}) left center / cover`,
+                    background:`url(./assets/images/${this.props.nsfw ? `${this.props.banner ? "banner-" : ""}ads-nsfw` : `${this.props.banner ? "banner-" : ""}ads`}/${"game-1.gif"}) left center / cover`,
                 }
             }>
                 

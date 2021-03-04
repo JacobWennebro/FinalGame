@@ -1,5 +1,9 @@
 export interface App {
-    title: string, icon: string, id: string
+    title: string, icon: string, id: string, 
+    
+    show?: boolean, maxWidth?: string, maxHeight?: string,
+    minHeight?: string, minWidth?: string,
+    buttons: boolean
 }
 
 export interface ConfigTypes {

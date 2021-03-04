@@ -10,7 +10,8 @@
     cursor: pointer;
 
     &.ad-banner {
-        width: calc(256px * 3);
+        max-width: calc(256px * 3);
+        width: 100%;
         margin: 1rem 0;
     }
 }

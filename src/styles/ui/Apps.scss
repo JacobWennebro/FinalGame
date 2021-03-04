@@ -148,6 +148,22 @@
                 align-items: stretch;
                 user-select: text !important;
                 z-index: 10;
+
+                .link-descriptor {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    user-select: none;
+                    span:not(:empty) {
+                        padding: 0.25rem;
+                        background-color: $sc-main-lightblue;
+                        color: #FFF;
+                        &:before {
+                            content: 'https://'
+                        }
+                    }
+                }
+
             }
         }
     }

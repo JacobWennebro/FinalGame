@@ -20,7 +20,7 @@ export default class Profile extends Component<{username: string, name: string, 
                                     <br/>
                                     {this.props.gender}, {this.props.age}<br/>
                                     <br/>
-                                    Last Login: 2/15/2006
+                                    Status: <span className="online">Online</span>
                                 </p>
                             </div>
                         </div>
@@ -34,7 +34,7 @@ export default class Profile extends Component<{username: string, name: string, 
 
                         <div className="myface-profile__about__url">
                             <p>MyFace URL:</p>
-                            <input readOnly={true} value={"https://myface.com/"+this.props.username.toLowerCase()}/>
+                            <input readOnly={true} value={"https://myface.com/user/"+this.props.username.toLowerCase()}/>
                         </div>
 
                     </div>

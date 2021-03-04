@@ -1,5 +1,16 @@
 [
     {
+        "username":"default",
+        "avatar":"female.png",
+        "name":"ooga booga",
+        "gender":"male",
+        "age": 17,
+        "town":"Umeå",
+        "state":"Västerbotten",
+        "country":"Sweden",
+        "biography":"coderman"
+    },
+    {
         "username":"jw",
         "avatar":"jacob.png",
         "name":"Jacob Wennebro",
@@ -42,5 +53,27 @@
         "state":"Pennsylvania",
         "country":"United States",
         "biography":"im epic"
+    },
+    {
+        "username":"brokenadmin",
+        "avatar":"alex.png",
+        "name":"Alex Alexanderson",
+        "gender":"male",
+        "age": 16,
+        "town":"Somewhere in Alabama",
+        "state":"Alabama",
+        "country":"United States",
+        "biography":"im epic"
+    },
+    {
+        "username":"tinalol00",
+        "avatar":"tina.png",
+        "name":"Tina Tina",
+        "gender":"male",
+        "age": 16,
+        "town":"Norwaytown",
+        "state":"Oogabooga",
+        "country":"Norway",
+        "biography":"tina is bad"
     }
 ]

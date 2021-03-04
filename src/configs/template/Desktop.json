@@ -4,22 +4,41 @@
         {
             "title": "NetExplorer",
             "icon": "browser.png",
-            "id": "app.browser"
+            "id": "app.browser",
+            "show": true,
+            "buttons": true
         },
         {
             "title": "Notepad",
             "icon": "notepad.png",
-            "id": "app.notepad"
+            "id": "app.notepad",
+            "show": true,
+            "buttons": true
         },
         {
             "title": "Webcam",
             "icon": "camera.png",
-            "id": "app.webcam"
+            "id": "app.webcam",
+            "show": true,
+            "buttons": true
         },
         {
             "title": "Pictures",
             "icon": "folder.png",
-            "id": "app.pictures"
+            "id": "app.pictures",
+            "show": true,
+            "buttons": true
+        },
+        {
+            "title": "Customize ExperienceOS",
+            "icon": "settings.png",
+            "id": "app.settings",
+            "show": false,
+            "maxWidth":"20vw",
+            "minWidth":"20vw",
+            "minHeight":"30vh",
+            "maxHeight":"30vh",
+            "buttons": false
         }
     ],
     "active_apps": [

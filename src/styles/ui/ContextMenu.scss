@@ -1,0 +1,33 @@
+.cxm {
+    position: absolute;
+    background-color: #EFEFEF;
+    padding: 0.25rem;
+    transform-origin: center;
+    border: 1px solid #cecece;
+
+    ul {
+        list-style: none;
+
+        li {
+            padding: 0.25rem 6rem 0.25rem 1.25rem;
+
+            &.cxm__spacer {
+                padding: 0;
+                hr {
+                    margin: 0.25rem 0;
+                    border: 0;
+                    border-bottom: 1px solid #cecece;
+                }
+            }
+
+            &:not(.cxm__spacer):hover {
+                background-color: #2F6AC6;
+                color: #FFF;
+                cursor: $cr-pointer;
+            }
+
+        }
+
+    }
+
+}

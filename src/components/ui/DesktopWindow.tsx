@@ -3,7 +3,24 @@ import Draggable from 'react-draggable'
 import Image from './Image';
 
 
-export default function DesktopWindow(props: {children?: any, title?: string, content?: any, active: boolean, icon?: string, close: () => void, hide: () => void, visibility: boolean, x?: number, y?: number, Consumer: Consumer<{}>}) {
+export default function DesktopWindow(props: {
+        children?: any,
+        title?: string,
+        content?: any,
+        active: boolean,
+        icon?: string,
+        close: () => void,
+        hide: () => void,
+        visibility: boolean, 
+        x?: number, 
+        y?: number, 
+        maxWidth?: string,
+        minWidth?: string,
+        maxHeight?: string,
+        minHeight?: string,
+        buttons: boolean,
+        Consumer: Consumer<{}>
+    }) {
 
     const windowRef = useRef<HTMLDivElement>();
 
@@ -25,15 +42,26 @@ export default function DesktopWindow(props: {children?: any, title?: string, co
         onStart={() => toggleZIndex()}
         bounds="parent"
         >
-            <div ref={windowRef} className="app-window" window-title={props.title} style={{visibility: props.visibility ? "visible" : "hidden"}}>
+            <div ref={windowRef} className="app-window" window-title={props.title} style={{
+                visibility: props.visibility ? "visible" : "hidden",
+                maxWidth: props.maxWidth || "100%",
+                maxHeight: props.maxHeight || "100%",
+                minWidth: props.minWidth || "50vw",
+                minHeight: props.maxHeight || "50vh"
+            }}>
                 
                 <div className="app-window__bar">
                     {props.icon ? (<Image className="app-window__bar__icon v-center" src={"icons/" + props.icon}/>) : (null)}
                     <span className="app-window__bar__title text-style-1 v-center">{props.title || "Title"}</span>
 
                     <div className="app-window__bar__actions v-center-all">
-                        <div onClick={props.hide} className="app-window__bar__button hide c-item"></div>
-                        <div onClick={() => windowRef.current.classList.add("fullscreen")} className="app-window__bar__button minimize c-item"></div>
+                        {props.buttons ? (
+                            <>
+                                <div onClick={props.hide} className="app-window__bar__button hide c-item"></div>
+                                <div onClick={() => windowRef.current.classList.add("fullscreen")} className="app-window__bar__button minimize c-item"></div>
+                            </>
+                        ) : ""}
+                    
                         <div onClick={props.close} className="app-window__bar__button close c-item"></div>
                     </div>
                 </div>

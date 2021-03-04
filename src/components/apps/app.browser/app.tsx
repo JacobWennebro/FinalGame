@@ -10,6 +10,7 @@ interface state {
     active_url: string
     active_sublink: string
     active_site_secure: boolean
+    link_descriptor: string
 }
 
 export default class app extends Component<{Consumer: Consumer<{}>}, state> {
@@ -29,13 +30,15 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
         this.SearchbarRestrictions = this.SearchbarRestrictions.bind(this);
         this.GoToWebpage = this.GoToWebpage.bind(this);
         this.DynamicWebpageLoader = this.DynamicWebpageLoader.bind(this);
+        this.LinkDescriptor = this.LinkDescriptor.bind(this);
 
         this.state = {
             input: "",
             visible_suggestions: false,
             active_url: "myface.com",
             active_sublink: "user/mayacooper89",
-            active_site_secure: true
+            active_site_secure: true,
+            link_descriptor: undefined
         }
     }
 
@@ -170,9 +173,15 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
         return (<DynamicComp redirect={this.GoToWebpage} production={props.production} exists={targetSite != undefined} site={props.site} path={props.path}/>);
     }
 
+    LinkDescriptor(e: MouseEvent<HTMLDivElement>) {
+        const link = (e.target as HTMLElement).getAttribute("data-link");
+        if(link) this.setState({ link_descriptor: link });
+        else if(this.state.link_descriptor != undefined) this.setState({ link_descriptor: undefined });
+    }
+
     render() {
         return (
-            <div className="app" id="browser">
+            <div onMouseMove={this.LinkDescriptor} className="app" id="browser">
                 <div className="browser" active-url={this.state.active_url}>
                     <div className="browser__bar">
 
@@ -216,6 +225,9 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
                                 <this.DynamicWebpageLoader site={this.state.active_url} path={this.state.active_sublink} production={data.production} />
                             )}
                         </this.props.Consumer>
+                        <div className="link-descriptor">
+                            <span>{this.state.link_descriptor}</span>
+                        </div>
                     </div>
                 </div>
             </div>

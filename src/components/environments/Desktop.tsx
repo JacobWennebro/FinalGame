@@ -12,6 +12,7 @@ import Browser from '../apps/app.browser/app'
 import HelpMonkey from '../ui/HelpMonkey';
 import FormatTime from '../../scripts/FormatTime';
 import devmode from '../../devmode.json';
+import ContextMenu from '../ui/ContextMenu';
 
 interface props {
     Consumer: React.Consumer<{}>
@@ -23,6 +24,11 @@ interface state {
     time_speed: number
     apps: any
     adware_popups: any[]
+    cxm: {
+        visibility: boolean
+        x: number
+        y: number
+    }
 }
 
 export default class Desktop extends Component<props, state> {
@@ -35,11 +41,17 @@ export default class Desktop extends Component<props, state> {
         this.closeApp = this.closeApp.bind(this);
         this.toggleVisibility = this.toggleVisibility.bind(this);
         this.AppClickEvent = this.AppClickEvent.bind(this);
+        this.DesktopClickEvent = this.DesktopClickEvent.bind(this);
 
         this.state = {
             time: 850, // Ingame start time (later load from save file)
             time_speed: 2000,
             adware_popups: [],
+            cxm: {
+                visibility: false,
+                x: 0,
+                y: 0
+            },
             apps: {
                 "app.browser": {
                     content: (<Browser Consumer={this.props.Consumer}/>),
@@ -60,6 +72,11 @@ export default class Desktop extends Component<props, state> {
                     content: (<h1>Pictures</h1>),
                     active: false,
                     visible: true
+                },
+                "app.settings": {
+                    content: (<h1>Settings</h1>),
+                    active: false,
+                    visible: true
                 }
             }
         }
@@ -76,10 +93,38 @@ export default class Desktop extends Component<props, state> {
         /* Left click */
         if (e.button == 0) {
             console.log("left click");
+
+            switch((e.target as HTMLDivElement).id) {
+                case "personalize":
+                    this.openApp("app.settings");
+                break;
+            }
+
+            this.setState({ cxm: {
+                visibility: false,
+                x: 0,
+                y: 0
+            } });
+
         }
         /* Right click */
         else if (e.button == 2) {
-            console.log("right click")
+            console.log("right click");
+
+            const target = e.target as HTMLElement;
+
+            if(!target.classList.contains("desktop__board") && !target.classList.contains("desktop__board__apps")) return             this.setState({ cxm: {
+                visibility: false,
+                x: 0,
+                y: 0
+            } });;
+
+            this.setState({ cxm: {
+                visibility: true,
+                x: e.clientX,
+                y: e.clientY
+            } });
+
         }
 
     }
@@ -201,7 +246,10 @@ export default class Desktop extends Component<props, state> {
 
                         {/* Desktop window container */}
                         <div className="desktop__board" id="wallpaper" style={{ background: data.desktop_config.wallpaper as string }}>
-                            {!data.production ? (<span id="debugInfo">Developer mode | Game clock: {this.state.time} | Formatted clock {FormatTime(this.state.time)}</span>) : (<React.Fragment/>)}
+                            {!data.production ? (<span id="debugInfo"><b>Developer mode</b> | Game clock: {this.state.time} | Formatted clock {FormatTime(this.state.time)} | Wallpaper {data.desktop_config.wallpaper}</span>) : (<React.Fragment/>)}
+                            
+                            <ContextMenu openApp={this.openApp} visibility={this.state.cxm.visibility} x={this.state.cxm.x} y={this.state.cxm.y}/>
+                            
                             <div className="desktop__board__window__container">
                                 {data.desktop_config.apps.map((app: App) => (
                                     <DesktopWindow
@@ -214,6 +262,11 @@ export default class Desktop extends Component<props, state> {
                                         close={() => this.closeApp(app.id)}
                                         hide={() => this.toggleVisibility(app.id)}
                                         Consumer={this.props.Consumer}
+                                        maxWidth={app.maxWidth}
+                                        maxHeight={app.maxHeight}
+                                        minWidth={app.minWidth}
+                                        minHeight={app.minHeight}
+                                        buttons={app.buttons}
                                     />
                                 ))}
 
@@ -233,6 +286,7 @@ export default class Desktop extends Component<props, state> {
                                         x={25*(Math.floor(index/10)*8+1) + (25*index)}
                                         y={50*(Math.floor((index % 10)/10)+1) + (25*(index % 10))}
                                         Consumer={this.props.Consumer}
+                                        buttons={false}
                                     />)
                                 })}
                             </div>
@@ -243,7 +297,7 @@ export default class Desktop extends Component<props, state> {
                             {/* Desktop app icon container */}
                             <div className="desktop__board__apps">
                                 {data.desktop_config.apps.map((app: App) => (
-                                    <DesktopAppIcon onClick={this.AppClickEvent} title={app.title} icon={app.icon} id={app.id} key={app.id} />
+                                    app.show ? <DesktopAppIcon onClick={this.AppClickEvent} title={app.title} icon={app.icon} id={app.id} key={app.id} /> : ""
                                 ))}
                             </div>
                         </div>

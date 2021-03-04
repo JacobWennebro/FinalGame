@@ -47,6 +47,7 @@ $lightblue: #79A7D7;
 
     .myface-profile {
         overflow-x: hidden;
+        margin-bottom: 3rem;
 
         .ad-banner {
             margin: 1rem auto;
@@ -84,6 +85,10 @@ $lightblue: #79A7D7;
                     text-transform: capitalize;
                     margin: auto;
                     width: 70%;
+
+                    span.online {
+                        color: green;       
+                    }
                 }
             }
 
