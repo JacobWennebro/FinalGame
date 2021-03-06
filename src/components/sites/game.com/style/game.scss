@@ -1,4 +1,5 @@
 $tile-amount: 10;
+$tile-size: 75px;
 
 .game {
     width: 100%;
@@ -8,8 +9,6 @@ $tile-amount: 10;
     background-color: #222;
 
     &__view {
-        max-width: calc(75px * #{$tile-amount});
-        max-height: calc(75px * #{$tile-amount});
         width: 100%;
         height: 100%;
         position: absolute;
@@ -22,24 +21,25 @@ $tile-amount: 10;
         background-color: #555;
 
         &__map {
-            width: 75px;
-            height: 75px;
+            width: $tile-size;
+            height: $tile-size;
             position: relative;
             top: 50%;
             transform: translateY(-52%);
             margin: auto;
             &__container {
                 display: grid;
-                width: calc(75px * #{$tile-amount});
-                min-height: calc(75px * #{$tile-amount});
-                grid-template-columns: repeat(#{$tile-amount}, minmax(75px, 1fr));
+                width: calc(#{$tile-size} * #{$tile-amount});
+                min-height: calc(#{$tile-size} * #{$tile-amount});
+                grid-template-columns: repeat(#{$tile-amount}, minmax(#{$tile-size}, 1fr));
                 grid-template-rows: repeat(16, auto);
-                transition: transform 0.2s ease;
+                transition: transform 1s ease;
                 position: absolute;
+                outline: 1px solid #222;
         
                 &__tile {
-                    width: 75px;
-                    height: 75px;
+                    width: $tile-size;
+                    height: $tile-size;
                     background-size: cover;
                     position: relative;
                     overflow: hidden;
@@ -48,7 +48,7 @@ $tile-amount: 10;
                         outline: none;
                     }
     
-                    &:not(.wall):not(.wall-bottom) {
+                    &.grass, &.stair-left, &.stair-right {
                         &:hover {
                             z-index: 50;
                             outline: 1px solid lightskyblue;
@@ -77,7 +77,19 @@ $tile-amount: 10;
                     }
         
                     &.wall-bottom {
-                        background-image: url("../assets/wall-bottom.png");
+                        background-image: url("../assets/wall_bottom.png");
+                    }
+
+                    &.stair-left {
+                        background-image: url("../assets/stair_left.png");
+                    }
+
+                    &.stair-right {
+                        background-image: url("../assets/stair_right.png");
+                    }
+
+                    &.water {
+                        background-image: url("../assets/water.png");
                     }
         
                 }
@@ -88,12 +100,44 @@ $tile-amount: 10;
             position: absolute;
             top: 0;
             left: 0;
-            margin: 1rem;
-            padding: 0.5rem;
             z-index: 100;
             color: #FFF;
-            background-color: #222;
             user-select: none;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+
+            &__stats {
+                margin: 1rem;
+                width: 25%;
+                display: inline-block;
+
+                h1 {
+                    font-weight: 100;
+                }
+            }
+
+            .game-profile {
+                position: absolute;
+                right: 0;
+                top: 0;
+                margin: 1rem;
+
+                &__health {
+                    li {
+                        display: inline-block;
+                        margin: 0 2.5px;
+
+                        .heart {
+                            width: 16px;
+                            height: 16px;
+                            background-image: url("../assets/heart.png");
+                            background-size: cover;
+                        }
+                    }
+                }
+
+            }
         }
     
         &__character {
@@ -104,12 +148,37 @@ $tile-amount: 10;
             bottom: 0;
             margin: auto;
             z-index: 70;
-            width: 75px;
-            height: 75px;
-            background-image: url("../assets/character_standby.png");
+            width: $tile-size;
+            height: $tile-size;
+            background: url("../assets/character_standby_down.png") left center;
             background-size: cover;
             pointer-events: none;
             text-align: center;
+
+            &[data-state="bottom"] {
+
+                background: url("../assets/character_standby_down.png");
+                background-size: cover;
+
+                &.walking {
+                    background: url("../assets/character_walking_down.png") left center;
+                    background-size: cover;
+                    animation: walking 0.5s steps(3) infinite;   
+                }
+            }
+
+            &[data-state="top"] {
+
+                background: url("../assets/character_standby_up.png");
+                background-size: cover;
+
+                &.walking {
+                    background: url("../assets/character_walking_up.png") left center;
+                    background-size: cover;
+                    animation: walking 0.5s steps(3) infinite;
+                }
+
+            }
 
             &:before {
                 content: 'Dragonslayer64';
@@ -120,6 +189,10 @@ $tile-amount: 10;
             }
         }
     }
+}
+
+@keyframes walking {
+    100% { background-position: 225px }
 }
 
 @keyframes tileTap {

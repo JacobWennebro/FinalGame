@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import fs from 'original-fs';
 
 export default class Ad extends Component<{nsfw: boolean, banner: boolean}> {
     private ads: string[]
