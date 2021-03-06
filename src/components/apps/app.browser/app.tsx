@@ -35,8 +35,8 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
         this.state = {
             input: "",
             visible_suggestions: false,
-            active_url: "myface.com",
-            active_sublink: "user/mayacooper89",
+            active_url: "game.com",
+            active_sublink: "",
             active_site_secure: true,
             link_descriptor: undefined
         }

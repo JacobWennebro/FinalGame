@@ -24,5 +24,10 @@
             "user/default",
             "user/tinalol00"
         ]
+    },
+    {
+        "url":"game.com",
+        "secure": true,
+        "paths": []
     }
 ]

@@ -1,0 +1,128 @@
+$tile-amount: 10;
+
+.game {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    background-color: #222;
+
+    &__view {
+        max-width: calc(75px * #{$tile-amount});
+        max-height: calc(75px * #{$tile-amount});
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        overflow: hidden;
+        background-color: #555;
+
+        &__map {
+            width: 75px;
+            height: 75px;
+            position: relative;
+            top: 50%;
+            transform: translateY(-52%);
+            margin: auto;
+            &__container {
+                display: grid;
+                width: calc(75px * #{$tile-amount});
+                min-height: calc(75px * #{$tile-amount});
+                grid-template-columns: repeat(#{$tile-amount}, minmax(75px, 1fr));
+                grid-template-rows: repeat(16, auto);
+                transition: transform 0.2s ease;
+                position: absolute;
+        
+                &__tile {
+                    width: 75px;
+                    height: 75px;
+                    background-size: cover;
+                    position: relative;
+                    overflow: hidden;
+    
+                    &:focus {
+                        outline: none;
+                    }
+    
+                    &:not(.wall):not(.wall-bottom) {
+                        &:hover {
+                            z-index: 50;
+                            outline: 1px solid lightskyblue;
+                        }
+                    
+                        &:focus {
+                            &:before {
+                                content: '';
+                                position: absolute;
+                                width: 100%;
+                                height: 100%;
+                                border-radius: 33vw;
+                                background-color: rgba(0,0,0,0.1);
+                                transform: scale(1.5);
+                                animation: tileTap 0.3s forwards;
+                            }
+                        }
+                    }
+    
+                    &.grass {
+                        background-image: url("../assets/grass.png");
+                    }
+        
+                    &.wall {
+                        background-image: url("../assets/wall.png");
+                    }
+        
+                    &.wall-bottom {
+                        background-image: url("../assets/wall-bottom.png");
+                    }
+        
+                }
+            }
+        }
+
+        &__overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 1rem;
+            padding: 0.5rem;
+            z-index: 100;
+            color: #FFF;
+            background-color: #222;
+            user-select: none;
+        }
+    
+        &__character {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+            z-index: 70;
+            width: 75px;
+            height: 75px;
+            background-image: url("../assets/character_standby.png");
+            background-size: cover;
+            pointer-events: none;
+            text-align: center;
+
+            &:before {
+                content: 'Dragonslayer64';
+                position: relative;
+                top: -25px;
+                color: #FFF;
+                text-shadow: 1px 1px 2px #222;
+            }
+        }
+    }
+}
+
+@keyframes tileTap {
+    from { transform: scale(1.5) }
+    to { transform: scale(0) }
+}

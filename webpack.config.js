@@ -16,11 +16,10 @@ module.exports = (env, argv) => {
         plugins: [
             new HtmlWebpackPlugin({
                 template: "./src/markup.html",
-            }),/*
+            }),
             (argv.mode !== "development") ? new WebpackObfuscator ({
                 rotateStringArray: true
             }) : () => {},
-            */
             new CopyWebpackPlugin({
                 patterns: [
                     { from: "src/assets", to: "assets" },
