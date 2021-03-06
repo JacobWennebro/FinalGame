@@ -1,5 +1,6 @@
 const electron = require('electron');
 const path = require('path');
+const DiscordRPC = require('discord-rpc');
 
 const { app, BrowserWindow, globalShortcut, ipcMain, session } = electron;
 
@@ -56,7 +57,7 @@ app.on('ready', () => {
         });
 
         w.setFullScreen(true);
-        
+
     } else {
         w.loadURL("http://localhost:8080");
 
@@ -69,4 +70,41 @@ app.on('ready', () => {
         w.isFocused() && w.webContents.toggleDevTools();
     });
 
+    // Set this to your Client ID.
+    const clientId = '817335112856764436';
+
+    // Only needed if you want to use spectate, join, or ask to join
+    DiscordRPC.register(clientId);
+
+    const rpc = new DiscordRPC.Client({ transport: 'ipc' });
+    const startTimestamp = new Date();
+
+    async function setActivity() {
+        if (!rpc || !w) {
+            return;
+        }
+
+        const boops = await w.webContents.executeJavaScript('window.boops');
+
+        // You'll need to have snek_large and snek_small assets uploaded to
+        // https://discord.com/developers/applications/<application_id>/rich-presence/assets
+        rpc.setActivity({
+            startTimestamp,
+            largeImageKey: 'monkey',
+            smallImageKey: 'notepad',
+            smallImageText: 'Using notepad',
+            instance: false,
+        });
+    }
+
+    rpc.on('ready', () => {
+        setActivity();
+
+        // activity can only be set every 15 seconds
+        setInterval(() => {
+            setActivity();
+        }, 15e3);
+    });
+
+    rpc.login({ clientId }).catch(console.error);
 });

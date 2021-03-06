@@ -94,7 +94,7 @@ export default class Desktop extends Component<props, state> {
         if (e.button == 0) {
             console.log("left click");
 
-            switch((e.target as HTMLDivElement).id) {
+            switch((e.target as HTMLDivElement).id.substr(3).toLowerCase()) {
                 case "personalize":
                     this.openApp("app.settings");
                 break;
