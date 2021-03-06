@@ -1,45 +1,23 @@
 import React, { Component, KeyboardEvent, MouseEvent, RefObject } from 'react'
 import '../style/game.scss'
+import Maps from '../assets/Maps.json'
 
-
-export default class index extends Component<{}, { x: number, y: number }> {
-    Character: RefObject<HTMLDivElement> 
-    Map: RefObject<HTMLDivElement> 
-    activeTile: HTMLDivElement
-    tiles = [
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-        [2, 2, 2, 2, 2, 2, 2, 2, 2, 2],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
-        [1, 1, 1, 1, 0, 0, 1, 1, 1, 1],
-        [2, 2, 2, 2, 0, 0, 2, 2, 2, 2],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-        [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-    ]
+export default class index extends Component<{}, { x: number, y: number, map_id: number }> {
+    Character: RefObject<HTMLDivElement> = React.createRef(); 
+    Map: RefObject<HTMLDivElement> = React.createRef();
+    MapRect: DOMRect;
 
     constructor(props) {
         super(props);
 
-        this.Character = React.createRef();
-        this.Map = React.createRef();
-
-        this.CharacterMovement = this.CharacterMovement.bind(this);
+        this.ClickMovement = this.ClickMovement.bind(this);
+        this.updateMap = this.updateMap.bind(this);
 
         this.state = {
-            x: 4,
-            y: 6
+            map_id: 0,
+            x: Maps[0].spawn[0],
+            y: Maps[0].spawn[1]
         }
-
-        document.body.addEventListener("keydown", this.CharacterMovement);
 
     }
 
@@ -53,22 +31,22 @@ export default class index extends Component<{}, { x: number, y: number }> {
             switch(key.toLowerCase()) {
                 case "arrowup":
                 case "w":
-                    tile = this.tiles[this.state.y-1][this.state.x];
+                    tile = Maps[this.state.map_id].tiles[this.state.y-1][this.state.x];
                     y--;
                 break;
                 case "arrowleft":
                 case "a":
-                    tile = this.tiles[this.state.y][this.state.x-1];
+                    tile = Maps[this.state.map_id].tiles[this.state.y][this.state.x-1];
                     x--;
                 break;
                 case "arrowdown":
                 case "s":
-                    tile = this.tiles[this.state.y+1][this.state.x];
+                    tile = Maps[this.state.map_id].tiles[this.state.y+1][this.state.x];
                     y++;
                 break;
                 case "arrowright":
                 case "d":
-                    tile = this.tiles[this.state.y][this.state.x+1];
+                    tile = Maps[this.state.map_id].tiles[this.state.y][this.state.x+1];
                     x++;
                 break;
             }
@@ -81,8 +59,45 @@ export default class index extends Component<{}, { x: number, y: number }> {
 
     }
 
-    componentWillUnmount() {
-        document.body.removeEventListener("keydown", this.CharacterMovement);
+    ClickMovement(e: MouseEvent<HTMLDivElement>) {
+        try {
+            const target = e.currentTarget;
+            const rect = target.getBoundingClientRect();
+            const mapRect = this.Map.current.getBoundingClientRect();
+
+            const addX = (Math.round(rect.left - mapRect.left) / 75);
+            const addY = (Math.round(rect.top - mapRect.top) / 75);
+
+            if(addX != 0) {
+                this.Character.current.setAttribute("data-state", addY > 0 ? "bottom" : "top");
+            } else if(addY != 0) {
+                this.Character.current.setAttribute("data-state", addY > 0 ? "bottom" : "top");
+            }
+
+            const x = this.state.x + addX;
+            const y = this.state.y + addY;
+
+            const tile = Maps[this.state.map_id].tiles[y][x];
+    
+            if(
+                tile == undefined || 
+                [1, 2, 5].includes(tile)
+            ) return;
+    
+            this.setState({ x, y });
+            this.Character.current.classList.add("walking")
+
+            setTimeout(() => {
+                this.Character.current.classList.remove("walking");
+            }, 800);
+
+        } catch(e) {
+            return;
+        }
+    }
+    
+    componentDidMount() {
+        this.MapRect = this.Map.current.getBoundingClientRect();
     }
 
     getTileName(int: number) {
@@ -93,7 +108,21 @@ export default class index extends Component<{}, { x: number, y: number }> {
                 return "wall";
             case 2:
                 return "wall-bottom";
+            case 3:
+                return "stair-left";
+            case 4:
+                return "stair-right";
+            case 5:
+                return "water";
         }
+    }
+
+    updateMap(id: number) {
+        this.setState({
+            map_id: id,
+            x: Maps[id].spawn[0],
+            y: Maps[id].spawn[1]
+        });
     }
 
     render() {
@@ -102,18 +131,37 @@ export default class index extends Component<{}, { x: number, y: number }> {
 
                 <div className="game__view">
                     <div className="game__view__overlay">
-                        <h1>MMO Online</h1>
-                        <p>1 player online</p>
+
+                        <div className="game__view__overlay__stats">
+                            <h1>MMO Online</h1>
+                            <p>Lobby #1 | 1 player online</p>
+                        </div>
+
+                        <div className="game-profile">
+
+
+                            <div className="game-profile__health">
+                                <ul>
+                                    <li><div className="heart"></div></li>
+                                    <li><div className="heart"></div></li>
+                                    <li><div className="heart"></div></li>
+                                    <li><div className="heart"></div></li>
+                                    <li><div className="heart"></div></li>
+                                </ul>
+                            </div>
+
+                        </div>
+
                     </div>
 
                     <div ref={this.Character} className="game__view__character render-as-pixels"></div>
 
                     <div className="game__view__map" ref={this.Map}>
                         <div style={{transform: `translate(${this.state.x * -1 * 75}px, ${this.state.y * -1 * 75}px)`}} className="game__view__map__container">
-                        {this.tiles.map(row => (
+                        {Maps[this.state.map_id].tiles.map(row => (
                             <>
                                 {row.map(tile => (
-                                    <div tabIndex={1} key={Math.random()} className={"game__view__map__container__tile render-as-pixels " + this.getTileName(tile)}></div>
+                                    <div onClick={this.ClickMovement} tabIndex={1} key={Math.random()} className={"game__view__map__container__tile render-as-pixels " + this.getTileName(tile)}></div>
                                 ))}
                             </>
                         ))}
