@@ -54,8 +54,7 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
         let site = props.site;
 
         if(!targetSite || targetSite && props.path && !targetSite.paths.includes(props.path)) site = "notfound";
-
-        targetSite.paths.push("");
+        if(targetSite) targetSite.paths.push("");
 
         /* is html type site */
         if(targetSite && targetSite.html && targetSite.paths.includes(props.path)) {
