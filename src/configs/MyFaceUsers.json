@@ -1,14 +1,14 @@
 [
     {
-        "username":"default",
-        "avatar":"female.png",
-        "name":"ooga booga",
+        "username":"sebhughes88",
+        "avatar":"sebastian.png",
+        "name":"Sebastian Hughes",
         "gender":"male",
-        "age": 17,
-        "town":"Umeå",
-        "state":"Västerbotten",
-        "country":"Sweden",
-        "biography":"coderman"
+        "age": 18,
+        "town":"Pittsburgh",
+        "state":"Pennsylvania",
+        "country":"United States",
+        "biography":"loves music idfk"
     },
     {
         "username":"jw",

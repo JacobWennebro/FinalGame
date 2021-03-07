@@ -33,7 +33,6 @@ $tile-size: 75px;
                 min-height: calc(#{$tile-size} * #{$tile-amount});
                 grid-template-columns: repeat(#{$tile-amount}, minmax(#{$tile-size}, 1fr));
                 grid-template-rows: repeat(16, auto);
-                transition: transform 1s ease;
                 position: absolute;
                 outline: 1px solid #222;
         
@@ -137,6 +136,16 @@ $tile-size: 75px;
                     }
                 }
 
+            }
+
+            .game-chat {
+                position: absolute;
+                left: 0;
+                bottom: 0;
+                margin: 1rem;
+                background-color: rgba(0,0,0,0.4);
+                min-width: 25%;
+                height: 40%;
             }
         }
     

@@ -9,6 +9,13 @@
             "buttons": true
         },
         {
+            "title": "JIM",
+            "icon": "messenger.png",
+            "id": "app.messenger",
+            "show": true,
+            "buttons": true
+        },
+        {
             "title": "Notepad",
             "icon": "notepad.png",
             "id": "app.notepad",

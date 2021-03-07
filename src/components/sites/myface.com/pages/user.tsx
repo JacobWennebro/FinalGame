@@ -4,7 +4,7 @@ import Layout from '../components/Layout';
 import Profile from '../components/Profile';
 import NotFound from '../../notfound/pages';
 
-export default class user extends Component<{path: string, redirect: (url: string) => void, exists: boolean, site: string, production: boolean}, {username: string}> {
+export default class user extends Component<{path: string, redirect: (url: string) => void, exists: boolean, site: string, production: boolean, time: number}, {username: string}> {
     render() {
         const search = Users.filter(u => u.username === this.props.path.split("/")[1]);
         if(search.length > 0) {
@@ -21,6 +21,7 @@ export default class user extends Component<{path: string, redirect: (url: strin
                         state={user.state}
                         country={user.country}
                         biography={user.biography}
+                        online={this.props.time > 500}
                         >
                             <p>oi</p>
                         </Profile>

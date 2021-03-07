@@ -58,6 +58,11 @@ export default class Desktop extends Component<props, state> {
                     active: false,
                     visible: true,
                 },
+                "app.messenger": {
+                    content: (<div>{this.state == undefined ? "a" : "b"}</div>),
+                    active: false,
+                    visible: true,
+                },
                 "app.notepad": {
                     content: (<Notepad />),
                     active: false,
@@ -191,6 +196,8 @@ export default class Desktop extends Component<props, state> {
 
             if(hours+1 >= 24 && minutes >= 59) this.setState({time: 0});
             else this.setState({ time: (hours+1 > 24) ? 0 : this.state.time + 1  });
+
+            document.body.setAttribute("data-game-time", this.state.time.toString());
         }, speed);
     }
 
@@ -201,6 +208,8 @@ export default class Desktop extends Component<props, state> {
     componentWillUnmount() {
         document.body.onkeydown = null;
         document.body.onkeyup = null;
+
+        document.body.removeAttribute("data-game-time");
     }
 
     componentDidMount() {
@@ -267,6 +276,7 @@ export default class Desktop extends Component<props, state> {
                                         minWidth={app.minWidth}
                                         minHeight={app.minHeight}
                                         buttons={app.buttons}
+                                        time={this.state.time}
                                     />
                                 ))}
 
@@ -287,6 +297,7 @@ export default class Desktop extends Component<props, state> {
                                         y={50*(Math.floor((index % 10)/10)+1) + (25*(index % 10))}
                                         Consumer={this.props.Consumer}
                                         buttons={false}
+                                        time={this.state.time}
                                     />)
                                 })}
                             </div>

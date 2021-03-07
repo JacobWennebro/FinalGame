@@ -47,9 +47,13 @@ module.exports = (env, argv) => {
                     use: [true ? "style-loader" : MiniCssExtractPlugin.loader, "css-loader", "resolve-url-loader", "sass-loader"],
                 },
                 {
-                    test: /\.png|svg|jpg|gif|ttf|cur$/,
+                    test: /\.png|svg|jpg|gif|ttf|cur|mp3$/,
                     use: ["file-loader"]
                 },
+                {
+                    test: /\.gtml$/,
+                    use: 'raw-loader'
+                }
             ],
         },
     };

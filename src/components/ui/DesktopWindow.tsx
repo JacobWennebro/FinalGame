@@ -20,6 +20,7 @@ export default function DesktopWindow(props: {
         minHeight?: string,
         buttons: boolean,
         Consumer: Consumer<{}>
+        time: number
     }) {
 
     const windowRef = useRef<HTMLDivElement>();

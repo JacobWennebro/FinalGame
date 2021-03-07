@@ -5,7 +5,8 @@ import Maps from '../assets/Maps.json'
 export default class index extends Component<{}, { x: number, y: number, map_id: number }> {
     Character: RefObject<HTMLDivElement> = React.createRef(); 
     Map: RefObject<HTMLDivElement> = React.createRef();
-    MapRect: DOMRect;
+    MapContainer: RefObject<HTMLDivElement> = React.createRef();
+    MusicObject: HTMLAudioElement
 
     constructor(props) {
         super(props);
@@ -18,6 +19,11 @@ export default class index extends Component<{}, { x: number, y: number, map_id:
             x: Maps[0].spawn[0],
             y: Maps[0].spawn[1]
         }
+
+        this.MusicObject = new Audio('./assets/audio/ADVENTUREGAME_MUSIC.mp3');
+        this.MusicObject.volume = 0.1;
+        this.MusicObject.play();
+        this.MusicObject.loop = true;
 
     }
 
@@ -77,6 +83,10 @@ export default class index extends Component<{}, { x: number, y: number, map_id:
             const x = this.state.x + addX;
             const y = this.state.y + addY;
 
+            const distance = Math.abs(addX) + Math.abs(addY);
+
+            this.MapContainer.current.style.transition = `transform ${distance/3}s linear`;
+
             const tile = Maps[this.state.map_id].tiles[y][x];
     
             if(
@@ -89,15 +99,16 @@ export default class index extends Component<{}, { x: number, y: number, map_id:
 
             setTimeout(() => {
                 this.Character.current.classList.remove("walking");
-            }, 800);
+            }, (distance/3)*1000);
 
         } catch(e) {
             return;
         }
     }
     
-    componentDidMount() {
-        this.MapRect = this.Map.current.getBoundingClientRect();
+
+    componentWillUnmount() {
+        this.MusicObject.pause();
     }
 
     getTileName(int: number) {
@@ -127,7 +138,7 @@ export default class index extends Component<{}, { x: number, y: number, map_id:
 
     render() {
         return (
-            <div className="game">
+            <div className="webpage game">
 
                 <div className="game__view">
                     <div className="game__view__overlay">
@@ -152,16 +163,20 @@ export default class index extends Component<{}, { x: number, y: number, map_id:
 
                         </div>
 
+                        <div className="game-chat">
+
+                        </div>
+
                     </div>
 
                     <div ref={this.Character} className="game__view__character render-as-pixels"></div>
 
                     <div className="game__view__map" ref={this.Map}>
-                        <div style={{transform: `translate(${this.state.x * -1 * 75}px, ${this.state.y * -1 * 75}px)`}} className="game__view__map__container">
+                        <div ref={this.MapContainer} style={{transform: `translate(${this.state.x * -1 * 75}px, ${this.state.y * -1 * 75}px)`}} className="game__view__map__container">
                         {Maps[this.state.map_id].tiles.map(row => (
                             <>
                                 {row.map(tile => (
-                                    <div onClick={this.ClickMovement} tabIndex={1} key={Math.random()} className={"game__view__map__container__tile render-as-pixels " + this.getTileName(tile)}></div>
+                                    <div onClick={this.ClickMovement} tabIndex={1} key={Math.random() + row.toString() + tile} className={"game__view__map__container__tile render-as-pixels " + this.getTileName(tile)}></div>
                                 ))}
                             </>
                         ))}

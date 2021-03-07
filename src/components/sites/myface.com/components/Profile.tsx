@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Ad from '../../../webcomponents/Ad'
 
-export default class Profile extends Component<{username: string, name: string, gender: string, age: number, town: string, state: string, country: string, avatar: string, biography: string}> {
+export default class Profile extends Component<{username: string, name: string, gender: string, age: number, town: string, state: string, country: string, avatar: string, biography: string, online: boolean}> {
     render() {
         return (
             <div className="myface-profile">
@@ -20,7 +20,7 @@ export default class Profile extends Component<{username: string, name: string, 
                                     <br/>
                                     {this.props.gender}, {this.props.age}<br/>
                                     <br/>
-                                    Status: <span className="online">Online</span>
+                                    Status: {this.props.online ? (<span className="online">Online</span>) : "Offline"}
                                 </p>
                             </div>
                         </div>
@@ -40,7 +40,7 @@ export default class Profile extends Component<{username: string, name: string, 
                     </div>
 
                     <div className="myface-profile__feed">
-                        <h2 className="myface-profile__heading">{this.props.username}'s feed</h2>
+                        <h2 className="myface-profile__heading">{this.props.name.substr(0, this.props.name.indexOf(" "))}'s feed</h2>
                         <div className="myface-profile__feed__contents">
                             {this.props.children}
                         </div>

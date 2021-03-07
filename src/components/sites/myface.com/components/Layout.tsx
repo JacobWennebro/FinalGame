@@ -11,7 +11,7 @@ export default class Layout extends Component<{redirect: (url: string) => void}>
                         <ul className="v-center">
                             <li className="hoverable" onClick={() => this.props.redirect("myface.com")}>Feed</li>
                             <li className="hoverable" data-link={"myface.com/friendslist"} onClick={() => this.props.redirect("myface.com/friendslist")}>Friends</li>
-                            <li className="hoverable" data-link={"myface.com/user/default"} onClick={() => this.props.redirect("myface.com/user/default")}>Profile</li>
+                            <li className="hoverable" data-link={"myface.com/user/sebhughes88"} onClick={() => this.props.redirect("myface.com/user/default")}>Profile</li>
                         </ul>
                     </div>
                 </header>

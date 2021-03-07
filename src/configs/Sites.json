@@ -1,5 +1,11 @@
 [
     {
+        "url":"html.com",
+        "secure": true,
+        "html": true,
+        "paths": []
+    },
+    {
         "url":"example.com",
         "secure": true,
         "paths": []
@@ -21,12 +27,12 @@
             "user/fishermanpat",
             "user/tj945",
             "user/brokenadmin",
-            "user/default",
+            "user/sebhughes88",
             "user/tinalol00"
         ]
     },
     {
-        "url":"game.com",
+        "url":"dungeonquests.com",
         "secure": true,
         "paths": []
     }
