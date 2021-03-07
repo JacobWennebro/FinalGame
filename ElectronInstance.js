@@ -84,8 +84,6 @@ app.on('ready', () => {
             return;
         }
 
-        const boops = await w.webContents.executeJavaScript('window.boops');
-
         // You'll need to have snek_large and snek_small assets uploaded to
         // https://discord.com/developers/applications/<application_id>/rich-presence/assets
         rpc.setActivity({
