@@ -32,6 +32,11 @@
         ]
     },
     {
+        "url":"videosite.com",
+        "secure": true,
+        "paths": []
+    },
+    {
         "url":"dungeonquests.com",
         "secure": true,
         "paths": []

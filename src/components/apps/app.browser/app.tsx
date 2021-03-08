@@ -11,6 +11,10 @@ interface state {
     htmlpage: any
 }
 
+const default_url = "myface.com";
+const default_sublink = "user/sebhughes88";
+
+
 export default class app extends Component<{Consumer: Consumer<{}>}, state> {
     spanInputElement = createRef<HTMLSpanElement>();
     inputElement: HTMLSpanElement
@@ -25,8 +29,8 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
 
         this.state = {
             link_descriptor: undefined,
-            active_url: "myface.com",
-            active_sublink: "user/sebhughes88",
+            active_url: default_url,
+            active_sublink: default_sublink,
             htmlpage: "fallback"
         }
     }
@@ -36,8 +40,14 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
         const domain = split[0];
         split.shift();
         const sublinks = split.join("/");
+        
+        document.body.classList.add("progress-state");
 
-        this.updateSite(domain, sublinks);
+        setTimeout(() => {
+            document.body.classList.remove("progress-state");
+            this.updateSite(domain, sublinks);
+        }, 2000*Math.random());
+
     }
 
     updateSite(active_url: string, active_sublink?: string) {
@@ -88,10 +98,10 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
 
     render() {
         return (
-            <div onMouseMove={this.LinkDescriptor} className="app" id="browser">
+            <div className="app" id="browser">
                 <div className="browser" active-url={this.state.active_url}>
                     <Bar updateSite={this.updateSite}/>
-                    <div className="browser__view">
+                    <div onMouseMove={this.LinkDescriptor} className="browser__view">
                         <this.props.Consumer>
                             {(data: ConfigTypes) => (
                                 <this.DynamicWebpageLoader site={this.state.active_url} path={this.state.active_sublink} production={data.production} />
