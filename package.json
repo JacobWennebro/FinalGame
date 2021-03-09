@@ -10,6 +10,7 @@
     "electron-squirrel-startup": "^1.0.0",
     "gulp": "^4.0.2",
     "original-fs": "^1.1.0",
+    "plyr-react": "^3.0.8",
     "raw-loader": "^4.0.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",

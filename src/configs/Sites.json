@@ -41,7 +41,9 @@
     {
         "url":"videosite.com",
         "secure": true,
-        "paths": []
+        "paths": [
+            "video"
+        ]
     },
     {
         "url":"dungeonquests.com",
