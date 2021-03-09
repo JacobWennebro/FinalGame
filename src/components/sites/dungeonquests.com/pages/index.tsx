@@ -75,7 +75,7 @@ export default class index extends Component<{}, { x: number, y: number, map_id:
             const addY = (Math.round(rect.top - mapRect.top) / 75);
 
             if(addX != 0) {
-                this.Character.current.setAttribute("data-state", addY > 0 ? "bottom" : "top");
+                this.Character.current.setAttribute("data-state", addX > 0 ? "left" : "right");
             } else if(addY != 0) {
                 this.Character.current.setAttribute("data-state", addY > 0 ? "bottom" : "top");
             }

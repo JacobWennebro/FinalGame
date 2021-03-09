@@ -164,6 +164,33 @@ $tile-size: 75px;
             pointer-events: none;
             text-align: center;
 
+            &[data-state="left"] {
+
+                background: url("../assets/character_standby_down.png");
+                background-size: cover;
+
+                &.walking {
+                    background: url("../assets/character_walking_sideways.png") left center;
+                    background-size: cover;
+                    animation: walking 0.5s steps(3) infinite;
+                }
+
+            }
+
+            &[data-state="right"] {
+
+                background: url("../assets/character_standby_down.png");
+                background-size: cover;
+
+                &.walking {
+                    background: url("../assets/character_walking_sideways.png") left center;
+                    background-size: cover;
+                    animation: walking 0.5s steps(3) infinite;
+                    transform: scaleX(-1);
+                }
+
+            }
+
             &[data-state="bottom"] {
 
                 background: url("../assets/character_standby_down.png");

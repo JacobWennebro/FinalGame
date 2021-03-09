@@ -22,6 +22,7 @@ export default class user extends Component<{path: string, redirect: (url: strin
                         country={user.country}
                         biography={user.biography}
                         online={this.props.time > 500}
+                        redirect={this.props.redirect}
                         >
                             <p>oi</p>
                         </Profile>

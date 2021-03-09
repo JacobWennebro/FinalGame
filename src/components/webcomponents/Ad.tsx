@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import AdsData from '../../configs/Ads.json'
 
-export default class Ad extends Component<{nsfw: boolean, banner: boolean}> {
+export default class Ad extends Component<{nsfw: boolean, banner: boolean, redirect: (url: string) => void}> {
     private ads: string[]
     ad: string
+
+    shouldComponentUpdate() {return false}
 
     constructor(props) {
         super(props);
@@ -14,11 +17,19 @@ export default class Ad extends Component<{nsfw: boolean, banner: boolean}> {
         }
 
     }
+
+    random(list: any[]) {
+        return list[Math.floor(Math.random() * list.length)];
+    }
+
     render() {
+
+        const ad = this.random(AdsData.banner);
+
         return (
-            <div data-link="adservice.net" className={`ad render-as-pixels ${this.props.banner ? "ad-banner" : ""}`} style={
+            <div onClick={() => this.props.redirect(ad.url)} data-link={ad.url} className={`ad render-as-pixels ${this.props.banner ? "ad-banner" : ""}`} style={
                 {
-                    background:`url(./assets/images/${this.props.nsfw ? `${this.props.banner ? "banner-" : ""}ads-nsfw` : `${this.props.banner ? "banner-" : ""}ads`}/${"game-1.gif"}) left center / cover`,
+                    background:`url(./assets/images/${this.props.banner ? `banner-ads/${ad.src}` : "ads"}) left center / cover`,
                 }
             }>
                 

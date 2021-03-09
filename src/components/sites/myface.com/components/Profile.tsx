@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import Ad from '../../../webcomponents/Ad'
 
-export default class Profile extends Component<{username: string, name: string, gender: string, age: number, town: string, state: string, country: string, avatar: string, biography: string, online: boolean}> {
+export default class Profile extends Component<{username: string, name: string, gender: string, age: number, town: string, state: string, country: string, avatar: string, biography: string, online: boolean, redirect: (url: string) => void}> {
     render() {
         return (
             <div className="myface-profile">
                 
-                <Ad banner={true} nsfw={false}/>
+                <Ad banner={true} nsfw={false} redirect={this.props.redirect}/>
 
                 <div className="myface-profile__seperator">
                     <div className="myface-profile__about">
