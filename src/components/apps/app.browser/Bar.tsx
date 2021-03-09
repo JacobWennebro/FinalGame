@@ -174,7 +174,7 @@ export default class Bar extends Component<{updateSite: (active_url: string, act
                     `}</style>
                     ) : <React.Fragment />}
 
-                    <span ref={this.spanInputElement} onClick={this.SearchbarClickAutoComplete} onFocus={() => this.setState({ visible_suggestions: true })} onBlur={() => this.setState({ visible_suggestions: false })} onKeyUp={(e) => this.Searchbar(e, false)} onKeyDown={(e) => { this.SearchbarRestrictions(e); this.Searchbar(e, true); }} contentEditable={true} className={`browser__bar__search__input v-center ${this.state.active_site_secure ? "secure" : ""}`}></span>
+                    <span id="browserInput" ref={this.spanInputElement} onClick={this.SearchbarClickAutoComplete} onFocus={() => this.setState({ visible_suggestions: true })} onBlur={() => this.setState({ visible_suggestions: false })} onKeyUp={(e) => this.Searchbar(e, false)} onKeyDown={(e) => { this.SearchbarRestrictions(e); this.Searchbar(e, true); }} contentEditable={true} className={`browser__bar__search__input v-center ${this.state.active_site_secure ? "secure" : ""}`}></span>
                     <div className={`browser__bar__search__suggestions ${this.state.visible_suggestions ? "active" : ""}`}>
                         <span>hello.com</span>
                         <span>hello.com</span>

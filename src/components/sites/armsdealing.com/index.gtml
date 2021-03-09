@@ -1,0 +1,51 @@
+
+<html lang="de">
+    <title>Arms Dealing</title>
+<style>
+
+    div#black {
+        background-color: black;
+        height: 100%;
+        width: 100%;
+    }
+    img.mama {
+        float: right;
+        margin-bottom: 50px;
+    }
+    img {
+        margin-bottom: 50px;
+
+    }
+    img.caca {
+        float: right;
+        margin-bottom: 50px;
+    }
+    h1{
+        color:white
+        
+
+    }
+    p{
+        color:white
+    }
+
+</style>
+<div id="black">
+    <color:white>
+    <h1></h1>
+    </color:white>
+    <h1>Arms Dealing</h1>
+    <p>basic pistol(forgot the name) = 100 $</p>
+    <p>revolver = 80 $</p>
+    <p>m16 = 270 $</p>
+    <p>bazooka = 1000 $ (no ammo included)</p>
+    <img src="Pistoleta.jpg" alt= "helps making holes in people" width="700" height="400">
+    <img class="mama"src="Rivolvar.jpg" alt= "helps making holes in people" width="700" height="400">
+    <img src="m16.jpg" alt= "helps making holes in people faster" width="700" height="400">
+    <img class="caca" src="bazooka.jpg" alt="helps making people dissapear" width="700" height="400">
+    
+
+</div>
+</html>
+
+    

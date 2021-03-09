@@ -10,6 +10,7 @@ $app-size: 4rem;
     min-height: 100vh;
     display: flex;
     flex-direction: column;
+    animation: fadeIn 1s forwards ease;
 
     &__board {
         flex: 1;
@@ -70,9 +71,31 @@ $app-size: 4rem;
             }
 
             &__icon {
+                position: relative;
                 width: $app-size;
                 height: $app-size;
                 margin: 0.5rem auto;
+
+                &__notifications {
+                    pointer-events: none;
+                    height: 20px;
+                    width: 20px;
+                    position: absolute;
+                    right: 0;
+                    padding: 4px;
+                    background-color: $sc-main-lightblue;
+                    border: 1px solid $sc-main-blue;
+                    border-radius: 33vw;
+                    color: #FFF;
+                    span {
+                        position: absolute;
+                        top: 0; right: 0; left: 0; bottom: 0;
+                        margin: auto;
+                        transform: translateY(3px);
+                        font-size: 0.8rem;
+                        text-shadow: 1px 1px 0 black;
+                    }
+                }
             }
 
         }

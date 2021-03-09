@@ -14,7 +14,6 @@ interface state {
 const default_url = "myface.com";
 const default_sublink = "user/sebhughes88";
 
-
 export default class app extends Component<{Consumer: Consumer<{}>}, state> {
     spanInputElement = createRef<HTMLSpanElement>();
     inputElement: HTMLSpanElement
@@ -45,6 +44,8 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
 
         setTimeout(() => {
             document.body.classList.remove("progress-state");
+            document.getElementById("browserInput").innerText = url;
+
             this.updateSite(domain, sublinks);
         }, 2000*Math.random());
 

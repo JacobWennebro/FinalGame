@@ -75,5 +75,16 @@
         "state":"Oogabooga",
         "country":"Norway",
         "biography":"tina is bad"
+    },
+    {
+        "username":"gizmonster01",
+        "avatar":"gizmonster.png",
+        "name":"Gizmo Tologist",
+        "gender":"male",
+        "age": 19,
+        "town":"Burggerton",
+        "state":"North Carolina",
+        "country":"United States",
+        "biography":"dumb monke"
     }
 ]

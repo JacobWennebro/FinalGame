@@ -3,16 +3,28 @@ import ReactDOM from 'react-dom'
 import Desktop from './components/environments/Desktop';
 import os from 'os';
 import './styles/main.scss'
+import osinfo from 'systeminformation'
+import { Animate, AnimateKeyframes, AnimateGroup } from "react-simple-animate";
 
 // Update to utilize player save when implemented
 import DesktopConfig from './configs/template/Desktop.json';
+import DeveloperScreen from './components/environments/DeveloperScreen';
 
 // Context
 const Context = React.createContext({});
 
 const ipc = window.require('electron').ipcRenderer;
 
-const a = require("./scripts/DesktopManager");
+const introSequence = [
+    {
+        time: 2,
+        component: DeveloperScreen
+    },
+    {
+        time: null,
+        component: Desktop
+    },
+]
 
 const App = () => {
 
@@ -22,6 +34,9 @@ const App = () => {
         computer_username: os.userInfo().username,
         desktop_config: DesktopConfig,
         production: process.env.PRODUCTION === "true",
+        networks: null,
+        battery: null,
+        environment: introSequence[0].component
     });
 
     const [gameState, setGameState] = useState("ingame");
@@ -33,6 +48,32 @@ const App = () => {
                 if(state.production) setGameState(isFullscreen ? "ingame" : "paused");
             }
         };
+
+        /* Fetch system info */
+        (async () => {
+            const networks = await osinfo.wifiNetworks();
+            const battery = await osinfo.battery();
+        
+            setState({
+                ...state,
+                networks,
+                battery: battery.hasBattery ? battery : null
+            });
+            
+        })();
+
+        for(let i=0; i < introSequence.length; i++) {
+            const s = introSequence[i];
+            if(!s.time) continue;
+
+            setTimeout(() => {
+
+                setState({...state, environment: introSequence[i+1].component})
+
+            }, s.time*1000);
+        }
+
+        
     }, [gameState, setGameState]);
 
     return (
@@ -44,7 +85,8 @@ const App = () => {
                 <button onClick={() => ipc.sendSync("window-action", "toggleFullscreen")}>Resume game</button>
             </div>
 
-            <Desktop production={state.production} Consumer={Context.Consumer} />
+            <state.environment production={state.production} Consumer={Context.Consumer} />
+
         </Context.Provider>
     )
 };

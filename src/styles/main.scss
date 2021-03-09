@@ -1,6 +1,9 @@
 // Variables
 @import './variables.scss';
 
+// Animations
+@import './basic-animations.scss';
+
 // Fonts
 @import './fonts.scss';
 
@@ -12,6 +15,7 @@
 
 @import './environments/Desktop.scss';
 @import './environments/PauseScreen.scss';
+@import './environments/DeveloperScreen.scss';
 
 *, *:after, *:before {
     box-sizing: border-box;

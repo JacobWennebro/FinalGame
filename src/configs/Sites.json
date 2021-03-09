@@ -6,6 +6,12 @@
         "paths": []
     },
     {
+        "url":"armsdealing.com",
+        "secure": false,
+        "html": true,
+        "paths":[]
+    },
+    {
         "url":"example.com",
         "secure": true,
         "paths": []
@@ -28,7 +34,8 @@
             "user/tj945",
             "user/brokenadmin",
             "user/sebhughes88",
-            "user/tinalol00"
+            "user/tinalol00",
+            "user/gizmonster01"
         ]
     },
     {

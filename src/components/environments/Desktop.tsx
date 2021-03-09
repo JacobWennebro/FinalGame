@@ -42,6 +42,7 @@ export default class Desktop extends Component<props, state> {
         this.toggleVisibility = this.toggleVisibility.bind(this);
         this.AppClickEvent = this.AppClickEvent.bind(this);
         this.DesktopClickEvent = this.DesktopClickEvent.bind(this);
+        this.setNotification = this.setNotification.bind(this);
 
         this.state = {
             time: 850, // Ingame start time (later load from save file)
@@ -57,31 +58,37 @@ export default class Desktop extends Component<props, state> {
                     content: (<Browser Consumer={this.props.Consumer}/>),
                     active: false,
                     visible: true,
+                    notifications: 0
                 },
                 "app.messenger": {
                     content: (<div>{this.state == undefined ? "a" : "b"}</div>),
                     active: false,
                     visible: true,
+                    notifications: 14
                 },
                 "app.notepad": {
                     content: (<Notepad />),
                     active: false,
-                    visible: true
+                    visible: true,
+                    notifications: 0
                 },
                 "app.webcam": {
                     content: (<Webcam />),
                     active: false,
-                    visible: true
+                    visible: true,
+                    notifications: 0
                 },
                 "app.pictures": {
                     content: (<h1>Pictures</h1>),
                     active: false,
-                    visible: true
+                    visible: true,
+                    notifications: 0
                 },
                 "app.settings": {
                     content: (<h1>Settings</h1>),
                     active: false,
-                    visible: true
+                    visible: true,
+                    notifications: 0
                 }
             }
         }
@@ -172,6 +179,12 @@ export default class Desktop extends Component<props, state> {
     openApp(id: string) {
         let state = this.state;
         state.apps[id].active = true;
+        this.setState(state);
+    }
+
+    setNotification(id: string, amount: number) {
+        let state = this.state;
+        state.apps[id].notifications = amount;
         this.setState(state);
     }
 
@@ -308,7 +321,7 @@ export default class Desktop extends Component<props, state> {
                             {/* Desktop app icon container */}
                             <div className="desktop__board__apps">
                                 {data.desktop_config.apps.map((app: App) => (
-                                    app.show ? <DesktopAppIcon onClick={this.AppClickEvent} title={app.title} icon={app.icon} id={app.id} key={app.id} /> : ""
+                                    app.show ? <DesktopAppIcon onClick={this.AppClickEvent} setNotifications={this.setNotification} title={app.title} icon={app.icon} id={app.id} key={app.id} notifications={this.state.apps[app.id].notifications} /> : ""
                                 ))}
                             </div>
                         </div>
