@@ -2,13 +2,13 @@ import React, { Component, useEffect, useState } from 'react';
 import ReactDOM from 'react-dom'
 import Desktop from './components/environments/Desktop';
 import os from 'os';
-import './styles/main.scss'
 import osinfo from 'systeminformation'
-import { Animate, AnimateKeyframes, AnimateGroup } from "react-simple-animate";
+import DeveloperScreen from './components/environments/DeveloperScreen';
+import './styles/main.scss'
 
 // Update to utilize player save when implemented
 import DesktopConfig from './configs/template/Desktop.json';
-import DeveloperScreen from './components/environments/DeveloperScreen';
+import TitleScreen from './components/environments/TitleScreen';
 
 // Context
 const Context = React.createContext({});
@@ -22,7 +22,7 @@ const introSequence = [
     },
     {
         time: null,
-        component: Desktop
+        component: TitleScreen
     },
 ]
 
@@ -54,12 +54,13 @@ const App = () => {
             const networks = await osinfo.wifiNetworks();
             const battery = await osinfo.battery();
         
+            console.log(networks);
+
             setState({
                 ...state,
                 networks,
                 battery: battery.hasBattery ? battery : null
-            });
-            
+            });            
         })();
 
         for(let i=0; i < introSequence.length; i++) {
@@ -76,6 +77,10 @@ const App = () => {
         
     }, [gameState, setGameState]);
 
+    function setEnvironment(env: any) {
+        setState({ ...state, environment: env});
+    }
+
     return (
         <Context.Provider value={state}>
 
@@ -85,7 +90,7 @@ const App = () => {
                 <button onClick={() => ipc.sendSync("window-action", "toggleFullscreen")}>Resume game</button>
             </div>
 
-            <state.environment production={state.production} Consumer={Context.Consumer} />
+            <state.environment setEnvironment={setEnvironment} production={state.production} Consumer={Context.Consumer} />
 
         </Context.Provider>
     )

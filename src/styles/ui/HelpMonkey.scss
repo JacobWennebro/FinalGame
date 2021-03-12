@@ -7,6 +7,10 @@
     z-index: 10;
     z-index: 1;
 
+    &.hideable {
+        transition: transform 3s ease;
+    }
+
     &__bubble:not(:empty) {
         position: absolute;
         top: -2.5rem;

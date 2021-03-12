@@ -20,6 +20,7 @@ export default class Bar extends Component<{updateSite: (active_url: string, act
 
         this.SearchbarClickAutoComplete = this.SearchbarClickAutoComplete.bind(this);
         this.Searchbar = this.Searchbar.bind(this);
+        this.Pagination = this.Pagination.bind(this);
 
         this.state = {
             input: "",
@@ -117,6 +118,7 @@ export default class Bar extends Component<{updateSite: (active_url: string, act
 
     GoToWebpage(address: string) {
         //if(address === this.state.active_url + this.state.active_sublink ? "/"+this.state.active_sublink : "") return;
+        address = address.replace(/^(http|https):\/\/|www./gm, "");
 
         this.CancelFocus();
         const inputElement = this.spanInputElement.current;
@@ -148,13 +150,24 @@ export default class Bar extends Component<{updateSite: (active_url: string, act
         }, Math.round(Math.random() * 2000));
     }
 
+    Pagination(e: MouseEvent<HTMLDivElement>) {
+        if(e.currentTarget.classList.contains("back")) {
+            const targetPage = this.searchHistory[this.searchHistory.length-2];
+            console.log(targetPage);
+            
+            this.GoToWebpage(targetPage);
+        } else {
+            console.log("forward");
+        }
+    }
+
     render() {
         return (
             <div className="browser__bar">
 
                 <div className="browser__bar__pagination">
-                    <div className="browser__bar__pagination__button v-center"></div>
-                    <div className="browser__bar__pagination__button v-center"></div>
+                    <div onClick={this.Pagination} className="browser__bar__pagination__button v-center back"></div>
+                    <div onClick={this.Pagination} className="browser__bar__pagination__button v-center forward"></div>
                 </div>
 
                 <div className="browser__bar__security">

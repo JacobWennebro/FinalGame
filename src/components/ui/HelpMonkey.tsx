@@ -1,4 +1,4 @@
-import React, { Component, LegacyRef } from 'react'
+import React, { Component, LegacyRef, MouseEvent } from 'react'
 import Draggable from 'react-draggable'
 
 import Dialouge from '../../configs/MonkeyDialouge.json'
@@ -51,7 +51,7 @@ export default class HelpMonkey extends Component<{}, state> {
                 style={{
                     background: `url(./assets/images/${this.state.asset}) left center / cover`,
                     width: this.state.nativeWidth * 3,
-                    height: this.state.nativeHeight * 3
+                    height: this.state.nativeHeight * 3,
                 }}>
                     <span className="help-monkey__bubble">
                         {this.state.dialouge}
