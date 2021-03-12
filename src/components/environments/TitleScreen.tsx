@@ -3,12 +3,11 @@ import Typed from 'react-typed'
 
 import '../../styles/environments/TitleScreen.scss';
 import { ConfigTypes } from '../../types/ContextData';
-import HelpMonkey from '../ui/HelpMonkey';
 import Desktop from './Desktop';
 
 export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>, production: boolean, setEnvironment: (env: any) => void}> {
     WallpaperElement = React.createRef<HTMLDivElement>();
-    SoundObject = new Audio('./assets/audio/INTRO_MUSIC.wav');
+    SoundObject = new Audio('./assets/audio/INTRO_MUSIC.mp3');
     IPC = window.require('electron').ipcRenderer;
 
     constructor(props) {
