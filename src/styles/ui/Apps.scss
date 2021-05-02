@@ -1,13 +1,3 @@
-@keyframes webcamButtonPopup {
-    from {
-        transform: translateY(50%)
-    }
-
-    to {
-        transform: translateY(0%);
-    }
-}
-
 .app {
     position: relative;
     width: 100%;
@@ -225,18 +215,30 @@
                 grid-gap: 2px;
                 .theme {
                     background-color: gray;
+                    display:inline-block;
                     &:hover {
                         outline: 2px solid var(--secondary);
                         cursor: $cr-pointer;
                     }
                     &[data-theme="blue"] {
-                        background: $sc-primary-blue;
+                        border-top: 50px solid $sc-primary-blue;
+                        border-right:50px solid $sc-secondary-blue;
                     }
                     &[data-theme="black"] {
-                        background: $sc-primary-black;
+                        border-top: 50px solid $sc-primary-black;
+                        border-right:50px solid $sc-secondary-black;
                     }
                     &[data-theme="red"] {
-                        background: $sc-primary-red;
+                        border-top: 50px solid $sc-primary-red;
+                        border-right:50px solid $sc-secondary-red;
+                    }
+                    &[data-theme="green"] {
+                        border-top: 50px solid $sc-primary-green;
+                        border-right:50px solid $sc-secondary-green;
+                    }
+                    &[data-theme="pink"] {
+                        border-top: 50px solid $sc-primary-pink;
+                        border-right:50px solid $sc-secondary-pink;
                     }
                 }
             }
@@ -260,12 +262,14 @@
         &:hover {
             .webcam-button-overlay {
                 display: block;
+                transform: translateY(0%)
             }
         }
 
         .webcam-button-overlay {
             display: none;
-            animation: webcamButtonPopup 0.4s forwards;
+            transform: translateY(50%);
+            transition: transform 0.5s ease;
             position: absolute;
             bottom: 0;
             left: 0;

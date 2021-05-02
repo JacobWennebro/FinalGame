@@ -8,14 +8,23 @@ $debug-font: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"N
 
 /* Colors & gradients */
 $gc-main-blue: linear-gradient(#1f2f86 0px, #3165c4 3%, #3682e5 6%, #4490e6 10%, #3883e5 12%, #2b71e0 15%, #2663da 18%, #235bd6 20%, #2258d5 23%, #2157d6 38%, #245ddb 54%, #2562df 86%, #245fdc 89%, #2158d4 92%, #1d4ec0 95%, #1941a5 98%);
-
 $gc-main-red: linear-gradient(#772225 0px, #B23954 3%, #D1426D 6%, #D44F7B 10%, #D1446E 12%, #CB365C 15%, #C4304E 18%, #BF2C46 20%, #BE2B43 23%, #BF2A42 38%, #C42E48 54%, #C72F4D 86%, #C52E4A 89%, #BD2B45 92%, #AB253B 95%, #932032 98%);
-
 $gc-main-black: linear-gradient(#1E1E1E 0px, #303030 3%, #393939 6%, #3E3E3E 10%, #393939 12%, #333333 15%, #303030 18%, #2D2D2D 20%, #2D2D2D 23%, #2D2D2D 38%, #2F2F2F 54%, #303030 86%, #2F2F2F 89%, #303030 92%, #282828 95%, #222222 98%);
+$gc-main-green: linear-gradient(#2A5848 0px, #4B8C68 3%, #5AA777 6%, #67AE7F 10%, #5CA878 12%, #4D9D6E 15%, #459469 18%, #3F8D66 20%, #3E8E66 23%, #42936A 38%, #44966B 54%, #43946A 86%, #3E8D64 89%, #3E8D64 92%, #377F5B 95%, #2F6C4F 98%);
+$gc-main-pink: linear-gradient(#A06B8E 0px, #C579BB 3%, #D87FD3 6%, #DB89D9 10%, #D981D4 12%, #D276CA 15%, #CC70BF 18%, #C96EBA 20%, #C76DB6 23%, #C86CB8 38%, #CC6DBB 54%, #CE6FBF 86%, #CD6FBE 89%, #C86DB9 92%, #BD6AAE 95%, #B069A1 98%);
+
 
 $sc-primary-blue: #2157d6;
 $sc-primary-red: #BF2A42;
 $sc-primary-black: #1E1E1E;
+$sc-primary-green: #2A5848;
+$sc-primary-pink: #C579BB;
+
+$sc-secondary-blue: #6e7dff;
+$sc-secondary-red: #E97572;
+$sc-secondary-black: #3E3E3E;
+$sc-secondary-green: #67AE7F;
+$sc-secondary-pink: #DB89D9;
 
 /* Misc */
 $selection-color: #3368C4;
@@ -25,16 +34,31 @@ body {
     &[theme="blue"] {
         --gradient: #{$gc-main-blue};
         --primary: #{$sc-primary-blue};
-        --secondary: #6e7dff;
+        --secondary: #{$sc-secondary-blue};
+        --wallpaper: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(120,173,213,1) 100%);
     }
     &[theme="red"] {
         --gradient: #{$gc-main-red};
         --primary: #{$sc-primary-red};
-        --secondary: #E97572;
+        --secondary: #{$sc-secondary-red};
+        --wallpaper: linear-gradient(0deg, rgba(255,255,255,1) 0%, #eccbcb 100%);
     }
     &[theme="black"] {
         --gradient: #{$gc-main-black};
         --primary: #{$sc-primary-black};
-        --secondary: #3E3E3E;
+        --secondary: #{$sc-secondary-black};
+        --wallpaper: linear-gradient(0deg, rgba(255,255,255,1) 0%, #afafaf 100%);
+    }
+    &[theme="green"] {
+        --gradient: #{$gc-main-green};
+        --primary: #{$sc-primary-green};
+        --secondary: #{$sc-secondary-green};
+        --wallpaper: linear-gradient(0deg, rgba(255,255,255,1) 0%, #a8c1b7 100%);
+    }
+    &[theme="pink"] {
+        --gradient: #{$gc-main-pink};
+        --primary: #{$sc-primary-pink};
+        --secondary: #{$sc-secondary-pink};
+        --wallpaper: linear-gradient(0deg, rgba(255,255,255,1) 0%, #ffccf9 100%);
     }
 }

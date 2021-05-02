@@ -21,7 +21,7 @@
             }
 
             &:not(.cxm__spacer):hover {
-                background-color: #2F6AC6;
+                background-color: var(--secondary);
                 color: #FFF;
                 cursor: $cr-pointer;
             }
