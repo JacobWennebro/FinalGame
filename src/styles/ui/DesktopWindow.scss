@@ -4,8 +4,8 @@
     display: flex;
     flex-direction: column;
     position: absolute;
-    background: $gc-main-blue;
-    border: 2px solid rgb(110, 125, 255);
+    background: var(--gradient);
+    border: 2px solid var(--secondary);
     border-radius: 4px;
     padding: 0 0.3rem 0.3rem 0.3rem;
     overflow: auto;
@@ -60,9 +60,21 @@
                 height: 20px;
                 margin: 0 2px;
                 border: 1px solid #FFF;
+                transition: filter 0.2s ease;
+
+                span {
+                    position: absolute;
+                    width: 100%;
+                    text-align: center;
+                    color: #FFF;
+                }
+
+                &:hover {
+                    filter: brightness(90%);
+                }
 
                 &.minimize, &.hide {
-                    background: linear-gradient(0deg, rgba(39,57,218,1) 0%, rgba(193,223,255,1) 100%);
+                    background: linear-gradient(0deg, var(--primary) 0%, rgba(193,223,255,1) 100%);
                 }
 
                 &.close {
@@ -78,7 +90,7 @@
         background-color: #ECE9D8;
         display: flex;
         align-items: stretch;
-        border: 2px solid rgb(110, 125, 255);
+        border: 2px solid var(--secondary);
 
     }
 

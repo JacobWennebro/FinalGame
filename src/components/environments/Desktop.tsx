@@ -8,6 +8,7 @@ import { App, ConfigTypes } from '../../types/ContextData';
 import Notepad from '../apps/app.notepad/app'
 import Webcam from '../apps/app.webcam/app'
 import Browser from '../apps/app.browser/app'
+import Settings from '../apps/app.settings/app'
 
 import HelpMonkey from '../ui/HelpMonkey';
 import FormatTime from '../../scripts/FormatTime';
@@ -17,6 +18,7 @@ import ContextMenu from '../ui/ContextMenu';
 interface props {
     Consumer: React.Consumer<{}>
     production: boolean
+    setEnvironment: (env: any) => void
 }
 
 interface state {
@@ -85,7 +87,7 @@ export default class Desktop extends Component<props, state> {
                     notifications: 0
                 },
                 "app.settings": {
-                    content: (<h1>Settings</h1>),
+                    content: (<Settings/>),
                     active: false,
                     visible: true,
                     notifications: 0

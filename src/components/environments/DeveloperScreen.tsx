@@ -1,7 +1,7 @@
 import React, { Component, LegacyRef, RefObject } from 'react'
 import Image from '../ui/Image'
 
-export default class DeveloperScreen extends Component {
+export default class DeveloperScreen extends Component<{setEnvironment: (env: any) => void, production: boolean, Consumer: React.Consumer<{}>}> {
     SoundObject = new Audio('./assets/audio/INTRO_SOUND.wav');
 
     constructor(props) {

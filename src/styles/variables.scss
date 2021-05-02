@@ -7,11 +7,34 @@ $cr-progress: url(../assets/cursors/progress.cur), progress;
 $debug-font: system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans","Liberation Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji";
 
 /* Colors & gradients */
-$gc-main-blue: linear-gradient(rgb(31, 47, 134) 0px, rgb(49, 101, 196) 3%, rgb(54, 130, 229) 6%, rgb(68, 144, 230) 10%, rgb(56, 131, 229) 12%, rgb(43, 113, 224) 15%, rgb(38, 99, 218) 18%, rgb(35, 91, 214) 20%, rgb(34, 88, 213) 23%, rgb(33, 87, 214) 38%, rgb(36, 93, 219) 54%, rgb(37, 98, 223) 86%, rgb(36, 95, 220) 89%, rgb(33, 88, 212) 92%, rgb(29, 78, 192) 95%, rgb(25, 65, 165) 98%);
-$gc-main-lightblue: linear-gradient(rgb(12, 89, 185) 1%, rgb(19, 158, 233) 6%, rgb(24, 181, 242) 10%, rgb(19, 155, 235) 14%, rgb(18, 144, 232) 19%, rgb(13, 141, 234) 63%, rgb(13, 159, 241) 81%, rgb(15, 158, 237) 88%, rgb(17, 155, 233) 91%, rgb(19, 146, 226) 94%, rgb(19, 126, 215) 97%, rgb(9, 91, 201) 100%);
+$gc-main-blue: linear-gradient(#1f2f86 0px, #3165c4 3%, #3682e5 6%, #4490e6 10%, #3883e5 12%, #2b71e0 15%, #2663da 18%, #235bd6 20%, #2258d5 23%, #2157d6 38%, #245ddb 54%, #2562df 86%, #245fdc 89%, #2158d4 92%, #1d4ec0 95%, #1941a5 98%);
 
-$sc-main-blue: #2157d6;
-$sc-main-lightblue: #6e7dff;
+$gc-main-red: linear-gradient(#772225 0px, #B23954 3%, #D1426D 6%, #D44F7B 10%, #D1446E 12%, #CB365C 15%, #C4304E 18%, #BF2C46 20%, #BE2B43 23%, #BF2A42 38%, #C42E48 54%, #C72F4D 86%, #C52E4A 89%, #BD2B45 92%, #AB253B 95%, #932032 98%);
+
+$gc-main-black: linear-gradient(#1E1E1E 0px, #303030 3%, #393939 6%, #3E3E3E 10%, #393939 12%, #333333 15%, #303030 18%, #2D2D2D 20%, #2D2D2D 23%, #2D2D2D 38%, #2F2F2F 54%, #303030 86%, #2F2F2F 89%, #303030 92%, #282828 95%, #222222 98%);
+
+$sc-primary-blue: #2157d6;
+$sc-primary-red: #BF2A42;
+$sc-primary-black: #1E1E1E;
 
 /* Misc */
 $selection-color: #3368C4;
+
+// Native variables
+body {
+    &[theme="blue"] {
+        --gradient: #{$gc-main-blue};
+        --primary: #{$sc-primary-blue};
+        --secondary: #6e7dff;
+    }
+    &[theme="red"] {
+        --gradient: #{$gc-main-red};
+        --primary: #{$sc-primary-red};
+        --secondary: #E97572;
+    }
+    &[theme="black"] {
+        --gradient: #{$gc-main-black};
+        --primary: #{$sc-primary-black};
+        --secondary: #3E3E3E;
+    }
+}

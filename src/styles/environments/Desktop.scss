@@ -83,8 +83,8 @@ $app-size: 4rem;
                     position: absolute;
                     right: 0;
                     padding: 4px;
-                    background-color: $sc-main-lightblue;
-                    border: 1px solid $sc-main-blue;
+                    background-color: var(--secondary);
+                    border: 1px solid var(--primary);
                     border-radius: 33vw;
                     color: #FFF;
                     span {

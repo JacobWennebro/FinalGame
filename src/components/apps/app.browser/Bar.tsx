@@ -117,6 +117,7 @@ export default class Bar extends Component<{updateSite: (active_url: string, act
     }
 
     GoToWebpage(address: string) {
+        if(address && address.length <= 0) return;
         //if(address === this.state.active_url + this.state.active_sublink ? "/"+this.state.active_sublink : "") return;
         address = address.replace(/^(http|https):\/\/|www./gm, "");
 
@@ -194,8 +195,9 @@ export default class Bar extends Component<{updateSite: (active_url: string, act
                     </div>
                 </div>
 
-                <div className="browser__bar__bookmarks">
-
+                <div className="browser__bar__buttons">
+                    <button onClick={() => this.GoToWebpage(this.state.input)} className="v-center search-btn">Search</button>
+                    <button onClick={() => this.GoToWebpage("myface.com/user/mayacooper89")} className="v-center"><Image src="icons/menu.png"/></button>
                 </div>
 
         </div>

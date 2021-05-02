@@ -4,6 +4,7 @@ import Typed from 'react-typed'
 import '../../styles/environments/TitleScreen.scss';
 import { ConfigTypes } from '../../types/ContextData';
 import Desktop from './Desktop';
+import { GameSave } from '../../scripts/SaveManager'
 
 export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>, production: boolean, setEnvironment: (env: any) => void}> {
     WallpaperElement = React.createRef<HTMLDivElement>();
@@ -20,9 +21,11 @@ export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>
         this.SoundObject.play();
     }
 
-    componentWillUnmount() {
+    componentDidMount() {
         this.IPC.sendSync("window-action", "toggleFullscreen")
+    }
 
+    componentWillUnmount() {
         this.SoundObject.pause();
         this.SoundObject = null;
     }
@@ -47,7 +50,20 @@ export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>
                 case "devmode": 
                     this.props.setEnvironment(Desktop);
                 break;
+                case "newgame":
+                    const save = new GameSave();
+                    console.log(save);
+                break;
             }
+        }
+    }
+
+    buttonHoverEffect(e: MouseEvent<HTMLUListElement>) {
+        const t = (e.target as HTMLElement);
+        if(t.nodeName === "LI" && !t.classList.contains("seperator")) {
+            const soundEffect = new Audio('./assets/audio/TITLE_BUTTON_HOVER.mp3');
+            soundEffect.volume = 0.1;
+            soundEffect.play();
         }
     }
 
@@ -65,7 +81,7 @@ export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>
                             />
                         </h1>
                         <div ref={this.WallpaperElement} className="wallpaper render-as-pixels"></div>
-                        <ul onClick={this.handleAction}>
+                        <ul onMouseOver={this.buttonHoverEffect} onClick={this.handleAction}>
                             <this.props.Consumer>
                                 {(data: ConfigTypes) => !data.production ? (
                                     <>

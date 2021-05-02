@@ -2,7 +2,6 @@ import React, { Component, Consumer, useRef } from 'react'
 import Draggable from 'react-draggable'
 import Image from './Image';
 
-
 export default function DesktopWindow(props: {
         children?: any,
         title?: string,
@@ -58,12 +57,12 @@ export default function DesktopWindow(props: {
                     <div className="app-window__bar__actions v-center-all">
                         {props.buttons ? (
                             <>
-                                <div onClick={props.hide} className="app-window__bar__button hide c-item"></div>
-                                <div onClick={() => windowRef.current.classList.add("fullscreen")} className="app-window__bar__button minimize c-item"></div>
+                                <div onClick={props.hide} className="app-window__bar__button hide c-item"><span>&#8722;</span></div>
+                                <div onClick={() => windowRef.current.classList.add("fullscreen")} className="app-window__bar__button minimize c-item"><span>&#9723;</span></div>
                             </>
                         ) : ""}
                     
-                        <div onClick={props.close} className="app-window__bar__button close c-item"></div>
+                        <div onClick={props.close} className="app-window__bar__button close c-item"><span>&#10799;</span></div>
                     </div>
                 </div>
 

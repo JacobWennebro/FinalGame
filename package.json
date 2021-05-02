@@ -62,6 +62,14 @@
     "appId": "com.jamzi.quickstart",
     "win": {
       "target": "nsis"
-    }
+    },
+    "directories": {
+      "buildResources":"compiled"
+    },
+    "files": [
+      "ElectronInstance.js",
+      "compiled",
+      "node_modules"
+    ]
   }
 }

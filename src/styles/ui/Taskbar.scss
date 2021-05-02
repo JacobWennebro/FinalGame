@@ -3,7 +3,7 @@
     flex-shrink: 0;
     width: 100%;
     height: 2.5rem;
-    background: $gc-main-blue;
+    background: var(--gradient);
     display: grid;
     grid-template-columns: 8rem auto 5rem;
 
@@ -12,8 +12,8 @@
         font-size: 1.2rem;
         background: linear-gradient(0deg, rgba(54,146,39,1) 0%, rgba(61,206,75,1) 100%);
         border: 0;
-        border-top-right-radius: 1rem;
-        border-bottom-right-radius: 1rem;
+        border-top-right-radius: 0.65rem;
+        border-bottom-right-radius: 0.65rem;
         height: 100%;
         padding: 0 2rem;
         outline: none;
@@ -56,8 +56,8 @@
     }
 
     &__time {
-        background: $gc-main-lightblue;
-        border-left: 1px solid rgb(16, 66, 175);
+        background: rgba(255, 255, 255, 0.2);
+        border-left: 1px solid var(--primary);
         color: #FFF;
         text-align: center;
         span {

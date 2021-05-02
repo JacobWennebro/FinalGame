@@ -1,7 +1,12 @@
 @keyframes webcamButtonPopup {
-    from {transform: translateY(50%)}
-    to {transform: translateY(0%);}
-}  
+    from {
+        transform: translateY(50%)
+    }
+
+    to {
+        transform: translateY(0%);
+    }
+}
 
 .app {
     position: relative;
@@ -16,7 +21,7 @@
             height: 100%;
 
             &__bar {
-                background: #2157d6;
+                background: var(--primary);
                 width: 100%;
                 min-height: 3rem;
                 height: auto;
@@ -24,7 +29,7 @@
                 display: grid;
                 grid-template-columns: 4rem 3rem auto 5rem;
                 padding: 0 1rem;
-                border-bottom: 2px solid rgb(110, 125, 255);
+                border-bottom: 2px solid var(--secondary);
                 z-index: 100;
 
                 &__pagination {
@@ -37,7 +42,8 @@
                         border-radius: 33vw;
                         background: #FFF;
                         margin: 0 0.25rem;
-                        border: 2px solid rgb(110, 125, 255);
+                        border: 2px solid var(--secondary);
+
                         &:hover {
                             filter: brightness(90%);
                             cursor: $cr-pointer;
@@ -50,11 +56,13 @@
                     height: 100%;
                     position: relative;
                     margin-left: 1rem;
+
                     &__icon {
                         height: 34px;
-                        border: 2px solid rgb(110, 125, 255);
+                        border: 2px solid var(--secondary);
                         border-right: 0;
                         background-color: #fff;
+
                         img {
                             display: block;
                             height: 50%;
@@ -75,7 +83,7 @@
                         padding-left: 0;
                         width: 100%;
                         margin: auto;
-                        border: 2px solid rgb(110, 125, 255);
+                        border: 2px solid var(--secondary);
                         border-left: 0;
                         background-color: #fff;
                         outline: none;
@@ -83,6 +91,7 @@
                         white-space: nowrap;
                         text-overflow: ellipsis;
                         cursor: text;
+
                         &:empty:before {
                             content: 'Search the internet with a URL';
                             color: gray;
@@ -97,7 +106,7 @@
                             content: 'https://' !important;
                             color: gray;
                         }
-                    
+
                     }
 
                     &__suggestions {
@@ -108,11 +117,13 @@
                         margin: auto;
                         left: 0;
                         right: 0;
-                        border: 2px solid rgb(110, 125, 255);
+                        border: 2px solid var(--secondary);
                         margin-top: 4px;
+
                         span {
                             display: block;
                             padding: 0.35rem;
+
                             &:before {
                                 content: 'http://'
                             }
@@ -125,6 +136,38 @@
                             }
                         }
                     }
+                }
+
+                &__buttons {
+                    display: grid;
+                    grid-template-columns: auto auto;
+                    grid-gap: 5px;
+
+                    button {
+                        background-color: transparent;
+                        outline: none;
+                        color: #FFF;
+                        height: 34px;
+                        border: 0;
+
+                        img {
+                            height: 25px;
+                            width: auto;
+                        }
+
+                        &.search-btn {
+                            background-color: var(--secondary);
+                            text-transform: uppercase;
+                            font-size: 0.6rem;
+                            padding: 0 0.5rem;
+                            transform: translateX(-3px) translateY(-50%);
+                            &:hover {
+                                cursor: $cr-pointer;
+                                filter: brightness(95%);
+                            }
+                        }
+                    }
+
                 }
 
                 /* # Selector found in app.browser/app.tsx for dynamic targetting
@@ -141,7 +184,7 @@
                 }
 
             }
-    
+
             &__view {
                 flex: 1;
                 display: flex;
@@ -154,10 +197,12 @@
                     bottom: 0;
                     left: 0;
                     user-select: none;
+
                     span:not(:empty) {
                         padding: 0.25rem;
-                        background-color: $sc-main-lightblue;
+                        background-color: var(--secondary);
                         color: #FFF;
+
                         &:before {
                             content: 'https://'
                         }
@@ -168,14 +213,45 @@
         }
     }
 
+    &#settings {
+
+        .themes {
+            width: 90%;
+            margin: auto;
+            &__grid {
+                display: grid;
+                grid-template-columns: repeat(4, auto);
+                height: 50px;
+                grid-gap: 2px;
+                .theme {
+                    background-color: gray;
+                    &:hover {
+                        outline: 2px solid var(--secondary);
+                        cursor: $cr-pointer;
+                    }
+                    &[data-theme="blue"] {
+                        background: $sc-primary-blue;
+                    }
+                    &[data-theme="black"] {
+                        background: $sc-primary-black;
+                    }
+                    &[data-theme="red"] {
+                        background: $sc-primary-red;
+                    }
+                }
+            }
+        }
+
+    }
+
     &#webcam {
         background-color: #000;
-        
+
         canvas {
             width: 100%;
             height: 100%;
         }
-        
+
         video {
             display: none;
             //filter: contrast(550%);
@@ -196,6 +272,7 @@
             width: 100%;
             padding: 1rem;
             text-align: center;
+
             &__button {
                 width: 3rem;
                 height: 3rem;
@@ -204,6 +281,7 @@
                 display: inline-block;
                 margin: 0 1rem;
                 border: 1px solid transparent;
+
                 &:hover {
                     cursor: pointer;
                     border: 1px solid #FFF;
