@@ -64,7 +64,7 @@
       "target": "nsis"
     },
     "directories": {
-      "buildResources":"compiled"
+      "buildResources": "compiled"
     },
     "files": [
       "ElectronInstance.js",

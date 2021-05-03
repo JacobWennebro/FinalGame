@@ -269,7 +269,7 @@ export default class Desktop extends Component<props, state> {
                     <div onMouseDown={this.DesktopClickEvent} className="desktop">
 
                         {/* Desktop window container */}
-                        <div className="desktop__board" id="wallpaper" style={{ background: data.desktop_config.wallpaper as string }}>
+                        <div className="desktop__board" id="wallpaper">
                             {!data.production ? (<span id="debugInfo"><b>Developer mode</b> | Game clock: {this.state.time} | Formatted clock {FormatTime(this.state.time)} | Wallpaper {data.desktop_config.wallpaper}</span>) : (<React.Fragment/>)}
                             
                             <ContextMenu openApp={this.openApp} visibility={this.state.cxm.visibility} x={this.state.cxm.x} y={this.state.cxm.y}/>
