@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import Users from '../../../../configs/MyFaceUsers.json'
+import Users from '../../../../data/MyFaceUsers.json'
 import Layout from '../components/Layout';
 import Profile from '../components/Profile';
 import NotFound from '../../notfound/pages';

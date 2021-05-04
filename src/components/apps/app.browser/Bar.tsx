@@ -1,5 +1,6 @@
 import React, { Component, createRef, KeyboardEvent, MouseEvent } from 'react'
-import Sites from '../../../configs/Sites.json'
+import Sites from '../../../data/Sites.json'
+import LinkedList from '../../../types/LinkedList';
 import Image from '../../ui/Image';
 
 interface state {
@@ -14,6 +15,8 @@ interface state {
 export default class Bar extends Component<{updateSite: (active_url: string, active_sublink: string) => void}, state> {
     searchHistory = []
     spanInputElement = createRef<HTMLSpanElement>();
+    private previousLinks = new LinkedList();
+    private followingLinks = new LinkedList();
 
     constructor(props) {
         super(props);
@@ -117,7 +120,7 @@ export default class Bar extends Component<{updateSite: (active_url: string, act
     }
 
     GoToWebpage(address: string) {
-        if(address && address.length <= 0) return;
+        if(address.length <= 0) return;
         //if(address === this.state.active_url + this.state.active_sublink ? "/"+this.state.active_sublink : "") return;
         address = address.replace(/^(http|https):\/\/|www./gm, "");
 
@@ -134,6 +137,12 @@ export default class Bar extends Component<{updateSite: (active_url: string, act
 
             const targetSite = Sites.filter(s => s.url == domain)[0];
             const path = sublinks.join("/");
+
+            // Queue links
+            this.previousLinks.queue(this.state.active_url + "/" + this.state.active_sublink);
+
+            console.log("Previous", this.previousLinks);
+            console.log("Following", this.followingLinks);
 
             this.setState({ 
                 active_url: domain, 
@@ -152,13 +161,15 @@ export default class Bar extends Component<{updateSite: (active_url: string, act
     }
 
     Pagination(e: MouseEvent<HTMLDivElement>) {
-        if(e.currentTarget.classList.contains("back")) {
-            const targetPage = this.searchHistory[this.searchHistory.length-2];
-            console.log(targetPage);
-            
-            this.GoToWebpage(targetPage);
-        } else {
-            console.log("forward");
+        if(e.currentTarget.classList.contains("back") && !this.previousLinks.empty()) {
+            const link = this.previousLinks.dequeue();
+            this.GoToWebpage(link);
+            this.followingLinks.queue(link);
+        }
+        else if(!this.followingLinks.empty()) {
+            const link = this.followingLinks.dequeue();
+            this.GoToWebpage(link);
+            this.previousLinks.queue(link);
         }
     }
 

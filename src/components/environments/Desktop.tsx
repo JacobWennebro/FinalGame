@@ -9,16 +9,19 @@ import Notepad from '../apps/app.notepad/app'
 import Webcam from '../apps/app.webcam/app'
 import Browser from '../apps/app.browser/app'
 import Settings from '../apps/app.settings/app'
+import Messenger from '../apps/app.messenger/app'
 
 import HelpMonkey from '../ui/HelpMonkey';
 import FormatTime from '../../scripts/FormatTime';
 import devmode from '../../devmode.json';
 import ContextMenu from '../ui/ContextMenu';
+import GameSave from '../../scripts/SaveManager';
 
 interface props {
     Consumer: React.Consumer<{}>
     production: boolean
     setEnvironment: (env: any) => void
+    save: GameSave
 }
 
 interface state {
@@ -63,7 +66,7 @@ export default class Desktop extends Component<props, state> {
                     notifications: 0
                 },
                 "app.messenger": {
-                    content: (<div>{this.state == undefined ? "a" : "b"}</div>),
+                    content: (<Messenger/>),
                     active: false,
                     visible: true,
                     notifications: 14
@@ -87,13 +90,14 @@ export default class Desktop extends Component<props, state> {
                     notifications: 0
                 },
                 "app.settings": {
-                    content: (<Settings/>),
+                    content: (<Settings save={this.props.save}/>),
                     active: false,
                     visible: true,
                     notifications: 0
                 }
             }
         }
+
     }
 
     DesktopClickEvent(e: MouseEvent<HTMLDivElement>) {
@@ -229,6 +233,12 @@ export default class Desktop extends Component<props, state> {
 
     componentDidMount() {
 
+        /* Apply OS settings from save */
+        if(this.props.save) {
+            document.body.setAttribute("theme", this.props.save.getConstant("theme"));
+
+        }
+
         /* Game System time speed */
         this.setState({ time_speed: 2000 });
 
@@ -269,7 +279,7 @@ export default class Desktop extends Component<props, state> {
                     <div onMouseDown={this.DesktopClickEvent} className="desktop">
 
                         {/* Desktop window container */}
-                        <div className="desktop__board" id="wallpaper" style={{ background: data.desktop_config.wallpaper as string }}>
+                        <div className="desktop__board" id="wallpaper">
                             {!data.production ? (<span id="debugInfo"><b>Developer mode</b> | Game clock: {this.state.time} | Formatted clock {FormatTime(this.state.time)} | Wallpaper {data.desktop_config.wallpaper}</span>) : (<React.Fragment/>)}
                             
                             <ContextMenu openApp={this.openApp} visibility={this.state.cxm.visibility} x={this.state.cxm.x} y={this.state.cxm.y}/>

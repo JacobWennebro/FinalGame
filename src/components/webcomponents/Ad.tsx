@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import AdsData from '../../configs/Ads.json'
+import AdsData from '../../data/Ads.json'
 
 export default class Ad extends Component<{nsfw: boolean, banner: boolean, redirect: (url: string) => void}> {
     private ads: string[]

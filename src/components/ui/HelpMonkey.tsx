@@ -1,7 +1,7 @@
 import React, { Component, LegacyRef, MouseEvent } from 'react'
 import Draggable from 'react-draggable'
 
-import Dialouge from '../../configs/MonkeyDialouge.json'
+import Dialouge from '../../data/MonkeyDialouge.json'
 
 interface state {
     asset: string

@@ -1,0 +1,15 @@
+{
+    "username":"mayacooper88",
+    "avatar":"maya.png",
+    "theme":"pink",
+    "dialouge": [
+        {
+            "message":"Hey",
+            "author":"them"
+        },
+        {
+            "message":"hi!",
+            "author":"you"
+        }
+    ]
+}

@@ -1,6 +1,7 @@
 {
+    "titleScreen": true,
     "appDebugger": {
         "enabled": true,
-        "app":"app.browser"
+        "app":"app.messenger"
     }
 }

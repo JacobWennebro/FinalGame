@@ -2,6 +2,7 @@
     {
         "username":"sebhughes88",
         "avatar":"sebastian.png",
+        "jim_username":"",
         "name":"Sebastian Hughes",
         "gender":"male",
         "age": 18,
@@ -13,6 +14,7 @@
     {
         "username":"jw",
         "avatar":"jacob.png",
+        "jim_username":"",
         "name":"Jacob Wennebro",
         "gender":"male",
         "age": 17,
@@ -23,6 +25,7 @@
     },
     {
         "username":"mayacooper89",
+        "jim_username":"mayacooper89",
         "avatar":"maya.png",
         "name":"Maya Cooper",
         "gender":"female",
@@ -35,6 +38,7 @@
     {
         "username":"fishermanpat",
         "avatar":"patrick.png",
+        "jim_username":"",
         "name":"Patrick Marley",
         "gender":"male",
         "age": 46,
@@ -46,6 +50,7 @@
     {
         "username":"tj945",
         "avatar":"tj.png",
+        "jim_username":"",
         "name":"Tj Marley",
         "gender":"male",
         "age": 19,
@@ -57,6 +62,7 @@
     {
         "username":"brokenadmin",
         "avatar":"alex.png",
+        "jim_username":"",
         "name":"Alex Alexanderson",
         "gender":"male",
         "age": 16,
@@ -68,6 +74,7 @@
     {
         "username":"tinalol00",
         "avatar":"tina.png",
+        "jim_username":"",
         "name":"Tina Tina",
         "gender":"male",
         "age": 16,
@@ -79,6 +86,7 @@
     {
         "username":"gizmonster01",
         "avatar":"gizmonster.png",
+        "jim_username":"",
         "name":"Gizmo Tologist",
         "gender":"male",
         "age": 19,

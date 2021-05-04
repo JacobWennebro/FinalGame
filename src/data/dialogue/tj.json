@@ -1,0 +1,15 @@
+{
+    "username":"MrTeeJayz",
+    "avatar":"tj.png",
+    "theme":"green",
+    "dialouge": [
+        {
+            "message":"What's up",
+            "author":"them"
+        },
+        {
+            "message":"hi!",
+            "author":"you"
+        }
+    ]
+}

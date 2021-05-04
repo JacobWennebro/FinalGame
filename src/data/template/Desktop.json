@@ -13,7 +13,11 @@
             "icon": "messenger.png",
             "id": "app.messenger",
             "show": true,
-            "buttons": true
+            "buttons": false,
+            "maxWidth":"40vw",
+            "minWidth":"40vw",
+            "minHeight":"50vh",
+            "maxHeight":"50vh"
         },
         {
             "title": "Notepad",

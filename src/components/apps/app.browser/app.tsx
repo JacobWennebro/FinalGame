@@ -1,7 +1,7 @@
 import React, { Component, Consumer, createRef, MouseEvent } from 'react'
 import loadable from '@loadable/component'
 import { ConfigTypes } from '../../../types/ContextData'
-import Sites from '../../../configs/Sites.json'
+import Sites from '../../../data/Sites.json'
 import Bar from './Bar'
 
 interface state {

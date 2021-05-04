@@ -1,10 +1,17 @@
 import React, { Component, MouseEvent } from 'react'
+import GameSave from '../../../scripts/SaveManager';
 
-export default class app extends Component {
+export default class app extends Component<{save: GameSave}> {
     
+    constructor(props) {
+        super(props);
+
+        this.applyTheme = this.applyTheme.bind(this);
+    }
+
     applyTheme(e: MouseEvent<HTMLDivElement>) {
         const theme = e.currentTarget.getAttribute("data-theme");
-        console.log(theme);
+        if(this.props.save) this.props.save.setConstant("theme", theme);
         if(theme) document.body.setAttribute("theme", theme);
     }
 
@@ -19,6 +26,7 @@ export default class app extends Component {
                         <div onClick={this.applyTheme} className="theme" data-theme="black"></div>
                         <div onClick={this.applyTheme} className="theme" data-theme="red"></div>
                         <div onClick={this.applyTheme} className="theme" data-theme="green"></div>
+                        <div onClick={this.applyTheme} className="theme" data-theme="pink"></div>
                     </div>
                 </div>
 

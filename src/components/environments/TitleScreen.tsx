@@ -4,9 +4,9 @@ import Typed from 'react-typed'
 import '../../styles/environments/TitleScreen.scss';
 import { ConfigTypes } from '../../types/ContextData';
 import Desktop from './Desktop';
-import { GameSave } from '../../scripts/SaveManager'
+import GameSave from '../../scripts/SaveManager'
 
-export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>, production: boolean, setEnvironment: (env: any) => void}> {
+export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>, production: boolean, setEnvironment: (env: any, save?: GameSave) => void}> {
     WallpaperElement = React.createRef<HTMLDivElement>();
     SoundObject = new Audio('./assets/audio/INTRO_MUSIC.mp3');
     IPC = window.require('electron').ipcRenderer;
@@ -45,14 +45,19 @@ export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>
     
     handleAction(e: MouseEvent<HTMLUListElement>) {
         const t = (e.target as HTMLElement);
+        let save;
         if(t.nodeName === "LI") {
             switch(t.getAttribute("data-action")) {
                 case "devmode": 
                     this.props.setEnvironment(Desktop);
                 break;
                 case "newgame":
-                    const save = new GameSave();
-                    console.log(save);
+                    save = new GameSave();
+                    this.props.setEnvironment(Desktop, save);
+                break;
+                case "loadgame":
+                    save = new GameSave(0);
+                    this.props.setEnvironment(Desktop, save);
                 break;
             }
         }

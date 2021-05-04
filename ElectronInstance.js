@@ -28,6 +28,9 @@ app.on('ready', () => {
             case "isFullscreen":
                 val = w.isFullScreen();
                 break;
+            case "getAppPath":
+                val = app.getAppPath();
+                break;
         }
 
         return event.returnValue = val;
