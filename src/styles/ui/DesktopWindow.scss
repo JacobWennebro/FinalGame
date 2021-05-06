@@ -7,7 +7,6 @@
     background: var(--gradient);
     border: 2px solid var(--secondary);
     border-radius: 4px;
-    padding: 0 0.3rem 0.3rem 0.3rem;
     overflow: auto;
     z-index: 11;
     overflow: hidden;
@@ -33,7 +32,8 @@
         width: 100%;
         height: 2rem;
         flex-shrink: 0;
-        
+        padding: 0 0.5rem;
+
         &__title {
             position: relative;
             top: 50%;
@@ -87,12 +87,15 @@
     }
 
     &__view {
-        flex: 1;
         background-color: #ECE9D8;
-        display: flex;
         align-items: stretch;
         border: 2px solid var(--secondary);
-
+        flex: 1;
+        overflow: auto;
+        display: flex;
+        .webpage {
+            overflow-y: auto;
+        }
     }
 
 

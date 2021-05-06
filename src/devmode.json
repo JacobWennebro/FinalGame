@@ -1,5 +1,5 @@
 {
-    "titleScreen": true,
+    "titleScreen": false,
     "appDebugger": {
         "enabled": true,
         "app":"app.messenger"

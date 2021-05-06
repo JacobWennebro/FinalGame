@@ -88,7 +88,7 @@ export default class app extends Component<{}, state> {
 
                                 </div>
                                 <div className="user-input__box">
-
+                                    <textarea/>
                                 </div>
                                 <div className="user-input__footer">
                                     <button className="send-button v-center">Send</button>

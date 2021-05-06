@@ -25,8 +25,9 @@ $lightblue: #79A7D7;
         background-color: $blue;
         color: #FFF;
         padding: 0.25rem 0;
-        position: relative;
         user-select: none;
+        width: calc(100%);
+        z-index: 10;
         h1 {
             display: inline-block;
             font-weight: 100;
