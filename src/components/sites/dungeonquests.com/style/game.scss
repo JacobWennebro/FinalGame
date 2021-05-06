@@ -216,12 +216,17 @@ $tile-size: 75px;
 
             }
 
+            &[data-state="right"].walking:before {
+                transform: scaleX(-1) !important;
+            }
+
             &:before {
                 content: 'Dragonslayer64';
                 position: relative;
                 top: -25px;
                 color: #FFF;
                 text-shadow: 1px 1px 2px #222;
+                display: block;
             }
         }
     }
