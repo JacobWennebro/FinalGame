@@ -6,14 +6,14 @@
             "icon": "browser.png",
             "id": "app.browser",
             "show": true,
-            "buttons": true
+            "fullscreen": true
         },
         {
             "title": "JIM",
             "icon": "messenger.png",
             "id": "app.messenger",
             "show": true,
-            "buttons": false,
+            "fullscreen": false,
             "maxWidth":"40vw",
             "minWidth":"40vw",
             "minHeight":"50vh",
@@ -24,21 +24,21 @@
             "icon": "notepad.png",
             "id": "app.notepad",
             "show": true,
-            "buttons": true
+            "fullscreen": true
         },
         {
             "title": "Webcam",
             "icon": "camera.png",
             "id": "app.webcam",
             "show": true,
-            "buttons": true
+            "fullscreen": true
         },
         {
             "title": "Pictures",
             "icon": "folder.png",
             "id": "app.pictures",
             "show": true,
-            "buttons": true
+            "fullscreen": true
         },
         {
             "title": "Customize ExperienceOS",
@@ -49,7 +49,7 @@
             "minWidth":"20vw",
             "minHeight":"30vh",
             "maxHeight":"30vh",
-            "buttons": false
+            "fullscreen": false
         }
     ],
     "active_apps": [

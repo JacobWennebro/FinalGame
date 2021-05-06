@@ -3,7 +3,7 @@ export interface App {
     
     show?: boolean, maxWidth?: string, maxHeight?: string,
     minHeight?: string, minWidth?: string,
-    buttons: boolean
+    fullscreen: boolean
 }
 
 export interface ConfigTypes {

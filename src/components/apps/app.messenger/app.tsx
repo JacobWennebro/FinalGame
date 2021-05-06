@@ -4,6 +4,9 @@ import Contact from './Contact'
 
 import dMaya from "../../../data/dialogue/maya.json";
 import dTj from "../../../data/dialogue/tj.json";
+import dRosa from "../../../data/dialogue/rosa.json";
+import dBryant from "../../../data/dialogue/bryant.json";
+
 
 interface Message {
     message: string, 
@@ -22,6 +25,7 @@ interface state {
 }
 
 export default class app extends Component<{}, state> {
+    private chatbox = React.createRef() as RefObject<HTMLDivElement>;
 
     constructor(props) {
         super(props);
@@ -32,6 +36,14 @@ export default class app extends Component<{}, state> {
 
     }
 
+    componentDidMount() {
+        this.chatbox.current.scrollTo(0, this.chatbox.current.scrollHeight);
+    }
+
+    componentDidUpdate() {
+        this.chatbox.current.scrollTo(0, this.chatbox.current.scrollHeight);
+    }
+
     render() {
         return (
             <div className="app messager" id="messager">
@@ -39,8 +51,10 @@ export default class app extends Component<{}, state> {
                 <div className="sidebar">
                     <div className="sidebar__contacts">
                         
-                        <Contact onClick={() => this.setState({active_contact: dMaya as any})} name="mayacooper89"/>
-                        <Contact onClick={() => this.setState({active_contact: dTj as any})} name="MrTeeJayz"/>
+                        <Contact onClick={() => this.setState({active_contact: dMaya as any})} name={dMaya.username}/>
+                        <Contact onClick={() => this.setState({active_contact: dTj as any})} name={dTj.username}/>
+                        <Contact onClick={() => this.setState({active_contact: dRosa as any})} name={dRosa.username}/>
+                        <Contact onClick={() => this.setState({active_contact: dBryant as any})} name={dBryant.username}/>
 
                     </div>
                 </div>
@@ -55,9 +69,9 @@ export default class app extends Component<{}, state> {
                         </div>
 
                         <div className="chat__room__section right">
-                            <div className="chat-box">
+                            <div className="chat-box" ref={this.chatbox}>
                                 {this.state.active_contact.dialouge.map(m => (
-                                    <p className="chat-box__message"><span className={m.author !== "you" ? "them" : "you"}>{m.author !== "you" ? this.state.active_contact.username : "sebbers"}: </span>{m.message}</p>
+                                    <p className="chat-box__message"><span className={m.author !== "you" ? "them" : "you"}>{m.author !== "you" ? this.state.active_contact.username : "sebbyh"}: </span>{m.message}</p>
                                 ))}
                             </div>
                         </div>

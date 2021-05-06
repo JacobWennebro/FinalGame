@@ -34,7 +34,7 @@ export default class Profile extends Component<{username: string, name: string, 
 
                         <div className="myface-profile__about__url">
                             <p>MyFace URL:</p>
-                            <input readOnly={true} value={"https://myface.com/user/"+this.props.username.toLowerCase()}/>
+                            <input onClick={e => e.currentTarget.select()} readOnly={true} value={"https://myface.com/user/"+this.props.username.toLowerCase()}/>
                         </div>
 
                     </div>

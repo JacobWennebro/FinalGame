@@ -300,7 +300,7 @@ export default class Desktop extends Component<props, state> {
                                         maxHeight={app.maxHeight}
                                         minWidth={app.minWidth}
                                         minHeight={app.minHeight}
-                                        buttons={app.buttons}
+                                        fullscreen={app.fullscreen}
                                         time={this.state.time}
                                     />
                                 ))}
@@ -321,7 +321,7 @@ export default class Desktop extends Component<props, state> {
                                         x={25*(Math.floor(index/10)*8+1) + (25*index)}
                                         y={50*(Math.floor((index % 10)/10)+1) + (25*(index % 10))}
                                         Consumer={this.props.Consumer}
-                                        buttons={false}
+                                        fullscreen={false}
                                         time={this.state.time}
                                     />)
                                 })}

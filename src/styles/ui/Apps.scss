@@ -30,7 +30,7 @@
                         width: 20px;
                         height: 20px;
                         border-radius: 33vw;
-                        background: #FFF;
+                        background: #fff;
                         margin: 0 0.25rem;
                         border: 2px solid var(--secondary);
 
@@ -83,26 +83,25 @@
                         cursor: text;
 
                         &:empty:before {
-                            content: 'Search the internet with a URL';
+                            content: "Search the internet with a URL";
                             color: gray;
                         }
 
                         &:not(:empty):not(:focus):before {
-                            content: 'http://';
+                            content: "http://";
                             color: gray;
                         }
 
                         &.secure:not(:empty):not(:focus):before {
-                            content: 'https://' !important;
+                            content: "https://" !important;
                             color: gray;
                         }
-
                     }
 
                     &__suggestions {
                         display: none;
                         position: absolute;
-                        background: #FFF;
+                        background: #fff;
                         width: calc(100%);
                         margin: auto;
                         left: 0;
@@ -115,12 +114,12 @@
                             padding: 0.35rem;
 
                             &:before {
-                                content: 'http://'
+                                content: "http://";
                             }
 
                             &:hover {
                                 background-color: $selection-color;
-                                color: #FFF;
+                                color: #fff;
                                 cursor: $cr-pointer;
                                 text-decoration: underline;
                             }
@@ -136,7 +135,7 @@
                     button {
                         background-color: transparent;
                         outline: none;
-                        color: #FFF;
+                        color: #fff;
                         height: 34px;
                         border: 0;
 
@@ -158,7 +157,6 @@
                             }
                         }
                     }
-
                 }
 
                 /* # Selector found in app.browser/app.tsx for dynamic targetting
@@ -173,7 +171,6 @@
                 &__search:not([input-value=""]) .browser__bar__search__suggestions.active:not(:empty) {
                     display: block !important;
                 }
-
             }
 
             &__view {
@@ -192,20 +189,18 @@
                     span:not(:empty) {
                         padding: 0.25rem;
                         background-color: var(--secondary);
-                        color: #FFF;
+                        color: #fff;
 
                         &:before {
-                            content: 'https://'
+                            content: "https://";
                         }
                     }
                 }
-
             }
         }
     }
 
     &#settings {
-
         .themes {
             width: 90%;
             margin: auto;
@@ -252,13 +247,12 @@
                 }
             }
         }
-
     }
 
     &#messager {
         display: grid;
-        grid-template-columns: 20% auto;
-        background-color: #ECE9D8;
+        grid-template-columns: 25% auto;
+        background-color: #ece9d8;
 
         .sidebar {
             background-color: #d3d0c2;
@@ -269,8 +263,16 @@
                     padding: 0.5rem;
                     margin-bottom: 0.5rem;
                     font-size: 1.5rem;
-                    background-color: #ECE9D8;
+                    background-color: #ece9d8;
                     border-left: 4px solid darkred;
+
+                    p {
+                        width: 100%;
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
+
                     &:hover {
                         background-color: #dfdccc;
                         cursor: $cr-pointer;
@@ -281,13 +283,16 @@
 
         .chat {
             position: relative;
+
             &__room {
                 display: grid;
                 grid-template-columns: 20% 80%;
+                grid-template-rows: 50% 50%;
                 height: 90%;
                 width: 90%;
                 grid-gap: 0.5rem;
                 margin: auto;
+
                 &__section {
                     background-color: #d3d0c2;
 
@@ -296,12 +301,23 @@
                         height: 100%;
                         position: relative;
                         overflow: hidden;
+
                         &.pink {
                             background-color: $sc-secondary-pink;
                         }
+
                         &.green {
                             background-color: $sc-secondary-green;
                         }
+
+                        &.red {
+                            background-color: $sc-secondary-red;
+                        }
+
+                        &.black {
+                            background-color: $sc-secondary-black;
+                        }
+
                         .avatar {
                             width: 80%;
                             margin: auto;
@@ -317,18 +333,37 @@
                     .chat-box {
                         width: 100%;
                         height: 100%;
-                        background-color: #FFF;
+                        background-color: #fff;
                         padding-top: 1rem;
                         max-height: 100%;
                         overflow-y: scroll;
-                        border: 1px solid gray;
+                        border: 2px solid gray;
+
+                        &::-webkit-scrollbar {
+                            width: 5px;
+                        }
+
+                        &::-webkit-scrollbar-track {
+                            background: #d3d0c2;
+                        }
+
+                        &::-webkit-scrollbar-thumb {
+                            background-color: var(--primary);
+                        }
+
                         &__message {
                             padding: 0.25rem 1rem;
                             font-size: 1.5rem;
                             user-select: text;
+
+                            span {
+                                user-select: none;
+                            }
+
                             span.you {
                                 color: red;
                             }
+
                             span.them {
                                 color: blue;
                             }
@@ -340,10 +375,12 @@
                         height: 100%;
                         display: grid;
                         grid-template-rows: 40px auto 40px;
-                        &__header, &__footer {
+                        background-color: #ece9d8;
+
+                        &__header,
+                        &__footer {
                             width: 100%;
                             height: 100%;
-                            background-color: #ECE9D8;
                             text-align: right;
 
                             button.send-button {
@@ -351,20 +388,20 @@
                                 border: 0;
                                 background-color: var(--primary);
                                 outline: none;
-                                color: #FFF;
+                                color: #fff;
+                                font-family: "VT323", sans-serif;
+                                font-size: 1rem;
                             }
-
                         }
+
                         &__box {
-                            background-color: #FFF;
-                            border: 1px solid gray;
+                            background-color: #fff;
+                            border: 2px solid gray;
                         }
                     }
-
                 }
             }
         }
-
     }
 
     &#webcam {
@@ -383,7 +420,7 @@
         &:hover {
             .webcam-button-overlay {
                 display: block;
-                transform: translateY(0%)
+                transform: translateY(0%);
             }
         }
 
@@ -409,7 +446,7 @@
 
                 &:hover {
                     cursor: pointer;
-                    border: 1px solid #FFF;
+                    border: 1px solid #fff;
                 }
             }
         }
@@ -424,7 +461,7 @@
             outline: none;
             border: 0;
             padding: 1rem;
-            background-color: #ECE9D8;
+            background-color: #ece9d8;
             color: #333;
             resize: none;
         }
