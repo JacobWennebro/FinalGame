@@ -87,20 +87,23 @@ const App = () => {
     function setEnvironment(env: any, save?: GameSave) {
         setState({ ...state, environment: env, save });
     }
-
-    return (
-        <Context.Provider value={state}>
-
-            {/* Pause screen */}
-            <div className={`pause-screen ${(gameState === "paused") ? "active" : ""}`}>
-                <h1>Game is paused</h1>
-                <button onClick={() => ipc.sendSync("window-action", "toggleFullscreen")}>Resume game</button>
-            </div>
-
-            <state.environment setEnvironment={setEnvironment} production={state.production} Consumer={Context.Consumer} save={state.save} />
-
-        </Context.Provider>
-    )
+    try {
+        return (
+            <Context.Provider value={state}>
+    
+                {/* Pause screen */}
+                <div className={`pause-screen ${(gameState === "paused") ? "active" : ""}`}>
+                    <h1>Game is paused</h1>
+                    <button onClick={() => ipc.sendSync("window-action", "toggleFullscreen")}>Resume game</button>
+                </div>
+    
+                <state.environment setEnvironment={setEnvironment} production={state.production} Consumer={Context.Consumer} save={state.save} />
+    
+            </Context.Provider>
+        )
+    } catch(e) {
+        console.log("bologna");
+    }
 };
 
 

@@ -295,6 +295,9 @@
                 width: 90%;
                 grid-gap: 0.5rem;
                 margin: auto;
+                position: absolute;
+                left: 0;
+                right: 0;
 
                 &__section {
                     background-color: #d3d0c2;

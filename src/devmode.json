@@ -1,7 +1,7 @@
 {
-    "titleScreen": false,
+    "titleScreen": true,
     "appDebugger": {
         "enabled": true,
-        "app":"app.messenger"
+        "app":"app.notepad"
     }
 }
