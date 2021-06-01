@@ -86,13 +86,16 @@ img {
     top: 0;
     right: 0;
     width: 20%;
-    height: 30%;
     margin: 0.5rem;
     padding: 1rem;
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 4px;
     pointer-events: none;
     color: #FFF;
+
+    .chunk {
+        margin: 1rem 0;
+    }
 
     h1,h2,h3 {
         color: #e67e22;
@@ -105,14 +108,14 @@ img {
         pointer-events: all;
     }
 
-    .events {
+    .events,.constants {
         border: 1px solid rgba(0, 0, 0, 0.5);
         padding: 0.5rem;
         margin-top: 1rem;
         max-height: 70%;
         overflow-y: auto;
         pointer-events: all;
-        &__item {
+        &__removable {
             padding: 0.5rem;
             &:hover {
                 background-color: #ff7675;
