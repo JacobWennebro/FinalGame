@@ -41,11 +41,6 @@ img {
     pointer-events: none;
 }
 
-#debugInfo {
-    font-family: $debug-font;
-    position: absolute;
-}
-
 #game, .game-view {
     width: 100vw;
     height: 100vh;
@@ -55,4 +50,73 @@ img {
 ::selection {
     color: #FFF;
     background-color: $selection-color;
+}
+
+/* Developer utilities */
+
+#debugInfo {
+    font-family: $debug-font;
+    position: absolute;
+    display: block;
+    z-index: 1000;
+    text-align: center;
+    margin-top: 4px;
+    color: #FFF;
+    width: 100%;
+    pointer-events: none;
+    button {
+        background-color: var(--secondary);
+        color: #fff;
+        padding: 0.25rem 1rem;
+        margin: 0 0.5rem;
+        border: 0px;
+        border-radius: 4px;
+        outline: none;
+        pointer-events: all;
+        &:hover {
+            filter: brightness(80%);
+            cursor: pointer;
+        }
+    }
+}
+
+.developer-save-manager {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    right: 0;
+    width: 20%;
+    height: 30%;
+    margin: 0.5rem;
+    padding: 1rem;
+    background-color: rgba(0, 0, 0, 0.4);
+    border-radius: 4px;
+    pointer-events: none;
+
+    h1,h2,h3 {
+        color: #e67e22;
+        text-transform: uppercase;
+    }
+
+    input,button {
+        padding: 0.25rem;
+        outline: none;
+        pointer-events: all;
+    }
+
+    .events {
+        border: 1px solid rgba(0, 0, 0, 0.5);
+        padding: 0.5rem;
+        margin-top: 1rem;
+        &__item {
+            color: #FFF;
+            padding: 0.5rem;
+            pointer-events: all;
+            &:hover {
+                background-color: #ff7675;
+                cursor: pointer;
+            }
+        }
+    }
+
 }

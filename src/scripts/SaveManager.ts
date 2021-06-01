@@ -41,6 +41,11 @@ class GameSave {
         this.events.push(event_id);
         this.update();
     }
+
+    removeEvent(event_id: string) {
+        this.events = this.events.filter(e => e !== event_id);
+        this.update();
+    }
     
     setConstant(constant_id: string, value: string) {
         if(!Object.keys(this.constants).includes(constant_id)) {

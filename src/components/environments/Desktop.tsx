@@ -16,6 +16,7 @@ import FormatTime from '../../scripts/FormatTime';
 import devmode from '../../devmode.json';
 import ContextMenu from '../ui/ContextMenu';
 import GameSave from '../../scripts/SaveManager';
+import SaveManager from '../ui/SaveManagerInterface';
 
 interface props {
     Consumer: React.Consumer<{}>
@@ -29,6 +30,7 @@ interface state {
     time_speed: number
     apps: any
     adware_popups: any[]
+    show_save_manager: boolean
     cxm: {
         visibility: boolean
         x: number
@@ -52,6 +54,7 @@ export default class Desktop extends Component<props, state> {
         this.state = {
             time: 850, // Ingame start time (later load from save file)
             time_speed: 2000,
+            show_save_manager: false,
             adware_popups: [],
             cxm: {
                 visibility: false,
@@ -278,9 +281,14 @@ export default class Desktop extends Component<props, state> {
                 {(data: ConfigTypes) => (
                     <div onMouseDown={this.DesktopClickEvent} className="desktop">
 
+                        
+                        {   /* Save Manager is only accessible when dev/debug mode is enabled. */
+                            this.state.show_save_manager ? (<SaveManager save={this.props.save}/>) : ""
+                        }
+
                         {/* Desktop window container */}
                         <div className="desktop__board" id="wallpaper">
-                            {!data.production ? (<span id="debugInfo"><b>Developer mode</b> | Game clock: {this.state.time} | Formatted clock {FormatTime(this.state.time)} | Save data: {JSON.stringify(this.props.save)}</span>) : (<React.Fragment/>)}
+                            {!data.production ? (<span id="debugInfo"><b>Developer mode</b> | Game clock: {this.state.time} | Formatted clock {FormatTime(this.state.time)} | <button onClick={() => this.setState({show_save_manager: !this.state.show_save_manager})}>Save manager</button></span>) : (<React.Fragment/>)}
                             
                             <ContextMenu openApp={this.openApp} visibility={this.state.cxm.visibility} x={this.state.cxm.x} y={this.state.cxm.y}/>
                             
