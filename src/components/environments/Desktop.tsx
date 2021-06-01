@@ -17,6 +17,7 @@ import devmode from '../../devmode.json';
 import ContextMenu from '../ui/ContextMenu';
 import GameSave from '../../scripts/SaveManager';
 import SaveManager from '../ui/SaveManagerInterface';
+import Ad from '../webcomponents/Ad';
 
 interface props {
     Consumer: React.Consumer<{}>
@@ -264,15 +265,15 @@ export default class Desktop extends Component<props, state> {
         }
 
 
-        /*
-        let virus = setInterval(() => {
-            if(this.state.adware_popups.length <= 30) this.setState({ adware_popups: [...this.state.adware_popups, (<Ad nsfw={true} banner={false}/>)]})
+        
+        // let virus = setInterval(() => {
+        //     if(this.state.adware_popups.length <= 30) this.setState({ adware_popups: [...this.state.adware_popups, (<Ad redirect={null} nsfw={true} banner={false}/>)]})
             
-            const errorSound = new Audio('./assets/audio/UI_ERROR.mp3');
-            errorSound.volume = 0.1;
-            errorSound.play();
-        }, 50);
-        */
+        //     const errorSound = new Audio('./assets/audio/UI_ERROR.mp3');
+        //     errorSound.volume = 0.1;
+        //     errorSound.play();
+        // }, 50);
+        
     }
 
     render() {
@@ -346,7 +347,7 @@ export default class Desktop extends Component<props, state> {
                             </div>
                         </div>
 
-                        <Taskbar time={this.state.time} toggleVisibility={this.toggleVisibility} apps={data.desktop_config.apps} active_apps={this.state.apps} />
+                        <Taskbar openApp={this.openApp} time={this.state.time} toggleVisibility={this.toggleVisibility} apps={data.desktop_config.apps} active_apps={this.state.apps} />
                     </div>
                 )}
             </this.props.Consumer>

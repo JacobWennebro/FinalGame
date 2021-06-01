@@ -17,10 +17,12 @@ export default class SaveManager extends Component<Props> {
 
     }
 
-    addEvent(e: MouseEvent<HTMLButtonElement>) {
+    addEvent() {
         const value = this.EventsInput.current.value;
+        if(this.props.save.hasHappened(value)) return console.error("Event has already happened.");
         this.props.save.addEvent(value);
         console.log(`Event "${value}" added to save.`);
+        this.EventsInput.current.value = "";
     }
 
     removeEvent(e: MouseEvent<HTMLParagraphElement>) {
@@ -41,6 +43,7 @@ export default class SaveManager extends Component<Props> {
                         <button onClick={this.addEvent}>Add</button>
 
                         <div className="events">
+                            {this.props.save.events.length <= 0 ? (<p>No events have been saved</p>) : ""}
                             {this.props.save.events.map(e => (
                                 <p key={e} onClick={this.removeEvent} className="events__item">{e}</p>
                             ))}

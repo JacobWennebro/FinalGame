@@ -92,6 +92,7 @@ img {
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 4px;
     pointer-events: none;
+    color: #FFF;
 
     h1,h2,h3 {
         color: #e67e22;
@@ -108,10 +109,11 @@ img {
         border: 1px solid rgba(0, 0, 0, 0.5);
         padding: 0.5rem;
         margin-top: 1rem;
+        max-height: 70%;
+        overflow-y: auto;
+        pointer-events: all;
         &__item {
-            color: #FFF;
             padding: 0.5rem;
-            pointer-events: all;
             &:hover {
                 background-color: #ff7675;
                 cursor: pointer;
