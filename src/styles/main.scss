@@ -80,6 +80,8 @@ img {
     }
 }
 
+$dsm-accent: #81ecec;
+
 .developer-save-manager {
     position: fixed;
     z-index: 999;
@@ -87,19 +89,37 @@ img {
     right: 0;
     width: 20%;
     margin: 0.5rem;
-    padding: 1rem;
     background-color: rgba(0, 0, 0, 0.4);
     border-radius: 4px;
     pointer-events: none;
     color: #FFF;
+    overflow: hidden;
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+    .tab {
+        width: 100%;
+        height: auto;
+        background-color: rgba(0, 0, 0, 0.5);
+        pointer-events: all;
+        cursor: move;
+        padding: 0.25rem;
+        p {
+            pointer-events: none;
+        }
+    }
+
+    .window {
+        padding: 0 1rem;
+    }
 
     .chunk {
         margin: 1rem 0;
     }
 
     h1,h2,h3 {
-        color: #e67e22;
+        color: $dsm-accent;
         text-transform: uppercase;
+        font-size: 1.2rem;
     }
 
     input,button {

@@ -18,15 +18,16 @@ export default class StartMenu extends Component<Props> {
         setTimeout(() => {
             this.props.openApp(id);
             document.body.classList.remove("progress-state");
-        }, Math.floor(Math.random()*2000));
+        }, Math.floor(Math.random() * 2000));
     }
 
-    render() {;
+    render() {
+        ;
         return (
-            <div ref={this.Startmenu} style={{display: "none"}} className="startmenu render-as-pixels" id="startmenu">
+            <div ref={this.Startmenu} style={{ display: "none" }} className="startmenu render-as-pixels" id="startmenu">
                 <div className="startmenu__header">
                     <div className="startmenu__header__heading v-center">
-                        <Image src="images/avatars/sebastian.png"/>
+                        <Image src="images/avatars/sebastian.png" />
                         <div>
                             <h1 className="v-center">sebastian</h1>
                         </div>
@@ -36,7 +37,7 @@ export default class StartMenu extends Component<Props> {
                     <div className="startmenu__main__apps">
 
                         {this.props.apps.map(app => {
-                            if(!app.show) return;
+                            if (!app.show) return;
 
                             return (
                                 <div onClick={() => this.openApp(app.id)} className="startmenu__app">
@@ -51,27 +52,32 @@ export default class StartMenu extends Component<Props> {
                     </div>
                     <div className="startmenu__main__native">
                         <div className="startmenu__main__native__wall" />
-
-
-
+                        <div className="startmenu__main__native__apps">
+                            <div className="startmenu__app">
+                                <Image src={`icons/computer.png`} />
+                                <div className="startmenu__app__title-container">
+                                    <p>My Computer</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div className="startmenu__footer">
 
-                        <div className="startmenu__footer__button v-center">
-                            <Image src="icons/logoff-key.png"/>
-                            <div>
-                                <p className="v-center">Log off</p>
-                            </div>
+                    <div className="startmenu__footer__button v-center">
+                        <Image src="icons/logoff-key.png" />
+                        <div>
+                            <p className="v-center">Log off</p>
                         </div>
+                    </div>
 
-                        <div className="startmenu__footer__button v-center">
-                            <Image src="icons/shutdown.png"/>
-                            <div>
-                                <p className="v-center">Turn Off Computer</p>
-                            </div>
+                    <div className="startmenu__footer__button v-center">
+                        <Image src="icons/shutdown.png" />
+                        <div>
+                            <p className="v-center">Turn Off Computer</p>
                         </div>
-                        
+                    </div>
+
                 </div>
             </div>
         )
