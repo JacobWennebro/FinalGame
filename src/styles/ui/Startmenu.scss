@@ -90,12 +90,14 @@
                     top: 50%;
                     transform: translateY(-50%);
                     margin-left: 1rem;
+                    pointer-events: none;
                 }
 
                 img {
                     width: 32px;
                     height: auto;
                     background-color: #F6F6F6;
+                    pointer-events: none;
                 }
             }
 

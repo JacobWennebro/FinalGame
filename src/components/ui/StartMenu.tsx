@@ -1,11 +1,29 @@
-import React, { Component } from 'react'
+import React, { Component, createRef, RefObject } from 'react'
 import { App } from '../../types/ContextData'
 import Image from './Image'
 
-export default class StartMenu extends Component<{ openApp: (id: string) => void, apps: App[], hide: () => void }> {
-    render() {
+interface Props { openApp: (id: string) => void, apps: App[] }
+
+export default class StartMenu extends Component<Props> {
+    Startmenu = createRef() as RefObject<HTMLDivElement>;
+
+    toggleVisibility() {
+        this.Startmenu.current.style.display = this.Startmenu.current.style.display === "grid" ? "none" : "grid";
+    }
+
+    openApp(id: string) {
+        document.body.classList.add("progress-state");
+        this.toggleVisibility();
+
+        setTimeout(() => {
+            this.props.openApp(id);
+            document.body.classList.remove("progress-state");
+        }, Math.floor(Math.random()*2000));
+    }
+
+    render() {;
         return (
-            <div onClick={this.props.hide} className="startmenu render-as-pixels">
+            <div ref={this.Startmenu} style={{display: "none"}} className="startmenu render-as-pixels" id="startmenu">
                 <div className="startmenu__header">
                     <div className="startmenu__header__heading v-center">
                         <Image src="images/avatars/sebastian.png"/>
@@ -21,7 +39,7 @@ export default class StartMenu extends Component<{ openApp: (id: string) => void
                             if(!app.show) return;
 
                             return (
-                                <div onClick={() => this.props.openApp(app.id)} className="startmenu__app">
+                                <div onClick={() => this.openApp(app.id)} className="startmenu__app">
                                     <Image src={`icons/${app.icon}`} />
                                     <div className="startmenu__app__title-container">
                                         <p>{app.title}</p>

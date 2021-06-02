@@ -21,29 +21,26 @@ export default class Taskbar extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
-        this.state = {
-            show_start_menu: false
-        }
-
-        this.hideStartMenu = this.hideStartMenu.bind(this);
-
+        this.StartMenuDisplayState = this.StartMenuDisplayState.bind(this);
     }
 
-    hideStartMenu() {
-        this.setState({ show_start_menu: false });
+    StartMenuDisplayState() {
+        const startmenu = document.getElementById("startmenu");
+        if(startmenu) startmenu.style.display = startmenu.style.display === "grid" ? "none" : "grid";
     }
 
     render() {
         return (
             <div className="taskbar">
-                {this.state.show_start_menu ? (<StartMenu hide={this.hideStartMenu} apps={this.props.apps} openApp={this.props.openApp}/>) : ""}
+                
+                <StartMenu apps={this.props.apps} openApp={this.props.openApp}/>
 
-                <button onClick={() => this.setState({ show_start_menu: !this.state.show_start_menu })} className="taskbar__start__button text-style-1">Start</button>
+                <button onClick={this.StartMenuDisplayState} className="taskbar__start__button text-style-1">Start</button>
                 
                 <div className="taskbar__activity">
                     {Object.keys(this.props.active_apps).map(id => {
                         const app = this.props.active_apps[id];
-                        const appmeta = this.props.apps.filter(app => app.id === id)[0];
+                        const appmeta = this.props.apps.find(app => app.id === id);
     
                         return app.active ? <TaskbarApp key={id} toggleVisibility={() => this.props.toggleVisibility(id)} title={appmeta.title} icon={appmeta.icon}/> : <React.Fragment/>;
                     })}

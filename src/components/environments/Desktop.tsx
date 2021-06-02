@@ -112,6 +112,12 @@ export default class Desktop extends Component<props, state> {
         clickSoundEffect.volume = 0.1;
         clickSoundEffect.play();
 
+        const startmenu = document.getElementById("startmenu");
+        if(startmenu.style.display === "grid" && !Array.from((e.target as HTMLElement).classList).find(c => c.startsWith("startmenu"))) {
+            console.log("a");
+            startmenu.style.display = "none";
+        }
+
         /* Left click */
         if (e.button == 0) {
             console.log("left click");

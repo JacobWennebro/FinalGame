@@ -59,7 +59,7 @@ $app-size: 4rem;
                 }
 
                 &:focus, &:active {
-                    outline: 1px solid rgb(98, 130, 155);
+                    outline: 1px dotted rgb(98, 130, 155);
                     background-color: rgba(120,173,213,0.7);
                 }
             }

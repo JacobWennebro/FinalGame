@@ -82,9 +82,9 @@ export default class Bar extends Component<{updateSite: (active_url: string, act
         }
 
         // Cancel non-character keys
-        if (e.key.length > 1) return;
-
-        this.setState({ input: (t.innerText + (i ? e.key : "")).toLowerCase() });
+        //if (e.key.length > 1) return;
+        console.log(t.innerText);
+        this.setState({ input: (t.innerText).toLowerCase() });
     }
 
     SearchbarRestrictions(e: KeyboardEvent<HTMLSpanElement>) {
@@ -189,10 +189,10 @@ export default class Bar extends Component<{updateSite: (active_url: string, act
                 </div>
 
                 <div className="browser__bar__search" input-value={this.state.input}>
-                    {(this.state.input.length >= 3 && this.searchHistory.filter(a => a.startsWith(this.state.input)).length > 0) ? (
+                    {(this.state.input.length >= 3 && this.searchHistory.find(a => a.startsWith(this.state.input))) ? (
                         <style>{`
                         .browser__bar__search[input-value="${this.searchHistory.filter(a => a.startsWith(this.state.input))[0].substr(0, this.state.input.length)}"] .browser__bar__search__input:not(:empty):after {
-                            content: '${this.searchHistory.filter(a => a.startsWith(this.state.input))[0].substr(this.state.input.length)}';
+                            content: '${this.searchHistory.find(a => a.startsWith(this.state.input)).substr(this.state.input.length)}';
                             background-color: #3368C4;
                             color: #FFF;
                         }
