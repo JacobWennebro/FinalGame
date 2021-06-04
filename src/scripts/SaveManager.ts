@@ -66,6 +66,15 @@ class GameSave {
         return this.events.includes(event_id);
     }
 
+    setSetting(setting_id: string, value: boolean | string | number) {
+        this.constants[`setting_${setting_id}`] = value;
+        this.update();
+    }
+
+    getSetting(setting_id: string) {
+        return this.constants[`setting_${setting_id}`];
+    }
+
 }
 
 export default GameSave;
