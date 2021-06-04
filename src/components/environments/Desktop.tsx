@@ -123,8 +123,11 @@ export default class Desktop extends Component<props, state> {
             clickSoundEffect.play();
 
         const startmenu = document.getElementById("startmenu");
-        if(startmenu.style.display === "grid" && !Array.from((e.target as HTMLElement).classList).find(c => c.startsWith("startmenu"))) {
-            console.log("a");
+        // When the user clicks close the start menu
+        // Unless the user is clicking inside the start menu or the start menu button
+        if(startmenu.style.display === "grid" 
+            && !Array.from((e.target as HTMLElement).classList).find(c => c.startsWith("startmenu"))
+            && !Array.from((e.target as HTMLElement).classList).find(c => c.startsWith("taskbar__start__button"))) {
             startmenu.style.display = "none";
         }
 
