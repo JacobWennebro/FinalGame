@@ -1,6 +1,6 @@
 # \"Final Game\" Project
 
-**Note:** Main will remain the main development branch until the stable release demo where unstable and experimental code will remain in it's own branch until next stable release, whether intended for internal or public use.
+**Note:** main will continue to be our main development branch until the release of a stable release demo where unstable and experimental code will then go under it's own seperate branch until the next stable release, whether intended for internal or public use.
 
 ##### Developer resources
 * [Objective](#project-objective)
