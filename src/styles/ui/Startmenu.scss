@@ -1,5 +1,6 @@
 .startmenu {
     width: 20vw;
+    min-width: 20rem;
     height: 60vh;
     background: #FFF;
     position: absolute;
@@ -12,7 +13,7 @@
     border: 2px solid var(--secondary);
     z-index: 999;
     display: grid;
-    grid-template-rows: 9.5% 83% 7.5%;
+    grid-template-rows: 4rem auto 2.8rem;
 
     &__footer {
         border-top: 2px solid var(--secondary);
