@@ -24,8 +24,9 @@ With that said, the player must find clues by following Sebastians digital foots
 
 ## Technology stack
 * TypeScript
-* Webpack
+* React
 * Electron
+* Webpack
 
 ## Project objective
 The objective of developing Final Game is to build an immersive computer desktop-like experience with a sense of nostalgia for the early 2000’s with a rich and inviting storyline which follows the tragic disappearance of Sebastian Hughes.
