@@ -20,7 +20,7 @@ export default class app extends Component<{save: GameSave}, SettingsState> {
                 {
                     id: "clickSound",
                     name: "Click Noise",
-                    value: this.props.save.getSetting("clickSound") ? (this.props.save.getSetting("clickSound") === "true") : true
+                    value: this.props.save.getSetting("clickSound") === "true"
                 }
             ]
         }
