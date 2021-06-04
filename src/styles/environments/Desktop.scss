@@ -7,8 +7,22 @@
 
 $app-size: 4rem;
 
+@media screen and (max-width: 1028px) {
+    .desktop {
+        width: 100% !important;
+    }
+}
+
+body[full-width] .desktop {
+    width: 100% !important;
+}
+
 .desktop {
     min-height: 100vh;
+    width: 90%;
+    transition: width 0.5s linear;
+    position: relative;
+    margin: auto;
     display: flex;
     flex-direction: column;
     animation: fadeIn 1s forwards ease;
@@ -20,7 +34,7 @@ $app-size: 4rem;
         &__window__container {
             position: absolute;
             pointer-events: none;
-            width: 100vw;
+            width: 100%;
             height: calc(100vh - 2.5rem);
             top: 0;
             left: 0;

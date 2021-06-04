@@ -117,10 +117,8 @@ export default class Desktop extends Component<props, state> {
 
         const clickSoundEffect = new Audio('./assets/audio/UI_MOUSE_CLICK.mp3');
         clickSoundEffect.volume = 0.1;
-        let clickSoundSetting = this.props.save.getConstant("setting_clickSound");
         // If setting is undefined - default is true - or the setting is set to true play click sound
-        if(typeof clickSoundSetting === undefined || clickSoundSetting == "true")
-            clickSoundEffect.play();
+        if(this.props.save && (!this.props.save.getSetting("clickSound") ||  this.props.save.getSetting("clickSound")  == "true")) clickSoundEffect.play();
 
         const startmenu = document.getElementById("startmenu");
         if(startmenu.style.display === "grid" && !Array.from((e.target as HTMLElement).classList).find(c => c.startsWith("startmenu"))) {
@@ -162,7 +160,7 @@ export default class Desktop extends Component<props, state> {
 
             this.setState({ cxm: {
                 visibility: true,
-                x: e.clientX,
+                x: e.clientX - (document.body.clientWidth > 1028 ? (document.body.clientWidth * 0.05) : 0),
                 y: e.clientY
             } });
 

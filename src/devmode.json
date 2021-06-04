@@ -1,5 +1,5 @@
 {
-    "titleScreen": true,
+    "titleScreen": false,
     "appDebugger": {
         "enabled": false,
         "app":"app.notepad"

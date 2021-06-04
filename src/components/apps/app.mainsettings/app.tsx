@@ -15,7 +15,7 @@ export default class app extends Component<{save: GameSave}, SettingsState> {
     constructor(props) {
         super(props);        
 
-        this.state = {
+        if(this.props.save) this.state = {
             settings: [
                 {
                     id: "clickSound",
@@ -40,6 +40,13 @@ export default class app extends Component<{save: GameSave}, SettingsState> {
         // Meaning the you can set your click make sound, and it will next time the save is loaded.
         // But when you open the settings app it will reset this value to false, because the values are not persistent
         // MAJOR TODO:
+
+        if(!this.props.save) return (
+            <div className="app" id="mainsettings">
+                <p>Settings can not be changed without a save.</p>
+            </div>
+        )
+
         return (
             <div className="app" id="mainsettings">
                 {this.state.settings.map(setting => (
