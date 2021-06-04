@@ -41,9 +41,16 @@
             "fullscreen": true
         },
         {
+            "title": "Main Settings",
+            "icon": "settings.png",
+            "id": "app.mainsettings",
+            "show": false,
+            "fullscreen": false
+        },
+        {
             "title": "Customize ExperienceOS",
             "icon": "settings.png",
-            "id": "app.settings",
+            "id": "app.themesettings",
             "show": false,
             "maxWidth":"20vw",
             "minWidth":"20vw",

@@ -12,7 +12,8 @@ export default class ContextMenu extends Component<{ openApp: (id: string) => vo
                     <li>Test 123</li>
                     <li>123 Test</li>
                     <li className="cxm__spacer"><hr/></li>
-                    <li id="cxmPersonalize">Personalize</li>
+                    <li id="cxmPersonalize">Personalize Theme</li>
+                    <li id="cxmSettings">Settings</li>
                 </ul>
             </div>
         )

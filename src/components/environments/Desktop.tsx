@@ -8,7 +8,8 @@ import { App, ConfigTypes } from '../../types/ContextData';
 import Notepad from '../apps/app.notepad/app'
 import Webcam from '../apps/app.webcam/app'
 import Browser from '../apps/app.browser/app'
-import Settings from '../apps/app.settings/app'
+import MainSettings from '../apps/app.mainsettings/app'
+import ThemeSettings from '../apps/app.themesettings/app'
 import Messenger from '../apps/app.messenger/app'
 
 import HelpMonkey from '../ui/HelpMonkey';
@@ -93,8 +94,14 @@ export default class Desktop extends Component<props, state> {
                     visible: true,
                     notifications: 0
                 },
-                "app.settings": {
-                    content: (<Settings save={this.props.save}/>),
+                "app.mainsettings": {
+                    content: (<MainSettings save={this.props.save}/>),
+                    active: false,
+                    visible: true,
+                    notifications: 0
+                },
+                "app.themesettings": {
+                    content: (<ThemeSettings save={this.props.save}/>),
                     active: false,
                     visible: true,
                     notifications: 0
@@ -110,7 +117,10 @@ export default class Desktop extends Component<props, state> {
 
         const clickSoundEffect = new Audio('./assets/audio/UI_MOUSE_CLICK.mp3');
         clickSoundEffect.volume = 0.1;
-        clickSoundEffect.play();
+        let clickSoundSetting = this.props.save.getConstant("setting_clickSound");
+        // If setting is undefined - default is true - or the setting is set to true play click sound
+        if(typeof clickSoundSetting === undefined || clickSoundSetting == "true")
+            clickSoundEffect.play();
 
         const startmenu = document.getElementById("startmenu");
         if(startmenu.style.display === "grid" && !Array.from((e.target as HTMLElement).classList).find(c => c.startsWith("startmenu"))) {
@@ -124,8 +134,11 @@ export default class Desktop extends Component<props, state> {
 
             switch((e.target as HTMLDivElement).id.substr(3).toLowerCase()) {
                 case "personalize":
-                    this.openApp("app.settings");
-                break;
+                    this.openApp("app.themesettings");
+                    break;
+                case "settings":
+                    this.openApp("app.mainsettings");
+                    break;
             }
 
             this.setState({ cxm: {
