@@ -8,14 +8,16 @@
 - - - -
 ![fafe](https://i.imgur.com/XFK9SOC.gif)
 
-## Contributors
+## Team & contributors
 
-* **Developers**
+* **Developer**
 	* Jacob Wennebro **(Project lead)**
 	* Alexander Resurreccion
 * **Design artists**
 	* Tiapha
 	* Ash
+* **Writers**
+	* Coco
 * **Music & SFX**
 	* Douglas Johansson
 
