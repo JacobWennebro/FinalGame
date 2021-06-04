@@ -1,12 +1,9 @@
 # \"Final Game\" Project
-##### Run down
-*(code name: FinalGame)* is a game which revolves around the tragic disappearence of Sebastian Hughes, an 18 year old high school student who vanished in late 2006. The entire game plays out on a simulated computer operating system, one similar to Microsoft\'s Windows XP.
 
-Early in the game it\'s made apparent that this is a recovered computer, but why you have access to it is made unknown to the player, one playing the game may assume it was acquired from a garage sale or something of the sort.
-
-With that said, the player must find clues by following Sebastians digital footstep, looking through search history, text messages, social media posts etc in order to find out what truly happend to Sebastian.
+**Note:** Main will remain the main development branch until the stable release demo where unstable and experimental code will remain in it's own branch until next stable release, whether intended for internal or public use.
 
 ##### Developer resources
+* [Objective](#project-objective)
 * [Google Drive folder](https://drive.google.com/drive/folders/1af4BDSZ342vcDj-ZePUC9CcEOGQCoPeM?usp=sharing)
 - - - -
 ![fafe](https://i.imgur.com/XFK9SOC.gif)
