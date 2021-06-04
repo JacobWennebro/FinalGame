@@ -5,6 +5,7 @@
 ##### Developer resources
 * [Objective](#project-objective)
 * [Google Drive folder](https://drive.google.com/drive/folders/1af4BDSZ342vcDj-ZePUC9CcEOGQCoPeM?usp=sharing)
+* [Trello Board](https://trello.com/invite/b/ccjGcGb3/2bfa7ab0d550e9bdd502ad331a049a9b/game-development-technology-stack)
 - - - -
 ![fafe](https://i.imgur.com/XFK9SOC.gif)
 
