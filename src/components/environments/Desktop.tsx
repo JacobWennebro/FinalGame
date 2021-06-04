@@ -117,7 +117,7 @@ export default class Desktop extends Component<props, state> {
 
         const clickSoundEffect = new Audio('./assets/audio/UI_MOUSE_CLICK.mp3');
         clickSoundEffect.volume = 0.1;
-        let clickSoundSetting = this.props.save.getConstant("setting_clickSound");
+        let clickSoundSetting = this.props.save.getSetting("clickSound");
         // If setting is undefined - default is true - or the setting is set to true play click sound
         if(typeof clickSoundSetting === undefined || clickSoundSetting == "true")
             clickSoundEffect.play();
