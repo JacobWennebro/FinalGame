@@ -120,7 +120,7 @@ export default class Desktop extends Component<props, state> {
         
         //const clickSoundSetting = this.props.save.getSetting("clickSound");
         // If setting is undefined - default is true - or the setting is set to true play click sound
-        if(this.props.save && this.props.save.getSetting("clickSound") === "true") clickSoundEffect.play();
+        if(this.props.save && this.props.save.getSetting("clickSound")) clickSoundEffect.play();
 
         const startmenu = document.getElementById("startmenu");
         // When the user clicks close the start menu
@@ -262,7 +262,7 @@ export default class Desktop extends Component<props, state> {
         /* Apply OS settings from save */
         if(this.props.save) {
             document.body.setAttribute("theme", this.props.save.getConstant("theme"));
-
+            if(this.props.save.getSetting("fullWidth")) document.body.setAttribute("full-width", "");
         }
 
         /* Game System time speed */

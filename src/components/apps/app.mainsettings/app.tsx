@@ -1,13 +1,15 @@
 import React, { Component, MouseEvent } from 'react'
 import GameSave from '../../../scripts/SaveManager';
+
+interface Setting {
+    id: string,
+    name: string,
+    onUpdate?: (value: any) => void;
+}
+
 interface SettingsState {
     // An array of objects
-    settings: {
-        id: string,
-        name: string,
-        value: boolean,
-        // Default value of the setting upon init
-    }[]
+    settings: Setting[]
 }
 
 export default class app extends Component<{save: GameSave}, SettingsState> {
@@ -20,18 +22,22 @@ export default class app extends Component<{save: GameSave}, SettingsState> {
                 {
                     id: "clickSound",
                     name: "Click Noise",
-                    value: this.props.save.getSetting("clickSound") === "true"
+                },
+                {
+                    id: "blackBars",
+                    name: "Auto-scaling screen width",
+                    onUpdate: (value: boolean) => {
+                        value ? document.body.setAttribute("full-width", "") : document.body.removeAttribute("full-width");
+                    }
                 }
             ]
         }
     }
 
-    updateSetting(id: string) {
-        const setting = this.state.settings.find((setting => setting.id == id));
-        this.props.save.setSetting(`${id}`, (!setting.value).toString());
-
-        const settingObjectIndex = this.state.settings.findIndex((setting) => setting.id == id)
-        this.state.settings[settingObjectIndex].value = !this.state.settings[settingObjectIndex].value;
+    updateSetting(setting: Setting) {
+        const newValue = !this.props.save.getSetting(setting.id);
+        this.props.save.setSetting(`${setting.id}`, newValue);
+        if(setting.onUpdate) setting.onUpdate(newValue);
     }
 
     render() {
@@ -51,7 +57,7 @@ export default class app extends Component<{save: GameSave}, SettingsState> {
             <div className="app" id="mainsettings">
                 {this.state.settings.map(setting => (
                     <div>
-                        <input onChange={() => this.updateSetting(setting.id)} type="checkbox" defaultChecked={setting.value}/><span> {setting.name}</span>
+                        <input onChange={() => this.updateSetting(setting)} type="checkbox" defaultChecked={this.props.save.getSetting(setting.id)}/><span> {setting.name}</span>
                     </div>
                 ))}
             </div>

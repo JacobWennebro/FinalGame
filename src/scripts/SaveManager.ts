@@ -1,3 +1,9 @@
+const defaultConstants = {
+    theme:"blue",
+    setting_clickSound: true,
+    setting_fullWidth: false
+}
+
 class GameSave {
     private id: number;
     
@@ -5,11 +11,6 @@ class GameSave {
     public lastUpdated: number;
     public events: string[];
     public constants: any;
-    
-    private defaults = {
-        theme:"blue",
-        setting_clickSound: "true"
-    }
 
     constructor(id?: number) {
         const SaveObject: GameSave[] = localStorage.saves ? JSON.parse(localStorage.saves) : [];
@@ -28,7 +29,7 @@ class GameSave {
             this.events = [];
 
             // All constants must be declared here for a default value, even settings.
-            this.constants = this.defaults;
+            this.constants = defaultConstants;
 
             localStorage.saves = JSON.stringify(SaveObject);
         }
