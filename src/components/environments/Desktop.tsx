@@ -8,7 +8,7 @@ import { App, ConfigTypes } from '../../types/ContextData';
 import Notepad from '../apps/app.notepad/app'
 import Webcam from '../apps/app.webcam/app'
 import Browser from '../apps/app.browser/app'
-import MainSettings from '../apps/app.mainsettings/app'
+import Controlpanel from '../apps/app.controlpanel/app'
 import ThemeSettings from '../apps/app.themesettings/app'
 import Messenger from '../apps/app.messenger/app'
 
@@ -94,8 +94,8 @@ export default class Desktop extends Component<props, state> {
                     visible: true,
                     notifications: 0
                 },
-                "app.mainsettings": {
-                    content: (<MainSettings save={this.props.save}/>),
+                "app.controlpanel": {
+                    content: (<Controlpanel save={this.props.save}/>),
                     active: false,
                     visible: true,
                     notifications: 0
@@ -117,10 +117,10 @@ export default class Desktop extends Component<props, state> {
 
         const clickSoundEffect = new Audio('./assets/audio/UI_MOUSE_CLICK.mp3');
         clickSoundEffect.volume = 0.1;
-        let clickSoundSetting = this.props.save.getSetting("clickSound");
+        
+        //const clickSoundSetting = this.props.save.getSetting("clickSound");
         // If setting is undefined - default is true - or the setting is set to true play click sound
-        if(typeof clickSoundSetting === undefined || clickSoundSetting == "true")
-            clickSoundEffect.play();
+        if(this.props.save && this.props.save.getSetting("clickSound")) clickSoundEffect.play();
 
         const startmenu = document.getElementById("startmenu");
         // When the user clicks close the start menu
@@ -134,13 +134,12 @@ export default class Desktop extends Component<props, state> {
         /* Left click */
         if (e.button == 0) {
             console.log("left click");
-
             switch((e.target as HTMLDivElement).id.substr(3).toLowerCase()) {
                 case "personalize":
-                    this.openApp("app.themesettings");
+                    this.slowOpenApp("app.themesettings", 2000);
                     break;
                 case "settings":
-                    this.openApp("app.mainsettings");
+                    this.slowOpenApp("app.controlpanel", 2000);
                     break;
             }
 
@@ -165,7 +164,7 @@ export default class Desktop extends Component<props, state> {
 
             this.setState({ cxm: {
                 visibility: true,
-                x: e.clientX,
+                x: e.clientX - (document.body.clientWidth > 1028 ? (document.body.clientWidth * 0.05) : 0),
                 y: e.clientY
             } });
 
@@ -180,25 +179,17 @@ export default class Desktop extends Component<props, state> {
         const clicks = state.apps[id].clicks;
 
         if(clicks+1 >= 2) {
-            
             // App is open but hidden
             if(app.active && !app.visible) this.toggleVisibility(id);
 
             // App is closed
-            else if(!app.active) {
-                document.body.classList.add("progress-state");
-                
-                setTimeout(() => {
-                    this.openApp(id);
-                    document.body.classList.remove("progress-state");
-                }, Math.floor(Math.random()*2000));
-
-            }
+            else if(!app.active) this.slowOpenApp(id, 2000);
         }
         else {
             state.apps[id].clicks = clicks != undefined ? clicks + 1 : 1;
             this.setState(state);
     
+            // Forget the number of clicks within 250 milliseconds
             setTimeout(() => {
                 state.apps[id].clicks = 0;
                 this.setState(state);
@@ -212,6 +203,15 @@ export default class Desktop extends Component<props, state> {
         let state = this.state;
         state.apps[id].active = true;
         this.setState(state);
+    }
+
+    // Opens app by id taking maxTime amount of milliseconds to load, showing the user a loading cursor
+    slowOpenApp(id: string, maxTime: number) {
+        document.body.classList.add("progress-state");
+        setTimeout(() => {
+            this.openApp(id);
+            document.body.classList.remove("progress-state");
+        }, Math.floor(Math.random()*maxTime));
     }
 
     setNotification(id: string, amount: number) {
@@ -262,7 +262,8 @@ export default class Desktop extends Component<props, state> {
         /* Apply OS settings from save */
         if(this.props.save) {
             document.body.setAttribute("theme", this.props.save.getConstant("theme"));
-
+            console.log(this.props.save);
+            if(this.props.save.getSetting("fullWidth")) document.body.setAttribute("full-width", "");
         }
 
         /* Game System time speed */

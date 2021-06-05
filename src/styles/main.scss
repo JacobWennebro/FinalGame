@@ -31,6 +31,8 @@ body,html {
     overflow: hidden;
     cursor: $cr-default;
     user-select: none;
+    background-color: #000;
+    cursor: none;
 }
 
 .progress-state {

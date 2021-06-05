@@ -56,7 +56,7 @@ export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>
                     this.props.setEnvironment(Desktop, save);
                 break;
                 case "loadgame":
-                    save = new GameSave(0);
+                    save = new GameSave(0) as GameSave;
                     this.props.setEnvironment(Desktop, save);
                 break;
             }

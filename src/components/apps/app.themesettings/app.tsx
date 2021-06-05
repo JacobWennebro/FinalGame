@@ -17,7 +17,7 @@ export default class app extends Component<{save: GameSave}> {
 
     render() {
         return (
-            <div className="app" id="settings">
+            <div className="app" id="themesettings">
                 
                 <div className="themes">
                     <h2>Theme</h2>

@@ -1,3 +1,8 @@
+const defaultConstants = {
+    theme:"blue",
+    setting_fullWidth: false
+}
+
 class GameSave {
     private id: number;
     
@@ -21,9 +26,10 @@ class GameSave {
             this.createdAt = new Date().getTime();
             this.lastUpdated = this.createdAt;
             this.events = [];
-            this.constants = {
-                theme:"blue"
-            }
+
+            // All constants must be declared here for a default value, even settings.
+            this.constants = defaultConstants;
+
             localStorage.saves = JSON.stringify(SaveObject);
         }
     }
