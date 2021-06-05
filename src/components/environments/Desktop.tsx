@@ -179,14 +179,11 @@ export default class Desktop extends Component<props, state> {
         const clicks = state.apps[id].clicks;
 
         if(clicks+1 >= 2) {
-            
             // App is open but hidden
             if(app.active && !app.visible) this.toggleVisibility(id);
 
             // App is closed
-            else if(!app.active) {
-                this.slowOpenApp(id, 2000);
-            }
+            else if(!app.active) this.slowOpenApp(id, 2000);
         }
         else {
             state.apps[id].clicks = clicks != undefined ? clicks + 1 : 1;
