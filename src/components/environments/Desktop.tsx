@@ -134,13 +134,12 @@ export default class Desktop extends Component<props, state> {
         /* Left click */
         if (e.button == 0) {
             console.log("left click");
-
             switch((e.target as HTMLDivElement).id.substr(3).toLowerCase()) {
                 case "personalize":
-                    this.openApp("app.themesettings");
+                    this.slowOpenApp("app.themesettings", 2000);
                     break;
                 case "settings":
-                    this.openApp("app.mainsettings");
+                    this.slowOpenApp("app.mainsettings", 2000);
                     break;
             }
 
