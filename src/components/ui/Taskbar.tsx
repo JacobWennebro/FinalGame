@@ -21,10 +21,10 @@ export default class Taskbar extends Component<Props, State> {
     constructor(props: Props) {
         super(props);
 
-        this.StartMenuDisplayState = this.StartMenuDisplayState.bind(this);
+        this.ToggleStartMenuDisplayState = this.ToggleStartMenuDisplayState.bind(this);
     }
 
-    StartMenuDisplayState() {
+    ToggleStartMenuDisplayState() {
         const startmenu = document.getElementById("startmenu");
         if(startmenu) startmenu.style.display = startmenu.style.display === "grid" ? "none" : "grid";
     }
@@ -35,7 +35,7 @@ export default class Taskbar extends Component<Props, State> {
                 
                 <StartMenu apps={this.props.apps} openApp={this.props.openApp}/>
 
-                <button onClick={this.StartMenuDisplayState} className="taskbar__start__button text-style-1">Start</button>
+                <button onClick={this.ToggleStartMenuDisplayState} className="taskbar__start__button text-style-1">Start</button>
                 
                 <div className="taskbar__activity">
                     {Object.keys(this.props.active_apps).map(id => {

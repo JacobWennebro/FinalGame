@@ -117,25 +117,29 @@ export default class Desktop extends Component<props, state> {
 
         const clickSoundEffect = new Audio('./assets/audio/UI_MOUSE_CLICK.mp3');
         clickSoundEffect.volume = 0.1;
+           
+        //const clickSoundSetting = this.props.save.getSetting("clickSound");
         // If setting is undefined - default is true - or the setting is set to true play click sound
         if(this.props.save && (!this.props.save.getSetting("clickSound") ||  this.props.save.getSetting("clickSound")  == "true")) clickSoundEffect.play();
 
         const startmenu = document.getElementById("startmenu");
-        if(startmenu.style.display === "grid" && !Array.from((e.target as HTMLElement).classList).find(c => c.startsWith("startmenu"))) {
-            console.log("a");
+        // When the user clicks close the start menu
+        // Unless the user is clicking inside the start menu or the start menu button
+        if(startmenu.style.display === "grid" 
+            && !Array.from((e.target as HTMLElement).classList).find(c => c.startsWith("startmenu"))
+            && !Array.from((e.target as HTMLElement).classList).find(c => c.startsWith("taskbar__start__button"))) {
             startmenu.style.display = "none";
         }
 
         /* Left click */
         if (e.button == 0) {
             console.log("left click");
-
             switch((e.target as HTMLDivElement).id.substr(3).toLowerCase()) {
                 case "personalize":
-                    this.openApp("app.themesettings");
+                    this.slowOpenApp("app.themesettings", 2000);
                     break;
                 case "settings":
-                    this.openApp("app.mainsettings");
+                    this.slowOpenApp("app.mainsettings", 2000);
                     break;
             }
 
@@ -175,25 +179,17 @@ export default class Desktop extends Component<props, state> {
         const clicks = state.apps[id].clicks;
 
         if(clicks+1 >= 2) {
-            
             // App is open but hidden
             if(app.active && !app.visible) this.toggleVisibility(id);
 
             // App is closed
-            else if(!app.active) {
-                document.body.classList.add("progress-state");
-                
-                setTimeout(() => {
-                    this.openApp(id);
-                    document.body.classList.remove("progress-state");
-                }, Math.floor(Math.random()*2000));
-
-            }
+            else if(!app.active) this.slowOpenApp(id, 2000);
         }
         else {
             state.apps[id].clicks = clicks != undefined ? clicks + 1 : 1;
             this.setState(state);
     
+            // Forget the number of clicks within 250 milliseconds
             setTimeout(() => {
                 state.apps[id].clicks = 0;
                 this.setState(state);
@@ -207,6 +203,15 @@ export default class Desktop extends Component<props, state> {
         let state = this.state;
         state.apps[id].active = true;
         this.setState(state);
+    }
+
+    // Opens app by id taking maxTime amount of milliseconds to load, showing the user a loading cursor
+    slowOpenApp(id: string, maxTime: number) {
+        document.body.classList.add("progress-state");
+        setTimeout(() => {
+            this.openApp(id);
+            document.body.classList.remove("progress-state");
+        }, Math.floor(Math.random()*maxTime));
     }
 
     setNotification(id: string, amount: number) {

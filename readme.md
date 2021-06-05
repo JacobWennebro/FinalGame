@@ -1,31 +1,32 @@
 # \"Final Game\" Project
-##### Run down
-*(code name: FinalGame)* is a game which revolves around the tragic disappearence of Sebastian Hughes, an 18 year old high school student who vanished in late 2006. The entire game plays out on a simulated computer operating system, one similar to Microsoft\'s Windows XP.
 
-Early in the game it\'s made apparent that this is a recovered computer, but why you have access to it is made unknown to the player, one playing the game may assume it was acquired from a garage sale or something of the sort.
-
-With that said, the player must find clues by following Sebastians digital footstep, looking through search history, text messages, social media posts etc in order to find out what truly happend to Sebastian.
+**Note:** main will continue to be our main development branch, upon the release of demo a stable branch will have been made which should assure all code that is in there is indeed stable and ready for a working demo.
 
 ##### Developer resources
+* [Objective](#project-objective)
 * [Google Drive folder](https://drive.google.com/drive/folders/1af4BDSZ342vcDj-ZePUC9CcEOGQCoPeM?usp=sharing)
+* [Trello Board](https://trello.com/invite/b/ccjGcGb3/2bfa7ab0d550e9bdd502ad331a049a9b/game-development-technology-stack)
 - - - -
 ![fafe](https://i.imgur.com/XFK9SOC.gif)
 
-## Contributors
+## Team & contributors
 
-* **Developers**
+* **Developer**
 	* Jacob Wennebro **(Project lead)**
 	* Alexander Resurreccion
 * **Design artists**
 	* Tiapha
 	* Ash
+* **Writers**
+	* Coco
 * **Music & SFX**
 	* Douglas Johansson
 
 ## Technology stack
 * TypeScript
-* Webpack
+* React
 * Electron
+* Webpack
 
 ## Project objective
 The objective of developing Final Game is to build an immersive computer desktop-like experience with a sense of nostalgia for the early 2000’s with a rich and inviting storyline which follows the tragic disappearance of Sebastian Hughes.
