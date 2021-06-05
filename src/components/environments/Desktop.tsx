@@ -186,19 +186,14 @@ export default class Desktop extends Component<props, state> {
 
             // App is closed
             else if(!app.active) {
-                document.body.classList.add("progress-state");
-                
-                setTimeout(() => {
-                    this.openApp(id);
-                    document.body.classList.remove("progress-state");
-                }, Math.floor(Math.random()*2000));
-
+                this.slowOpenApp(id, 2000);
             }
         }
         else {
             state.apps[id].clicks = clicks != undefined ? clicks + 1 : 1;
             this.setState(state);
     
+            // Forget the number of clicks within 250 milliseconds
             setTimeout(() => {
                 state.apps[id].clicks = 0;
                 this.setState(state);
@@ -212,6 +207,15 @@ export default class Desktop extends Component<props, state> {
         let state = this.state;
         state.apps[id].active = true;
         this.setState(state);
+    }
+
+    // Opens app by id taking maxTime amount of milliseconds to load, showing the user a loading cursor
+    slowOpenApp(id: string, maxTime: number) {
+        document.body.classList.add("progress-state");
+        setTimeout(() => {
+            this.openApp(id);
+            document.body.classList.remove("progress-state");
+        }, Math.floor(Math.random()*maxTime));
     }
 
     setNotification(id: string, amount: number) {
