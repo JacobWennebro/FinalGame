@@ -17,7 +17,6 @@ import GameSave from './scripts/SaveManager';
 
 // Context
 const Context = React.createContext({});
-
 const ipc = window.require('electron').ipcRenderer;
 
 const introSequence = [
@@ -60,8 +59,6 @@ const App = () => {
             const networks = await osinfo.wifiNetworks();
             const battery = await osinfo.battery();
         
-            console.log(networks);
-
             setState({
                 ...state,
                 networks,

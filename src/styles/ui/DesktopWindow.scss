@@ -34,7 +34,13 @@
         flex-shrink: 0;
         padding: 0 0.5rem;
 
-        &__title {
+        &-inner {
+            display: grid;
+            grid-template-columns: 16px auto 8rem;
+            grid-column-gap: 0.5rem;
+        }
+
+        &__title span {
             position: relative;
             top: 50%;
             transform: translateY(-50%);
@@ -49,11 +55,12 @@
         }
 
         &__actions {
-            float: right;
             height: 100%;
             width: auto;
+            text-align: right;
 
             .app-window__bar__button {
+                text-align: left;
                 display: inline-block;
                 background-color: #FFF;
                 width: 20px;

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import '../videosite.scss';
+import '../mytube.scss';
 
 export default class Layout extends Component<{redirect: (url: string) => void}> {
     render() {
         return (
-            <div className="webpage videosite">
+            <div className="webpage mytube">
                 <header>
                     <div className="margin">
                         <h1 className="hoverable" data-link={"videosite.com"} onClick={() => this.props.redirect("videosite.com")}>VideoSite.com</h1>

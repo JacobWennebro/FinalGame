@@ -39,6 +39,10 @@ body,html {
     cursor: $cr-progress !important;
 }
 
+.cursor-pointer {
+    cursor: $cr-pointer !important;
+}
+
 img {
     pointer-events: none;
 }
