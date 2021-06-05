@@ -26,6 +26,7 @@ body[full-width] .desktop {
     display: flex;
     flex-direction: column;
     animation: fadeIn 1s forwards ease;
+    cursor: $cr-default;
 
     &__board {
         flex: 1;
