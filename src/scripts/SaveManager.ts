@@ -2,6 +2,7 @@ class GameSave {
     private id: number;
     
     public createdAt: number;
+    public lastUpdated: number;
     public events: string[];
     public constants: any;
 
@@ -18,6 +19,7 @@ class GameSave {
             this.id = SaveObject.length;
             SaveObject.push(this);
             this.createdAt = new Date().getTime();
+            this.lastUpdated = this.createdAt;
             this.events = [];
             this.constants = {
                 theme:"blue"
@@ -27,6 +29,8 @@ class GameSave {
     }
 
     private update() {
+        this.lastUpdated = new Date().getTime();
+
         const SaveObject = localStorage.saves ? JSON.parse(localStorage.saves) : [];
 
         console.log(this.id);
