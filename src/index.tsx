@@ -87,6 +87,7 @@ const App = () => {
     function setEnvironment(env: any, save?: GameSave) {
         setState({ ...state, environment: env, save });
     }
+    
     try {
         return (
             <Context.Provider value={state}>
