@@ -370,7 +370,7 @@ export default class Desktop extends Component<props, state> {
                             </div>
                         </div>
 
-                        <Taskbar openApp={this.openApp} time={this.state.time} toggleVisibility={this.toggleVisibility} apps={data.desktop_config.apps} active_apps={this.state.apps} />
+                        <Taskbar slowOpenApp={(id: string, maxTime: number) => this.slowOpenApp(id, maxTime)} time={this.state.time} toggleVisibility={this.toggleVisibility} apps={data.desktop_config.apps} active_apps={this.state.apps} />
                     </div>
                 )}
             </this.props.Consumer>

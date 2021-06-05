@@ -1,6 +1,7 @@
 const defaultConstants = {
     theme:"blue",
-    setting_fullWidth: false
+    setting_fullWidth: false,
+    setting_clickSound: true
 }
 
 class GameSave {
