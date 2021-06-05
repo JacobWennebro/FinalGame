@@ -208,7 +208,6 @@ export default class Bar extends Component<{updateSite: (active_url: string, act
 
                 <div className="browser__bar__buttons">
                     <button onClick={() => this.GoToWebpage(this.state.input)} className="v-center search-btn">Search</button>
-                    <button onClick={() => this.GoToWebpage("myface.com/user/mayacooper89")} className="v-center"><Image src="icons/menu.png"/></button>
                 </div>
 
         </div>

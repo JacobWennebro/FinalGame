@@ -8,7 +8,7 @@ import { App, ConfigTypes } from '../../types/ContextData';
 import Notepad from '../apps/app.notepad/app'
 import Webcam from '../apps/app.webcam/app'
 import Browser from '../apps/app.browser/app'
-import MainSettings from '../apps/app.mainsettings/app'
+import Controlpanel from '../apps/app.controlpanel/app'
 import ThemeSettings from '../apps/app.themesettings/app'
 import Messenger from '../apps/app.messenger/app'
 
@@ -94,8 +94,8 @@ export default class Desktop extends Component<props, state> {
                     visible: true,
                     notifications: 0
                 },
-                "app.mainsettings": {
-                    content: (<MainSettings save={this.props.save}/>),
+                "app.controlpanel": {
+                    content: (<Controlpanel save={this.props.save}/>),
                     active: false,
                     visible: true,
                     notifications: 0
@@ -139,7 +139,7 @@ export default class Desktop extends Component<props, state> {
                     this.slowOpenApp("app.themesettings", 2000);
                     break;
                 case "settings":
-                    this.slowOpenApp("app.mainsettings", 2000);
+                    this.slowOpenApp("app.controlpanel", 2000);
                     break;
             }
 
@@ -262,6 +262,7 @@ export default class Desktop extends Component<props, state> {
         /* Apply OS settings from save */
         if(this.props.save) {
             document.body.setAttribute("theme", this.props.save.getConstant("theme"));
+            console.log(this.props.save);
             if(this.props.save.getSetting("fullWidth")) document.body.setAttribute("full-width", "");
         }
 

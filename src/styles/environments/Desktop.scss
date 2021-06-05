@@ -17,6 +17,10 @@ body[full-width] .desktop {
     width: 100% !important;
 }
 
+body:not(.progress-state) {
+    cursor: $cr-default;
+}
+
 .desktop {
     min-height: 100vh;
     width: 90%;
@@ -26,7 +30,6 @@ body[full-width] .desktop {
     display: flex;
     flex-direction: column;
     animation: fadeIn 1s forwards ease;
-    cursor: $cr-default;
 
     &__board {
         flex: 1;

@@ -1,6 +1,5 @@
 const defaultConstants = {
     theme:"blue",
-    setting_clickSound: true,
     setting_fullWidth: false
 }
 
