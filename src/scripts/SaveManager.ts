@@ -1,5 +1,8 @@
+import Save from "../components/ui/Save";
+import SaveManager from "../components/ui/SaveManagerInterface";
+
 class GameSave {
-    private id: number;
+    public id: number;
     
     public createdAt: number;
     public lastUpdated: number;
@@ -39,6 +42,35 @@ class GameSave {
 
         console.log(SaveObject);
         localStorage.saves = JSON.stringify(SaveObject);
+    }
+
+    // Fetches the SaveObject array
+    static fetchAll() {
+        const SaveObject: GameSave[] = localStorage.saves ? JSON.parse(localStorage.saves) : [];
+        return(SaveObject);
+    }
+
+    // Check if a SaveObject or specific save exists, without creating an instance
+    static saveExists(id?: number) {
+        const SaveObject: GameSave[] = localStorage.saves ? JSON.parse(localStorage.saves) : [];
+        // Check if there are game saves
+        if(!SaveObject || SaveObject.length === 0) return(false);
+        // Otherwise, if no id was provided, there are existing saves so return true
+        else if(id === undefined) return(true);
+
+        if(!SaveObject.find((save) => save.id === id)) return(false);
+        else return(true);
+    }
+
+    delete() {
+        const SaveObject = localStorage.saves ? JSON.parse(localStorage.saves) : [];
+        SaveObject.splice(this.id, 1);
+        // Reset save ids
+        SaveObject.forEach((save, index) => {
+            save.id = index;
+        })
+        localStorage.saves = JSON.stringify(SaveObject);
+        
     }
 
     addEvent(event_id: string) {

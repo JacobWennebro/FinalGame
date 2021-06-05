@@ -25,7 +25,7 @@
             width: 100%;
             transform: translateY(-50px);
             font-size: 8vw;
-            z-index: 100;
+            z-index: 2;
             font-weight: 100;
             color: #8DD7E6;
             -webkit-text-stroke-width: 2px;
@@ -40,6 +40,58 @@
             
             &.clicked {
                 background: url("../../assets/images/title.gif") left center / cover !important;
+            }
+        }
+
+        .gamesaves {
+            display: none;
+            overflow: display;
+            position: absolute;
+            bottom: 50%;
+            background-color: rgba($color: #23055f, $alpha: 0.85);
+            z-index: 3;
+            // Fix width to not have to be 100% but still center align the save list box
+            text-align: center;
+            width: 100%;
+
+            .savelist {
+                // I don't know how to stylize a scrollbar
+                overflow-y: none;
+                height: 200px;
+
+                .listelement {
+                    font-size: 90%;
+                }
+            }
+
+            .seperator {
+                //margin: 0 1rem;
+                font-size: 80%;
+                &:before {
+                    content: 'x';
+                }
+                &:hover {
+                    color: darkred;
+                    text-decoration: underline;
+                }
+                // When the separator is not hovered over
+                &:not(:hover) {
+                    color: red;
+                }
+            }
+            
+            .small {
+                font-size: 80%;
+            }
+
+            .cancel {
+                /* border-top: ;
+                border-left: ;
+                border-bottom: ;
+                border-right: ; */
+                width: 50%;
+                margin: 0 auto;
+                background: linear-gradient(90deg, rgba($color: #23055f, $alpha: 0.85), rgba($color: #592E59, $alpha: 0.85));
             }
         }
 

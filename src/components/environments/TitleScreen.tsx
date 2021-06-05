@@ -5,6 +5,7 @@ import '../../styles/environments/TitleScreen.scss';
 import { ConfigTypes } from '../../types/ContextData';
 import Desktop from './Desktop';
 import GameSave from '../../scripts/SaveManager'
+import ListSave from '../ui/Save'
 
 export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>, production: boolean, setEnvironment: (env: any, save?: GameSave) => void}> {
     WallpaperElement = React.createRef<HTMLDivElement>();
@@ -44,6 +45,7 @@ export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>
     }
     
     handleAction(e: MouseEvent<HTMLUListElement>) {
+        const errorSound = new Audio('./assets/audio/UI_ERROR.mp3');
         const t = (e.target as HTMLElement);
         let save;
         if(t.nodeName === "LI") {
@@ -52,12 +54,15 @@ export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>
                     this.props.setEnvironment(Desktop);
                 break;
                 case "newgame":
-                    save = new GameSave();
-                    this.props.setEnvironment(Desktop, save);
+                    this.handleSaveLoad()
                 break;
                 case "loadgame":
-                    save = new GameSave(0);
-                    this.props.setEnvironment(Desktop, save);
+                    if(!GameSave.saveExists()) {
+                            errorSound.play();
+                            break;
+                    }
+                    console.log(GameSave.saveExists());
+                    this.toggleGameSavesDisplay();
                 break;
             }
         }
@@ -72,13 +77,37 @@ export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>
         }
     }
 
+    // Handles save loading, loading a save, or creating a new one and loading into the game
+    handleSaveLoad(id?) {
+        const save = new GameSave(id);
+        this.props.setEnvironment(Desktop, save);
+    }
+
+    // TODO: <ListSave>'s span id does not update when a save is deleted despite SaveObject ids being updated by save.delete
+    // This means that when a single save is deleted no other saves can be deleted until a reload
+    handleSaveDelete(id) {
+        console.log(id)
+        // If the save doesn't exist, it can't be deleted
+        if(!GameSave.saveExists(id)) return;
+        let save = new GameSave(id);
+        save.delete();
+        // Handle deleting the save element
+        let saveElement = document.getElementById(`save_${id}`);
+        //while (saveElement.firstChild) { saveElement.removeChild(saveElement.firstChild);}
+        saveElement.remove();
+        // Check if there are any saves left, if not, close the save load menu
+        if(!GameSave.saveExists()) this.toggleGameSavesDisplay();
+    }
+
+    // Toggles the display of the game saves list
+    toggleGameSavesDisplay() {
+        const savesHolder = document.getElementById('gameSavesHolder');
+        savesHolder.style.display = savesHolder.style.display === 'grid' ? 'none' : 'grid';
+    }
+
     render() {
         return (
             <div onClick={this.animateWallpaper} className="title-screen">
-
-                <div className="gamesaves">
-                    
-                </div>
 
                 <div className="page-centerer v-center">
                     <div className="centerer v-center">
@@ -90,6 +119,18 @@ export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>
                             />
                         </h1>
                         <div ref={this.WallpaperElement} className="wallpaper render-as-pixels"></div>
+                        <div className="gamesaves" id="gameSavesHolder">
+                            <ul className="savelist">
+                                {
+                                    // There should never be two saves which are not consequtive
+                                    GameSave.fetchAll().map((save: GameSave) => {
+                                        // I'd prefer for id to be private, but any fetchId function I attempt to make just causes an error as though it doesn't exist upon 
+                                        return(<ListSave saveClick={() => this.handleSaveLoad(save.id)} deleteClick={() => this.handleSaveDelete(save.id)} save={save}></ListSave>)
+                                    })
+                                }
+                            </ul>
+                            <button onClick={this.toggleGameSavesDisplay} className="cancel">Cancel</button>
+                        </div>
                         <ul onMouseOver={this.buttonHoverEffect} onClick={this.handleAction}>
                             <this.props.Consumer>
                                 {(data: ConfigTypes) => !data.production ? (
