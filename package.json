@@ -53,8 +53,9 @@
     "webpack-obfuscator": "^3.2.0"
   },
   "scripts": {
-    "dev": "concurrently \"webpack-cli serve --mode development\" \"electron ElectronInstance.js\"",
-    "build": "webpack --config webpack.config.js --mode production && electron-builder"
+    "dev": "concurrently \"webpack-cli serve --mode development --config webpack.config.js\" \"webpack-cli serve --mode development --config webpack-sandbox.config.js\" \"electron ElectronInstance.js\"",
+    "build": "webpack --config webpack.config.js --mode production && electron-builder",
+    "sandbox": "webpack-cli serve --mode development --config webpack-sandbox.config.js"
   },
   "author": "Jacob Wennebro",
   "license": "ISC",

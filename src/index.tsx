@@ -17,7 +17,6 @@ import GameSave from './scripts/SaveManager';
 
 // Context
 const Context = React.createContext({});
-
 const ipc = window.require('electron').ipcRenderer;
 
 const introSequence = [
@@ -36,7 +35,7 @@ const App = () => {
     process.env.PRODUCTION = ipc.sendSync("retrieve-data", "isPackaged");
 
     const [state, setState] = useState({
-        save: null,
+        save: typeof Devmode.defaultSave !== "undefined" ? new GameSave(Devmode.defaultSave) : null,
         computer_username: os.userInfo().username,
         desktop_config: DesktopConfig,
         production: process.env.PRODUCTION === "true",
@@ -60,8 +59,6 @@ const App = () => {
             const networks = await osinfo.wifiNetworks();
             const battery = await osinfo.battery();
         
-            console.log(networks);
-
             setState({
                 ...state,
                 networks,
@@ -87,6 +84,7 @@ const App = () => {
     function setEnvironment(env: any, save?: GameSave) {
         setState({ ...state, environment: env, save });
     }
+    
     try {
         return (
             <Context.Provider value={state}>

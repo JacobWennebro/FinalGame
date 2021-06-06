@@ -1,6 +1,12 @@
 import Save from "../components/ui/Save";
 import SaveManager from "../components/ui/SaveManagerInterface";
 
+const defaultConstants = {
+    theme:"blue",
+    setting_fullWidth: false,
+    setting_clickSound: true
+}
+
 class GameSave {
     public id: number;
     
@@ -24,9 +30,10 @@ class GameSave {
             this.createdAt = new Date().getTime();
             this.lastUpdated = this.createdAt;
             this.events = [];
-            this.constants = {
-                theme:"blue"
-            }
+
+            // All constants must be declared here for a default value, even settings.
+            this.constants = defaultConstants;
+
             localStorage.saves = JSON.stringify(SaveObject);
         }
     }

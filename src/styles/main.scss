@@ -31,10 +31,16 @@ body,html {
     overflow: hidden;
     cursor: $cr-default;
     user-select: none;
+    background-color: #000;
+    cursor: none;
 }
 
 .progress-state {
     cursor: $cr-progress !important;
+}
+
+.cursor-pointer {
+    cursor: $cr-pointer !important;
 }
 
 img {

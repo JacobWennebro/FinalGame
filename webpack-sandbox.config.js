@@ -8,9 +8,9 @@ const path = require("path");
 module.exports = (env, argv) => {
     return {
         target: "node",
-        entry: "./src/index.tsx",
+        entry: "./src/sandbox.tsx",
         devServer: {
-            port: 8080
+            port: 8081
         },
         output: {
             filename: "game.js",

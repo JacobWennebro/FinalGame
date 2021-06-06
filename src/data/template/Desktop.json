@@ -41,9 +41,9 @@
             "fullscreen": true
         },
         {
-            "title": "Main Settings",
+            "title": "ExperienceOS - Control Panel",
             "icon": "settings.png",
-            "id": "app.mainsettings",
+            "id": "app.controlpanel",
             "show": false,
             "fullscreen": false
         },

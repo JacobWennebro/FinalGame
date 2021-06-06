@@ -1,7 +1,8 @@
 {
-    "titleScreen": true,
+    "titleScreen": false,
+    "defaultSave": 0,
     "appDebugger": {
-        "enabled": false,
-        "app":"app.notepad"
+        "enabled": true,
+        "app":"app.browser"
     }
 }

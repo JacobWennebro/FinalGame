@@ -3,23 +3,13 @@ import { App } from '../../types/ContextData'
 import TitleScreen from '../environments/TitleScreen';
 import Image from './Image'
 
-interface Props { openApp: (id: string) => void, apps: App[]; setEnvironment: (component: any) => void }
+interface Props { slowOpenApp: (id: string, maxTime: number) => void, apps: App[]; setEnvironment: (component: any) => void }
 
 export default class StartMenu extends Component<Props> {
     Startmenu = createRef() as RefObject<HTMLDivElement>;
 
     toggleVisibility() {
         this.Startmenu.current.style.display = this.Startmenu.current.style.display === "grid" ? "none" : "grid";
-    }
-
-    openApp(id: string) {
-        document.body.classList.add("progress-state");
-        this.toggleVisibility();
-
-        setTimeout(() => {
-            this.props.openApp(id);
-            document.body.classList.remove("progress-state");
-        }, Math.floor(Math.random() * 2000));
     }
 
     render() {
@@ -41,7 +31,7 @@ export default class StartMenu extends Component<Props> {
                             if (!app.show) return;
 
                             return (
-                                <div onClick={() => this.openApp(app.id)} className="startmenu__app">
+                                <div onClick={() => { this.props.slowOpenApp(app.id, 2000); this.toggleVisibility()}} className="startmenu__app">
                                     <Image src={`icons/${app.icon}`} />
                                     <div className="startmenu__app__title-container">
                                         <p>{app.title}</p>
@@ -54,12 +44,21 @@ export default class StartMenu extends Component<Props> {
                     <div className="startmenu__main__native">
                         <div className="startmenu__main__native__wall" />
                         <div className="startmenu__main__native__apps">
+
                             <div className="startmenu__app">
                                 <Image src={`icons/computer.png`} />
                                 <div className="startmenu__app__title-container">
                                     <p>My Computer</p>
                                 </div>
                             </div>
+
+                            <div onClick={() => { this.props.slowOpenApp("app.controlpanel", 2000); this.toggleVisibility()}} className="startmenu__app">
+                                <Image src={`icons/settings.png`} />
+                                <div className="startmenu__app__title-container">
+                                    <p>Settings</p>
+                                </div>
+                            </div>
+
                         </div>
                     </div>
                 </div>

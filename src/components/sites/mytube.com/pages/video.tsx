@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import Plyr from 'plyr-react'
 import 'plyr-react/dist/plyr.css'
-import Layout from '../../videosite.com/components/Layout'
+import Layout from '../../mytube.com/components/Layout'
+import VideoPlayer from '../components/VideoPlayer'
 
 export default class video extends Component<{ redirect: (url: string) => void }> {
     shouldComponentUpdate() {return false}
@@ -13,20 +14,7 @@ export default class video extends Component<{ redirect: (url: string) => void }
                     <h1 className="video__title">Video Title</h1>
                     <div className="video__seperator">
                         <div className="main">
-                            <Plyr options={{
-                                controls: ['play-large', 'play', 'progress', 'current-time', 'mute', 'volume'],
-                                fullscreen: { enabled: false },
-                                autoplay: true
-                            }} source={{
-                                type: 'video',
-                                title: '',
-                                sources: [
-                                    {
-                                        src: "./assets/videos/tube/example.mp4",
-                                        type: 'video/mp4',
-                                    }]
-                            }}
-                            ></Plyr>
+                            <VideoPlayer src="https://www.w3schools.com/html/mov_bbb.mp4"/>
                         </div>
                         <div className="related">
                             <div className="video__about">

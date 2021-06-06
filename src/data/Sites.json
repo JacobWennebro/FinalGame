@@ -39,7 +39,7 @@
         ]
     },
     {
-        "url":"videosite.com",
+        "url":"mytube.com",
         "secure": true,
         "paths": [
             "video"

@@ -22,12 +22,10 @@ export default class index extends Component<{}, { x: number, y: number, map_id:
         }
 
         this.MusicObject = null;
-        /*
         this.MusicObject = new Audio('./assets/audio/ADVENTUREGAME_MUSIC.mp3');
         this.MusicObject.volume = 0.1;
         this.MusicObject.play();
         this.MusicObject.loop = true;
-        */
 
         this.TileArray = [];
         const rows = Maps[this.state.map_id].tiles;
@@ -103,7 +101,6 @@ export default class index extends Component<{}, { x: number, y: number, map_id:
             for(let ax = 0; ax < Math.abs(addX); ax++) {
                 const goingRight = addX > 0;
                 const tile = document.querySelector(`.game__view__map__container__tile[data-x="${goingRight ? this.state.x + ax : this.state.x - ax}"][data-y="${y}"]`) as HTMLElement;
-                tile.style.filter = "brightness(50%)";
                 if([1, 2, 5].includes(Number(tile.getAttribute("data-tile-type")))) {
                     x = Number(tile.getAttribute("data-x")) + (goingRight ? -1 : 1);
                     y = Number(tile.getAttribute("data-y"));
@@ -119,7 +116,6 @@ export default class index extends Component<{}, { x: number, y: number, map_id:
             for(let ay = 0; ay < Math.abs(addY); ay++) {
                 const goingDown = addY > 0;
                 const tile = document.querySelector(`.game__view__map__container__tile[data-x="${this.state.x}"][data-y="${goingDown ? this.state.y + ay : this.state.y - ay}"]`) as HTMLElement;
-                tile.style.filter = "brightness(150%)";
                 if([1, 2, 5].includes(Number(tile.getAttribute("data-tile-type")))) return;
                 else previousYTile = tile;
             }

@@ -73,7 +73,6 @@ export default class TitleScreen extends Component<Props, State> {
                     this.handleSaveLoad()
                     break;
                 case "loadgame":
-
                     if (!GameSave.saveExists()) {
                         errorSound.play();
                         break;
@@ -81,6 +80,10 @@ export default class TitleScreen extends Component<Props, State> {
 
                     this.setState({ showSaves: !this.state.showSaves });
                     break;
+
+                    save = new GameSave(0) as GameSave;
+                    this.props.setEnvironment(Desktop, save);
+                break;
             }
         }
     }
