@@ -42,7 +42,7 @@
         "url":"mytube.com",
         "secure": true,
         "paths": [
-            "video"
+            "video/bunny"
         ]
     },
     {

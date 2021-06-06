@@ -1,10 +1,15 @@
+body[full-width] .tube-player__wrapper {
+    width: 100% !important;
+}
+
 .tube-player {
     width: 100%;
     position: relative;
     user-select: none;
 
     &__wrapper {
-        width: 100%;
+        width: 90%;
+        margin: auto;
         display: grid;
         grid-template-rows: auto 30px;
     }
@@ -53,7 +58,7 @@
                     &__progress {
                         width: 0%;
                         height: 100%;
-                        background-color: rgba(255, 121, 121, 0.6);
+                        background-color: #EB1D1D;
                         position: relative;
 
                         &[data-progress="0"]:after {

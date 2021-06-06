@@ -1,8 +1,4 @@
-$red: #ff7675;
-
-:root {
-    --plyr-color-main: #{$red};
-}
+$red: #EB1D1D;
 
 .mytube {
     width: 100%;
@@ -28,28 +24,115 @@ $red: #ff7675;
             margin-top: 2rem;
 
             &__title {
-                margin-bottom: 0.25rem;
+                margin-bottom: 0.5rem;
             }
 
             &__seperator {
                 display: grid;
-                grid-template-columns: auto 40%;
-                grid-column-gap: 3rem;
+                grid-template-columns: auto 30%;
+                grid-column-gap: 1.5rem;
+
+                .main {
+
+                    hr {
+                        height:2px;
+                        border-width:0;
+                        color:#ccc;
+                        background-color:#ccc;
+                    }
+
+                    .statistics {
+                        height: 40px;
+                        p {
+                            display: inline-block;
+                            margin-left: 0.5rem;
+                        }
+                    }
+
+                    .section {
+                        margin-top: 1rem;
+                        &__contents {
+                            .comment {
+                                display: grid;
+                                grid-column-gap: 0.5rem;
+                                grid-template-columns: 3rem auto;
+                                margin: 1rem 0;
+                                img {
+                                    width: 100%;
+                                    height: auto;
+                                    outline: 1px solid #CDCDCA;
+                                }
+                                &__content {
+                                    h4 {
+                                        color: blue;
+                                        &:hover {
+                                            text-decoration: underline;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    .rating {
+                        display: inline-block;
+                        float: left;
+                        transform: translateY(-60%) !important;
+                        user-select: none;
+                    }
+
+                    .lean-right {
+                        float: right;
+                    }
+                }
+
+            }
+
+            &__related, &__about {
+                border: 1px solid #CDCDCA;
+                background-color: #EEEEEE;
+                min-width: 10rem;
+                width: 100%;
+                border-radius: 2px;
+                padding: 0.5rem;
+                min-width: 10rem;
+                margin-bottom: 1.5rem;
+                h1,h2,h3 {
+                    font-weight: 100;
+                }
             }
 
             &__about {
-                width: 100%;
-                border: 2px solid #ccc;
-                border-radius: 10px;
-
-                h3 {
-                    padding: 0.25rem;
-                    background-color: #ccc;
+                .channel {
+                    display: grid;
+                    grid-template-columns: minmax(3rem, 4.5rem) auto;
+                    grid-column-gap: 1rem;
+                    margin-bottom: 1rem;
+                    &__info {
+                        h3 {
+                            color: blue;
+                        }
+                    }
+                    img {
+                        border: 1px solid #CDCDCA;
+                        width: 100%;
+                    }
+                }
+                hr {
+                    height:1px;
+                    border-width:0;
+                    color:#CDCDCA;
+                    background-color:#CDCDCA;
+                    margin: 1rem 0;
                 }
 
-                &__content {
-                    padding: 1rem;
-                    min-height: 40vh;
+                input {
+                    border:1px solid #CDCDCA;
+                    border-radius: 0;
+                    padding: 0.25rem;
+                    outline: none;
+                    width: 100%;
+                    font-family: "VT323", sans-serif;
                 }
             }
 
@@ -59,14 +142,20 @@ $red: #ff7675;
 
     header {
         font-size: 0.8rem;
-        background-color: $red;
-        color: #FFF;
-        padding: 0.25rem 0;
+        background-color: rgb(238, 238, 238);
+        color: #222;
+        padding: 0.5rem 0;
         position: relative;
         user-select: none;
         h1 {
             display: inline-block;
             font-weight: 100;
+            span.heading-filled {
+                background-color: $red;
+                padding: 0 0.15rem;
+                color: #FFF;
+                border-radius: 4px;
+            }
         }
         ul {
             position: absolute;

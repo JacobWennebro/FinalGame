@@ -1,0 +1,27 @@
+[
+    {
+        "title":"Bunny test video",
+        "description":"epic video !! lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum",
+        "file":"example.mp4",
+        "id":"bunny",
+        "stars": 5,
+        "ratings": 300,
+        "comments": [
+            {
+                "user":"tj945",
+                "message":"Hello world"
+            }, {
+                "user":"fishermanpat",
+                "message":"awesome video"
+            }
+        ],
+        "author": "Test",
+        "likes": 5,
+        "dislikes": 2,
+        "views": 600,
+        "author":"fishermanpat",
+        "day": 3,
+        "month": 9,
+        "year": 2007
+    }
+]

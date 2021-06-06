@@ -1,32 +1,97 @@
 import React, { Component } from 'react'
-import Plyr from 'plyr-react'
-import 'plyr-react/dist/plyr.css'
 import Layout from '../../mytube.com/components/Layout'
 import VideoPlayer from '../components/VideoPlayer'
+import Videos from '../../../../data/Videos.json'
+import Users from '../../../../data/MyFaceUsers.json'
+import NotFound from '../../notfound/pages';
+import ReactStars from 'react-stars';
+import Comment from '../components/Comment';
+import Image from '../../../ui/Image';
 
-export default class video extends Component<{ redirect: (url: string) => void }> {
-    shouldComponentUpdate() {return false}
+export default class video extends Component<{ path: string, redirect: (url: string) => void, exists: boolean, site: string, production: boolean, time: number }> {
+    shouldComponentUpdate() { return false }
+    months = [
+        "January",
+        "February",
+        "March",
+        "April",
+        "May",
+        "June",
+        "July",
+        "August",
+        "September",
+        "October",
+        "November",
+        "December"
+    ]
 
     render() {
-        return (
-            <Layout redirect={this.props.redirect}>
-                <div className="video">
-                    <h1 className="video__title">Video Title</h1>
-                    <div className="video__seperator">
-                        <div className="main">
-                            <VideoPlayer src="https://www.w3schools.com/html/mov_bbb.mp4"/>
-                        </div>
-                        <div className="related">
-                            <div className="video__about">
-                                <h3>About This Video</h3>
-                                <div className="video__about__content">
-                                    <p>about text blablabla</p>
+        const video = Videos.find(v => v.id === this.props.path.split("/")[1]);
+        const author = Users.find(u => u.username === video.author);
+
+        if (video && author) {
+            return (
+                <Layout redirect={this.props.redirect}>
+                    <div className="video">
+                        <h1 className="video__title">{video.title}</h1>
+                        <div className="video__seperator">
+                            <div className="main">
+
+                                <VideoPlayer src={video.file} />
+
+                                <div className="statistics">
+                                    <ReactStars
+                                        count={5}
+                                        value={video.stars}
+                                        className="rating v-center"
+                                        size={18}
+                                        edit={false}
+                                        color2={'#EB1D1D'}
+                                    />
+                                    <p className="v-center">{video.ratings} ratings</p>
+                                    <p className="v-center lean-right"><b>{video.views}</b> views</p>
                                 </div>
+
+                                <hr />
+
+                                <div className="section">
+                                    <h3>Text Comments ({video.comments.length})</h3>
+                                    <div className="section__contents">
+                                        {video.comments.map(c => (
+                                            <Comment redirect={this.props.redirect} user={c.user} message={c.message} />
+                                        ))}
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div className="related">
+
+                                <div className="video__about">
+                                    <div className="channel render-as-pixels">
+                                        <Image src={`images/avatars/${author.avatar}`} />
+                                        <div className="channel__info">
+                                            <h3 className="hoverable" data-link={`myface.com/user/${author.username}`} onClick={() => this.props.redirect ? this.props.redirect(`myface.com/user/${author.username}`) : ""}>{author.username}</h3>
+                                            <p>{video.day} {this.months[video.month]}</p>
+                                            <p>{video.year}</p>
+                                        </div>
+                                    </div>
+                                    <p>{video.description}</p>
+                                    <hr />
+                                    <span>URL: </span><input onClick={e => e.currentTarget.select()} value={`https://mytube.com/video/${video.id}`} />
+                                    <br />
+                                    <br />
+                                    <span>MyFace Profile: </span><input onClick={e => e.currentTarget.select()} value={`https://myface.com/user/${author.username}`} />
+                                </div>
+                                            
+                                <div className="video__related">
+                                    <h3>Related Videos</h3>
+                                </div>
+
                             </div>
                         </div>
                     </div>
-                </div>
-            </Layout>
-        )
+                </Layout>
+            )
+        } else return (<NotFound production={this.props.production} exists={this.props.exists} site={this.props.site} redirect={this.props.redirect} />)
     }
 }

@@ -79,6 +79,24 @@ export default class VideoPlayer extends Component<Props, State> {
         document.body.onfullscreenchange = null;
     }
 
+    fancyTimeFormat(duration) {   
+        // Hours, minutes and seconds
+        const hrs = ~~(duration / 3600);
+        const mins = ~~((duration % 3600) / 60);
+        const secs = ~~duration % 60;
+    
+        // Output like "1:01" or "4:03:59" or "123:03:59"
+        let ret = "";
+    
+        if (hrs > 0) {
+            ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+        }
+    
+        ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+        ret += "" + secs;
+        return ret;
+    }
+
     render() {
         return (
             <div id="player" ref={this.Player} className="tube-player">
@@ -90,7 +108,7 @@ export default class VideoPlayer extends Component<Props, State> {
                         onLoadedMetadata={this.MetaDataEvent}
                         onTimeUpdate={this.TimeUpdateEvent}
                         ref={this.Video}
-                        src={this.props.src}
+                        src={`assets/videos/tube/${this.props.src}`}
                     />
                     </div>
                     <div className="tube-player__controls">
@@ -104,7 +122,7 @@ export default class VideoPlayer extends Component<Props, State> {
                                 </div>
                             </div>
                             <div className="tube-player__controls__progress_divider">
-                                <p style={{ whiteSpace: "nowrap" }} className="v-center">{`0:0${this.state.currentTime} / 0:${this.state.duration}`}</p>
+                                <p style={{ whiteSpace: "nowrap" }} className="v-center">{`${this.fancyTimeFormat(this.state.currentTime)} / ${this.fancyTimeFormat(this.state.duration)}`}</p>
                             </div>
                         </div>
                         <div className="tube-player__controls__volume cursor-pointer chunk">
