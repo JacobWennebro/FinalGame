@@ -93,7 +93,6 @@ export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>
         save.delete();
         // Handle deleting the save element
         let saveElement = document.getElementById(`save_${id}`);
-        //while (saveElement.firstChild) { saveElement.removeChild(saveElement.firstChild);}
         saveElement.remove();
         // Check if there are any saves left, if not, close the save load menu
         if(!GameSave.saveExists()) this.toggleGameSavesDisplay();
