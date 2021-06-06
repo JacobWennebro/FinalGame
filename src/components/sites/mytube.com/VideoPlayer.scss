@@ -1,4 +1,6 @@
-body[full-width] .tube-player__wrapper {
+body[full-width] .tube-player .tube-player__wrapper,
+body[full-width] .tube-player.fullscreen .tube-player__wrapper
+{
     width: 100% !important;
 }
 
@@ -7,8 +9,12 @@ body[full-width] .tube-player__wrapper {
     position: relative;
     user-select: none;
 
+    &.fullscreen .tube-player__wrapper {
+        width: 90% !important;
+    }
+
     &__wrapper {
-        width: 90%;
+        width: 100%;
         margin: auto;
         display: grid;
         grid-template-rows: auto 30px;
