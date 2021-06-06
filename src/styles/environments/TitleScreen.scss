@@ -44,10 +44,13 @@
         }
 
         .gamesaves {
-            display: none;
-            overflow: display;
+            overflow: hidden;
+            pointer-events: none;
+            transition: height 0.5s ease;
             position: absolute;
-            bottom: 50%;
+            top: 35%;
+            transform: translateY(-40%);
+            height: 0%;
             background-color: rgba($color: #23055f, $alpha: 0.85);
             z-index: 3;
             // Fix width to not have to be 100% but still center align the save list box
@@ -57,10 +60,28 @@
             .savelist {
                 // I don't know how to stylize a scrollbar
                 overflow-y: none;
-                height: 200px;
 
                 .listelement {
+                    display: block;
                     font-size: 90%;
+                    text-transform: uppercase;
+                    margin-bottom: 1rem;
+
+                    span:hover {
+                        text-decoration: underline;
+                    }
+
+                    .save-details {
+                        color: #FFF;
+                        &:hover {
+                            color: yellow;
+                        }
+                    }
+
+                    .delete-btn {
+                        margin-left: 1rem;
+                        color: red;
+                    }
                 }
             }
 
@@ -85,17 +106,22 @@
             }
 
             .cancel {
-                /* border-top: ;
-                border-left: ;
-                border-bottom: ;
-                border-right: ; */
-                width: 50%;
-                margin: 0 auto;
-                background: linear-gradient(90deg, rgba($color: #23055f, $alpha: 0.85), rgba($color: #592E59, $alpha: 0.85));
+                position: absolute;
+                bottom: 0;
+                margin-bottom: 1rem;
+                border: 0;
+                background-color: transparent;
+                color: #FFF;
+                outline: none;
+                font-family: "VT323", sans-serif;
+                &:hover {
+                    color: yellow;
+                    text-decoration: underline;
+                }
             }
         }
 
-        ul {
+        ul.start-options {
             list-style: none;
             padding: 0;
             margin-top: 2rem;
@@ -107,7 +133,6 @@
                 &:not(.seperator):hover {
                     color: yellow;
                     text-decoration: underline;
-                    cursor: pointer;
                 }
 
                 &.seperator {

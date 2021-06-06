@@ -38,7 +38,8 @@ export default class TitleScreen extends Component<Props, State> {
     }
 
     componentDidMount() {
-        this.IPC.sendSync("window-action", "toggleFullscreen")
+        const isFullscreen = this.IPC.sendSync("retrieve-data", "isFullscreen");
+        if(!isFullscreen) this.IPC.sendSync("window-action", "toggleFullscreen");
     }
 
     componentWillUnmount() {
@@ -128,8 +129,8 @@ export default class TitleScreen extends Component<Props, State> {
                             />
                         </h1>
                         <div ref={this.WallpaperElement} className="wallpaper render-as-pixels"></div>
-                        <div style={{ display: this.state.showSaves ? "block" : "none"}} className="gamesaves" >
-                            <ul className="savelist">
+                        <div style={{ height: this.state.showSaves ? "50%" : "0%", pointerEvents: this.state.showSaves ? "all" : "none"}} className="gamesaves" >
+                            <ul className="savelist v-center">
                                 {
                                     // There should never be two saves which are not consequtive
                                     GameSave.fetchAll().map((save: GameSave) => {
@@ -138,22 +139,22 @@ export default class TitleScreen extends Component<Props, State> {
                                     })
                                 }
                             </ul>
-                            <button onClick={() => this.setState({ showSaves: true })} className="cancel">Cancel</button>
+                            <button onClick={() => this.setState({ showSaves: false })} className="cancel cursor-pointer">Cancel</button>
                         </div>
-                        <ul onMouseOver={this.buttonHoverEffect} onClick={this.handleAction}>
+                        <ul className="start-options" onMouseOver={this.buttonHoverEffect} onClick={this.handleAction}>
                             <this.props.Consumer>
                                 {(data: ConfigTypes) => !data.production ? (
                                     <>
-                                        <li data-action="devmode" style={{ color: "red" }}>developer mode</li>
+                                        <li className="cursor-pointer" data-action="devmode" style={{ color: "red" }}>developer mode</li>
                                         <li className="seperator"></li>
                                     </>
                                 ) : ""}
                             </this.props.Consumer>
-                            <li data-action="newgame">new game</li>
+                            <li className="cursor-pointer" data-action="newgame">new game</li>
                             <li className="seperator"></li>
-                            <li data-action="loadgame">load game</li>
+                            <li className="cursor-pointer" data-action="loadgame">load game</li>
                             <li className="seperator"></li>
-                            <li data-action="credits">credits</li>
+                            <li className="cursor-pointer" data-action="credits">credits</li>
                         </ul>
                         <p id="copyright">&copy; 2021 Jacob Wennebro. ALL RIGHTS RESERVED.</p>
                     </div>

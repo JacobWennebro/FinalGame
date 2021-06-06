@@ -314,7 +314,7 @@ export default class Desktop extends Component<props, state> {
 
                         {/* Desktop window container */}
                         <div className="desktop__board" id="wallpaper">
-                            {!data.production ? (<span id="debugInfo"><b>Developer mode</b> | Game clock: {this.state.time} | Formatted clock {FormatTime(this.state.time)} | <button onClick={() => this.setState({show_save_manager: !this.state.show_save_manager})}>Save manager</button></span>) : (<React.Fragment/>)}
+                            {!data.production ? (<span id="debugInfo"><b>Developer mode</b> | Game clock: {this.state.time} | Formatted clock {FormatTime(this.state.time)} | Save #{this.props.save.id} | <button onClick={() => this.setState({show_save_manager: !this.state.show_save_manager})}>Save manager</button></span>) : (<React.Fragment/>)}
                             
                             <ContextMenu openApp={this.openApp} visibility={this.state.cxm.visibility} x={this.state.cxm.x} y={this.state.cxm.y}/>
                             
@@ -372,7 +372,7 @@ export default class Desktop extends Component<props, state> {
                             </div>
                         </div>
 
-                        <Taskbar openApp={this.openApp} time={this.state.time} toggleVisibility={this.toggleVisibility} apps={data.desktop_config.apps} active_apps={this.state.apps} />
+                        <Taskbar setEnvironment={this.props.setEnvironment} openApp={this.openApp} time={this.state.time} toggleVisibility={this.toggleVisibility} apps={data.desktop_config.apps} active_apps={this.state.apps} />
                     </div>
                 )}
             </this.props.Consumer>
