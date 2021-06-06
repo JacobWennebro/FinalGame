@@ -9,6 +9,7 @@ interface Props {
     apps: App[], 
     toggleVisibility: (id: string) => void, 
     time: number
+    setEnvironment: (component: any) => void;
     slowOpenApp: (id: string, maxTime: number) => void;
 }
 
@@ -33,7 +34,7 @@ export default class Taskbar extends Component<Props, State> {
         return (
             <div className="taskbar">
                 
-                <StartMenu apps={this.props.apps} slowOpenApp={this.props.slowOpenApp}/>
+                <StartMenu setEnvironment={this.props.setEnvironment} apps={this.props.apps} slowOpenApp={this.props.openApp}/>
 
                 <button onClick={this.ToggleStartMenuDisplayState} className="taskbar__start__button text-style-1">Start</button>
                 

@@ -26,7 +26,7 @@
             width: 100%;
             transform: translateY(-50px);
             font-size: 8vw;
-            z-index: 100;
+            z-index: 2;
             font-weight: 100;
             color: #8DD7E6;
             -webkit-text-stroke-width: 2px;
@@ -44,7 +44,85 @@
             }
         }
 
-        ul {
+        .gamesaves {
+            overflow: hidden;
+            pointer-events: none;
+            transition: height 0.5s ease;
+            position: absolute;
+            top: 35%;
+            transform: translateY(-40%);
+            height: 0%;
+            background-color: rgba($color: #23055f, $alpha: 0.85);
+            z-index: 3;
+            // Fix width to not have to be 100% but still center align the save list box
+            text-align: center;
+            width: 100%;
+
+            .savelist {
+                // I don't know how to stylize a scrollbar
+                overflow-y: none;
+
+                .listelement {
+                    display: block;
+                    font-size: 90%;
+                    text-transform: uppercase;
+                    margin-bottom: 1rem;
+
+                    span:hover {
+                        text-decoration: underline;
+                    }
+
+                    .save-details {
+                        color: #FFF;
+                        &:hover {
+                            color: yellow;
+                        }
+                    }
+
+                    .delete-btn {
+                        margin-left: 1rem;
+                        color: red;
+                    }
+                }
+            }
+
+            .seperator {
+                //margin: 0 1rem;
+                font-size: 80%;
+                &:before {
+                    content: 'x';
+                }
+                &:hover {
+                    color: darkred;
+                    text-decoration: underline;
+                }
+                // When the separator is not hovered over
+                &:not(:hover) {
+                    color: red;
+                }
+            }
+            
+            .small {
+                font-size: 80%;
+            }
+
+            .cancel {
+                position: absolute;
+                bottom: 0;
+                margin-bottom: 1rem;
+                border: 0;
+                background-color: transparent;
+                color: #FFF;
+                outline: none;
+                font-family: "VT323", sans-serif;
+                &:hover {
+                    color: yellow;
+                    text-decoration: underline;
+                }
+            }
+        }
+
+        ul.start-options {
             list-style: none;
             padding: 0;
             margin-top: 2rem;
@@ -56,7 +134,6 @@
                 &:not(.seperator):hover {
                     color: yellow;
                     text-decoration: underline;
-                    cursor: pointer;
                 }
 
                 &.seperator {

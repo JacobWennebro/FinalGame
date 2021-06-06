@@ -1,8 +1,9 @@
 import React, { Component, createRef, RefObject } from 'react'
 import { App } from '../../types/ContextData'
+import TitleScreen from '../environments/TitleScreen';
 import Image from './Image'
 
-interface Props { slowOpenApp: (id: string, maxTime: number) => void, apps: App[] }
+interface Props { slowOpenApp: (id: string, maxTime: number) => void, apps: App[]; setEnvironment: (component: any) => void }
 
 export default class StartMenu extends Component<Props> {
     Startmenu = createRef() as RefObject<HTMLDivElement>;
@@ -70,9 +71,9 @@ export default class StartMenu extends Component<Props> {
                         </div>
                     </div>
 
-                    <div className="startmenu__footer__button v-center">
+                    <div onClick={() => this.props.setEnvironment(TitleScreen)} className="startmenu__footer__button v-center">
                         <Image src="icons/shutdown.png" />
-                        <div>
+                        <div style={{pointerEvents: "none"}}>
                             <p className="v-center">Turn Off Computer</p>
                         </div>
                     </div>
