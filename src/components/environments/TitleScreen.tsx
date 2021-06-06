@@ -1,4 +1,4 @@
-import React, { Component, MouseEvent } from 'react'
+import React, { Component, createRef, MouseEvent, RefObject } from 'react'
 import Typed from 'react-typed'
 
 import '../../styles/environments/TitleScreen.scss';
@@ -7,7 +7,17 @@ import Desktop from './Desktop';
 import GameSave from '../../scripts/SaveManager'
 import ListSave from '../ui/Save'
 
-export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>, production: boolean, setEnvironment: (env: any, save?: GameSave) => void}> {
+interface Props { 
+    Consumer: React.Consumer<{}>, 
+    production: boolean, 
+    setEnvironment: (env: any, save?: GameSave) => void
+}
+
+interface State {
+    showSaves: boolean
+}
+
+export default class TitleScreen extends Component<Props, State> {
     WallpaperElement = React.createRef<HTMLDivElement>();
     SoundObject = new Audio('./assets/audio/INTRO_MUSIC.mp3');
     IPC = window.require('electron').ipcRenderer;
@@ -17,9 +27,14 @@ export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>
 
         this.animateWallpaper = this.animateWallpaper.bind(this);
         this.handleAction = this.handleAction.bind(this);
+        this.handleSaveDelete = this.handleSaveDelete.bind(this);
 
         this.SoundObject.volume = 0.1;
         this.SoundObject.play();
+
+        this.state = {
+            showSaves: false
+        }
     }
 
     componentDidMount() {
@@ -43,34 +58,35 @@ export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>
             t.classList.remove("clicked");
         }, 1000);
     }
-    
+
     handleAction(e: MouseEvent<HTMLUListElement>) {
         const errorSound = new Audio('./assets/audio/UI_ERROR.mp3');
         const t = (e.target as HTMLElement);
         let save;
-        if(t.nodeName === "LI") {
-            switch(t.getAttribute("data-action")) {
-                case "devmode": 
+        if (t.nodeName === "LI") {
+            switch (t.getAttribute("data-action")) {
+                case "devmode":
                     this.props.setEnvironment(Desktop);
-                break;
+                    break;
                 case "newgame":
                     this.handleSaveLoad()
-                break;
+                    break;
                 case "loadgame":
-                    if(!GameSave.saveExists()) {
-                            errorSound.play();
-                            break;
+
+                    if (!GameSave.saveExists()) {
+                        errorSound.play();
+                        break;
                     }
-                    console.log(GameSave.saveExists());
-                    this.toggleGameSavesDisplay();
-                break;
+
+                    this.setState({ showSaves: !this.state.showSaves });
+                    break;
             }
         }
     }
 
     buttonHoverEffect(e: MouseEvent<HTMLUListElement>) {
         const t = (e.target as HTMLElement);
-        if(t.nodeName === "LI" && !t.classList.contains("seperator")) {
+        if (t.nodeName === "LI" && !t.classList.contains("seperator")) {
             const soundEffect = new Audio('./assets/audio/TITLE_BUTTON_HOVER.mp3');
             soundEffect.volume = 0.1;
             soundEffect.play();
@@ -88,7 +104,7 @@ export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>
     handleSaveDelete(id) {
         console.log(id)
         // If the save doesn't exist, it can't be deleted
-        if(!GameSave.saveExists(id)) return;
+        if (!GameSave.saveExists(id)) return;
         let save = new GameSave(id);
         save.delete();
         // Handle deleting the save element
@@ -96,13 +112,7 @@ export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>
         //while (saveElement.firstChild) { saveElement.removeChild(saveElement.firstChild);}
         saveElement.remove();
         // Check if there are any saves left, if not, close the save load menu
-        if(!GameSave.saveExists()) this.toggleGameSavesDisplay();
-    }
-
-    // Toggles the display of the game saves list
-    toggleGameSavesDisplay() {
-        const savesHolder = document.getElementById('gameSavesHolder');
-        savesHolder.style.display = savesHolder.style.display === 'grid' ? 'none' : 'grid';
+        if (!GameSave.saveExists()) this.setState({ showSaves: false });
     }
 
     render() {
@@ -119,23 +129,23 @@ export default class TitleScreen extends Component<{Consumer: React.Consumer<{}>
                             />
                         </h1>
                         <div ref={this.WallpaperElement} className="wallpaper render-as-pixels"></div>
-                        <div className="gamesaves" id="gameSavesHolder">
+                        <div style={{ display: this.state.showSaves ? "block" : "none"}} className="gamesaves" >
                             <ul className="savelist">
                                 {
                                     // There should never be two saves which are not consequtive
                                     GameSave.fetchAll().map((save: GameSave) => {
                                         // I'd prefer for id to be private, but any fetchId function I attempt to make just causes an error as though it doesn't exist upon 
-                                        return(<ListSave saveClick={() => this.handleSaveLoad(save.id)} deleteClick={() => this.handleSaveDelete(save.id)} save={save}></ListSave>)
+                                        return (<ListSave saveClick={() => this.handleSaveLoad(save.id)} deleteClick={() => this.handleSaveDelete(save.id)} save={save}></ListSave>)
                                     })
                                 }
                             </ul>
-                            <button onClick={this.toggleGameSavesDisplay} className="cancel">Cancel</button>
+                            <button onClick={() => this.setState({ showSaves: true })} className="cancel">Cancel</button>
                         </div>
                         <ul onMouseOver={this.buttonHoverEffect} onClick={this.handleAction}>
                             <this.props.Consumer>
                                 {(data: ConfigTypes) => !data.production ? (
                                     <>
-                                        <li data-action="devmode" style={{color: "red"}}>developer mode</li>
+                                        <li data-action="devmode" style={{ color: "red" }}>developer mode</li>
                                         <li className="seperator"></li>
                                     </>
                                 ) : ""}
