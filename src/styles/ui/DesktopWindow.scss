@@ -36,7 +36,7 @@
 
         &-inner {
             display: grid;
-            grid-template-columns: 16px auto 8rem;
+            grid-template-columns: 16px minmax(0, calc(100% - 5rem - 16px)) 5rem;
             grid-column-gap: 0.5rem;
         }
 
@@ -46,6 +46,10 @@
             transform: translateY(-50%);
             font-size: 1.3rem;
             display: inline-block;
+            white-space: nowrap;
+            max-width: 100%;
+            text-overflow: ellipsis;
+            overflow: hidden;
         }
 
         &__icon {

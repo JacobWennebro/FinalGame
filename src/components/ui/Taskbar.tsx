@@ -34,7 +34,7 @@ export default class Taskbar extends Component<Props, State> {
         return (
             <div className="taskbar">
                 
-                <StartMenu setEnvironment={this.props.setEnvironment} apps={this.props.apps} slowOpenApp={this.props.openApp}/>
+                <StartMenu setEnvironment={this.props.setEnvironment} apps={this.props.apps} slowOpenApp={this.props.slowOpenApp}/>
 
                 <button onClick={this.ToggleStartMenuDisplayState} className="taskbar__start__button text-style-1">Start</button>
                 
