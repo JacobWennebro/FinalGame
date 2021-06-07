@@ -110,10 +110,9 @@ export default class TitleScreen extends Component<Props, State> {
         save.delete();
         // Handle deleting the save element
         let saveElement = document.getElementById(`save_${id}`);
-        saveElement.remove();
+        saveElement.style.display = "none";
         // Check if there are any saves left, if not, close the save load menu
         if (!GameSave.saveExists()) this.setState({ showSaves: false });
-        else this.setState({ showSaves: true });
     }
 
     render() {
