@@ -25,7 +25,9 @@ class GameSave {
             this.createdAt = save.createdAt;
             this.events = save.events;
         } else {
-            this.id = SaveObject.length;
+            let curId = SaveObject.length;
+            while(GameSave.saveExists(curId)) curId++;
+            this.id = curId;
             SaveObject.push(this);
             this.createdAt = new Date().getTime();
             this.lastUpdated = this.createdAt;
@@ -70,14 +72,9 @@ class GameSave {
     }
 
     delete() {
-        const SaveObject = localStorage.saves ? JSON.parse(localStorage.saves) : [];
-        SaveObject.splice(this.id, 1);
-        // Reset save ids
-        SaveObject.forEach((save, index) => {
-            save.id = index;
-        })
+        let SaveObject = localStorage.saves ? JSON.parse(localStorage.saves) : [];
+        SaveObject = SaveObject.map(save => save.id !== this.id);
         localStorage.saves = JSON.stringify(SaveObject);
-        
     }
 
     addEvent(event_id: string) {
