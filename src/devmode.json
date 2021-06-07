@@ -1,8 +1,8 @@
 {
-    "titleScreen": true,
+    "titleScreen": false,
     "defaultSave": 0,
     "appDebugger": {
-        "enabled": false,
+        "enabled": true,
         "app":"app.browser"
     }
 }

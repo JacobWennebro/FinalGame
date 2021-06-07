@@ -61,11 +61,20 @@ body[full-width] .tube-player.fullscreen .tube-player__wrapper
                     width: 95%;
                     margin: auto;
                     background-color: rgba(0,0,0,0.1);
+
+                    &__buffer {
+                        position: absolute;
+                        left: 0;
+                        height: 100%;
+                        background: rgba(255, 118, 117, 0.5);
+                        width: 0%;
+                    }
+
                     &__progress {
                         width: 0%;
                         height: 100%;
                         background-color: #EB1D1D;
-                        position: relative;
+                        position: absolute;
 
                         &[data-progress="0"]:after {
                             transform: translateY(-50%) translateX(14px) !important;

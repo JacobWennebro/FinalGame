@@ -8,7 +8,7 @@ export default class Sandbox extends Component {
         return (
             <div style={{padding:"1rem"}}>
 
-                <VideoPlayer src="https://www.w3schools.com/html/mov_bbb.mp4"/>
+                <VideoPlayer src="happy-birthday.mp4"/>
 
             </div>
         )

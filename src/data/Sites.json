@@ -42,7 +42,8 @@
         "url":"mytube.com",
         "secure": true,
         "paths": [
-            "video/bunny"
+            "video/bunny",
+            "video/bike"
         ]
     },
     {

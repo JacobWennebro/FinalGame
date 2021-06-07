@@ -7,9 +7,9 @@ import NotFound from '../../notfound/pages';
 import ReactStars from 'react-stars';
 import Comment from '../components/Comment';
 import Image from '../../../ui/Image';
+import RelatedVideo from '../components/RelatedVideo'
 
 export default class video extends Component<{ path: string, redirect: (url: string) => void, exists: boolean, site: string, production: boolean, time: number }> {
-    shouldComponentUpdate() { return false }
     months = [
         "January",
         "February",
@@ -25,10 +25,17 @@ export default class video extends Component<{ path: string, redirect: (url: str
         "December"
     ]
 
+    shuffleArray(a) {
+        for (let i = a.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [a[i], a[j]] = [a[j], a[i]];
+        }
+        return a;
+    }
+
     render() {
         const video = Videos.find(v => v.id === this.props.path.split("/")[1]);
         const author = Users.find(u => u.username === video.author);
-
         if (video && author) {
             return (
                 <Layout redirect={this.props.redirect}>
@@ -70,21 +77,26 @@ export default class video extends Component<{ path: string, redirect: (url: str
                                     <div className="channel render-as-pixels">
                                         <Image src={`images/avatars/${author.avatar}`} />
                                         <div className="channel__info">
-                                            <h3 className="hoverable" data-link={`myface.com/user/${author.username}`} onClick={() => this.props.redirect ? this.props.redirect(`myface.com/user/${author.username}`) : ""}>{author.username}</h3>
+                                            <h3 className="hoverable link" data-link={`myface.com/user/${author.username}`} onClick={() => this.props.redirect ? this.props.redirect(`myface.com/user/${author.username}`) : ""}>{author.username}</h3>
                                             <p>{video.day} {this.months[video.month]}</p>
                                             <p>{video.year}</p>
                                         </div>
                                     </div>
                                     <p>{video.description}</p>
                                     <hr />
-                                    <span>URL: </span><input onClick={e => e.currentTarget.select()} value={`https://mytube.com/video/${video.id}`} />
+                                    <span>URL: </span><input readOnly onClick={e => e.currentTarget.select()} value={`https://mytube.com/video/${video.id}`} />
                                     <br />
                                     <br />
-                                    <span>MyFace Profile: </span><input onClick={e => e.currentTarget.select()} value={`https://myface.com/user/${author.username}`} />
+                                    <span>MyFace Profile: </span><input readOnly onClick={e => e.currentTarget.select()} value={`https://myface.com/user/${author.username}`} />
                                 </div>
                                             
                                 <div className="video__related">
                                     <h3>Related Videos</h3>
+                                    <div className="video__related__videos">
+                                        {this.shuffleArray(Videos).filter(v => v.id !== video.id).splice(0, 5).map(v => (
+                                            <RelatedVideo key={v.id} redirect={this.props.redirect} title={v.title} file={v.file} author={v.author} id={v.id}/>
+                                        ))}
+                                    </div>
                                 </div>
 
                             </div>
