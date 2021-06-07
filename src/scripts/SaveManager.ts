@@ -16,11 +16,11 @@ class GameSave {
     public constants: any;
 
     constructor(id?: number) {
-        const SaveObject: GameSave[] = localStorage.saves ? JSON.parse(localStorage.saves) : [];
+        let SaveObject: GameSave[] = localStorage.saves ? JSON.parse(localStorage.saves) : [];
 
-        if(id != undefined) {
+        if(id != undefined && GameSave.saveExists(id)) {
             this.id = id;
-            const save = SaveObject[id];
+            const save = SaveObject.find(save => save.id === id);
             this.constants = save.constants;
             this.createdAt = save.createdAt;
             this.events = save.events;
@@ -36,6 +36,8 @@ class GameSave {
             // All constants must be declared here for a default value, even settings.
             this.constants = defaultConstants;
 
+            // Sort the saves
+            SaveObject = SaveObject.sort((a, b) => a.id - b.id);
             localStorage.saves = JSON.stringify(SaveObject);
         }
     }
@@ -73,7 +75,9 @@ class GameSave {
 
     delete() {
         let SaveObject = localStorage.saves ? JSON.parse(localStorage.saves) : [];
-        SaveObject = SaveObject.map(save => save.id !== this.id);
+        SaveObject.splice(SaveObject.findIndex(save => save.id === this.id), 1);
+        // Sort the saves
+        SaveObject = SaveObject.sort((a, b) => a.id - b.id);
         localStorage.saves = JSON.stringify(SaveObject);
     }
 
