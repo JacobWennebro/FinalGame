@@ -14,7 +14,8 @@ interface Props {
 }
 
 interface State {
-    showSaves: boolean
+    showSaves: boolean,
+    saveCount: number
 }
 
 export default class TitleScreen extends Component<Props, State> {
@@ -33,7 +34,8 @@ export default class TitleScreen extends Component<Props, State> {
         this.SoundObject.play();
 
         this.state = {
-            showSaves: false
+            showSaves: false,
+            saveCount: GameSave.fetchAll().length
         }
     }
 
@@ -110,9 +112,12 @@ export default class TitleScreen extends Component<Props, State> {
         save.delete();
         // Handle deleting the save element
         let saveElement = document.getElementById(`save_${id}`);
-        saveElement.style.display = "none";
         // Check if there are any saves left, if not, close the save load menu
-        if (!GameSave.saveExists()) this.setState({ showSaves: false });
+        if (!GameSave.saveExists()) this.setState({ showSaves: false, saveCount: 0 })
+        else this.setState({
+            showSaves: this.state.showSaves,
+            saveCount: this.state.saveCount - 1
+        });
     }
 
     render() {
