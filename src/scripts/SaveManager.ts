@@ -18,13 +18,26 @@ class GameSave {
     constructor(id?: number) {
         let SaveObject: GameSave[] = localStorage.saves ? JSON.parse(localStorage.saves) : [];
 
-        if(id != undefined && GameSave.saveExists(id)) {
+        if(id != undefined && GameSave.saveExists(id)) { // If the id is passed and the save exists
             this.id = id;
             const save = SaveObject.find(save => save.id === id);
             this.constants = save.constants;
             this.createdAt = save.createdAt;
             this.events = save.events;
-        } else {
+        } else if(id != undefined) { // If the id is passed and the save does not exist
+            this.id = id;
+            SaveObject.push(this);
+            this.createdAt = new Date().getTime();
+            this.lastUpdated = this.createdAt;
+            this.events = [];
+
+            // All constants must be declared here for a default value, even settings.
+            this.constants = defaultConstants;
+
+            // Sort the saves
+            SaveObject = SaveObject.sort((a, b) => a.id - b.id);
+            localStorage.saves = JSON.stringify(SaveObject);
+        } else { // If no id is passed
             let curId = SaveObject.length;
             while(GameSave.saveExists(curId)) curId++;
             this.id = curId;
