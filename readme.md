@@ -11,7 +11,7 @@
 
 ## Team & contributors
 
-* **Developer**
+* **Developers**
 	* Jacob Wennebro **(Project lead)**
 	* Alexander Resurreccion
 * **Design artists**
