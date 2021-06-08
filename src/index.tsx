@@ -35,7 +35,7 @@ const App = () => {
     process.env.PRODUCTION = ipc.sendSync("retrieve-data", "isPackaged");
 
     const [state, setState] = useState({
-        save: typeof Devmode.defaultSave !== "undefined" ? new GameSave(Devmode.defaultSave) : null,
+        save: typeof Devmode.defaultSave !== "undefined" && Devmode.defaultSave !== null ? new GameSave(Devmode.defaultSave) : null,
         computer_username: os.userInfo().username,
         desktop_config: DesktopConfig,
         production: process.env.PRODUCTION === "true",
