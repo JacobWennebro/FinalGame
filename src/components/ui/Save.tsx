@@ -1,7 +1,7 @@
 import React, { Component, HtmlHTMLAttributes, LegacyRef, RefObject } from 'react'
 import GameSave from '../../scripts/SaveManager'
 
-export default class extends Component<{ save: GameSave, saveClick: any, deleteClick: any }> {
+export default class extends Component<{ save: GameSave, saveClick: () => void, deleteClick: () => void }> {
     render() {
         return (
             <li id={`save_${this.props.save.id}`} className="listelement">
