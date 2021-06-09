@@ -62,7 +62,7 @@ class GameSave {
 
         console.log(this.id);
 
-        SaveObject[this.id] = this;
+        SaveObject[SaveObject.findIndex(save => save.id === this.id)] = this;
 
         console.log(SaveObject);
         localStorage.saves = JSON.stringify(SaveObject);
