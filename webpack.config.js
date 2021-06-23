@@ -37,7 +37,7 @@ module.exports = (env, argv) => {
             rules: [
                 {
                     test: /\.tsx?$/,
-                    exclude: /node_modules/,
+                    exclude: /.*node_modules.*/,
                     loader: require.resolve("babel-loader"),
                 },
                 {
@@ -59,5 +59,8 @@ module.exports = (env, argv) => {
                 }
             ],
         },
+        watchOptions: {
+            ignored: /.*node_modules.*/,
+          },
     };
 }

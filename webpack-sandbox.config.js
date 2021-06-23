@@ -59,5 +59,8 @@ module.exports = (env, argv) => {
                 }
             ],
         },
+        watchOptions: {
+            ignored: /node_modules.{0,}/,
+          },
     };
 }
