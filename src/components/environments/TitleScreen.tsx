@@ -150,14 +150,6 @@ export default class TitleScreen extends Component<Props, State> {
                             <button onClick={() => this.setState({ showSaves: false })} className="cancel cursor-pointer">Cancel</button>
                         </div>
                         <ul className="start-options" onMouseOver={this.buttonHoverEffect} onClick={this.handleAction}>
-                            <this.props.Consumer>
-                                {(data: ConfigTypes) => !data.production ? (
-                                    <>
-                                        <li className="cursor-pointer" data-action="devmode" style={{ color: "red" }}>developer mode</li>
-                                        <li className="seperator"></li>
-                                    </>
-                                ) : ""}
-                            </this.props.Consumer>
                             <li className="cursor-pointer" data-action="newgame">new game</li>
                             <li className="seperator"></li>
                             <li className="cursor-pointer" data-action="loadgame">load game</li>
