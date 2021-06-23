@@ -64,14 +64,14 @@ export default class StartMenu extends Component<Props> {
                 </div>
                 <div className="startmenu__footer">
 
-                    <div className="startmenu__footer__button v-center">
+                    <div onClick={() => this.props.setEnvironment(TitleScreen)} className="startmenu__footer__button v-center">
                         <Image src="icons/logoff-key.png" />
-                        <div>
+                        <div style={{pointerEvents: "none"}}>
                             <p className="v-center">Log off</p>
                         </div>
                     </div>
 
-                    <div onClick={() => this.props.setEnvironment(TitleScreen)} className="startmenu__footer__button v-center">
+                    <div onClick={() => window.close()} className="startmenu__footer__button v-center">
                         <Image src="icons/shutdown.png" />
                         <div style={{pointerEvents: "none"}}>
                             <p className="v-center">Turn Off Computer</p>
