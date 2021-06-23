@@ -82,6 +82,9 @@ export default class TitleScreen extends Component<Props, State> {
 
                     this.setState({ showSaves: !this.state.showSaves });
                     break;
+                case "exitgame":
+                    window.close();
+                    break;
                 break;
             }
         }
@@ -158,6 +161,8 @@ export default class TitleScreen extends Component<Props, State> {
                             <li className="cursor-pointer" data-action="newgame">new game</li>
                             <li className="seperator"></li>
                             <li className="cursor-pointer" data-action="loadgame">load game</li>
+                            <li className="seperator"></li>
+                            <li className="cursor-pointer" data-action="exitgame">exit game</li>
                             <li className="seperator"></li>
                             <li className="cursor-pointer" data-action="credits">credits</li>
                         </ul>
