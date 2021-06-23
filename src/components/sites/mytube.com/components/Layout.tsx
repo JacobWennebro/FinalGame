@@ -7,7 +7,7 @@ export default class Layout extends Component<{redirect: (url: string) => void}>
             <div className="webpage mytube">
                 <header>
                     <div className="margin">
-                        <h1 className="hoverable" data-link={"videosite.com"} onClick={() => this.props.redirect("videosite.com")}>VideoSite.com</h1>
+                        <h1 className="hoverable" data-link={"mytube.com"} onClick={() => this.props.redirect("mytube.com")}>My<span data-link={"mytube.com"} onClick={() => this.props.redirect("mytube.com")} className="heading-filled hoverable">Tube</span></h1>
                         <ul className="v-center">
                             <li className="hoverable" onClick={() => this.props.redirect("myface.com")}>Feed</li>
                             <li className="hoverable" data-link={"myface.com"} onClick={() => this.props.redirect("myface.com")}>MyFace</li>

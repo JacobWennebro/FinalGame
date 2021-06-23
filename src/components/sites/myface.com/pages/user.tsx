@@ -6,9 +6,8 @@ import NotFound from '../../notfound/pages';
 
 export default class user extends Component<{path: string, redirect: (url: string) => void, exists: boolean, site: string, production: boolean, time: number}, {username: string}> {
     render() {
-        const search = Users.filter(u => u.username === this.props.path.split("/")[1]);
-        if(search.length > 0) {
-            const user = search[0];
+        const user = Users.find(u => u.username === this.props.path.split("/")[1]);
+        if(user) {
             return (
                 <Layout redirect={this.props.redirect}>
                     <Profile

@@ -1,10 +1,21 @@
+body[full-width] .tube-player .tube-player__wrapper,
+body[full-width] .tube-player.fullscreen .tube-player__wrapper
+{
+    width: 100% !important;
+}
+
 .tube-player {
     width: 100%;
     position: relative;
     user-select: none;
 
+    &.fullscreen .tube-player__wrapper {
+        width: 90% !important;
+    }
+
     &__wrapper {
         width: 100%;
+        margin: auto;
         display: grid;
         grid-template-rows: auto 30px;
     }
@@ -50,11 +61,20 @@
                     width: 95%;
                     margin: auto;
                     background-color: rgba(0,0,0,0.1);
+
+                    &__buffer {
+                        position: absolute;
+                        left: 0;
+                        height: 100%;
+                        background: rgba(255, 118, 117, 0.5);
+                        width: 0%;
+                    }
+
                     &__progress {
                         width: 0%;
                         height: 100%;
-                        background-color: rgba(255, 121, 121, 0.6);
-                        position: relative;
+                        background-color: #EB1D1D;
+                        position: absolute;
 
                         &[data-progress="0"]:after {
                             transform: translateY(-50%) translateX(14px) !important;
