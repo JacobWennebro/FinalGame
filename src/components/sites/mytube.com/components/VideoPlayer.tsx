@@ -58,10 +58,8 @@ export default class VideoPlayer extends Component<Props, State> {
 
     MetaDataEvent() {
         const v = this.Video.current;
-        const progressWidth = Number(this.InsideBar.current.style.width.replace("%", ""));
 
         if(v.currentTime == 0 && this.InsideBar.current.style.width) {
-            console.log("reee");
             this.setState({
                 percentage: 0,
                 bufferWidth: 0,
@@ -69,6 +67,8 @@ export default class VideoPlayer extends Component<Props, State> {
                 isPlaying: false,
                 currentTime: 0
             });
+
+            this.Buffer.current.style.width = "0%";
         }
 
         else this.setState({

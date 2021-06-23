@@ -48,7 +48,9 @@ export default function DesktopWindow(props: {
                 maxWidth: props.maxWidth || "100%",
                 maxHeight: props.maxHeight || "100%",
                 minWidth: props.minWidth || "50vw",
-                minHeight: props.maxHeight || "50vh"
+                minHeight: props.minHeight || "50vh",
+                width: props.minWidth || "50vw",
+                height: props.minHeight || "60vh"
             }}>
                 
                 <div className="app-window__bar">
