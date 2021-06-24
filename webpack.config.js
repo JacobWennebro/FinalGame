@@ -54,7 +54,7 @@ module.exports = (env, argv) => {
                     use: ["file-loader"]
                 },
                 {
-                    test: /\.gtml$/,
+                    test: /\.gsml$/,
                     use: 'raw-loader'
                 }
             ],

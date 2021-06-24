@@ -1,15 +1,9 @@
 [
     {
-        "url":"html.com",
+        "url":"pokeranimals.com",
         "secure": true,
         "html": true,
         "paths": []
-    },
-    {
-        "url":"armsdealing.com",
-        "secure": false,
-        "html": true,
-        "paths":[]
     },
     {
         "url":"example.com",
@@ -17,25 +11,14 @@
         "paths": []
     },
     {
-        "url":"jacob.com",
-        "secure": true,
-        "paths": [
-            "test"
-        ]
-    },
-    {
         "url":"myface.com",
         "secure": true,
         "paths": [
             "user",
-            "user/jw",
             "user/mayacooper89",
             "user/fishermanpat",
             "user/tj945",
-            "user/brokenadmin",
-            "user/sebhughes88",
-            "user/tinalol00",
-            "user/gizmonster01"
+            "user/sebhughes88"
         ]
     },
     {
