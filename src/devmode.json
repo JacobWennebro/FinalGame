@@ -2,7 +2,7 @@
     "titleScreen": true,
     "defaultSave": null,
     "appDebugger": {
-        "enabled": true,
-        "app":"app.browser"
+        "enabled": false,
+        "app":"app.themesettings"
     }
 }

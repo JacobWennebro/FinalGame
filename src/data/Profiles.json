@@ -1,0 +1,67 @@
+[
+    {
+        "name":"Sebastian Hughes",
+        "gender":"male",
+        "age": 18,
+        "myface": {
+            "username":"sebhughes88",
+            "town":"Pittsburgh",
+            "state":"Pennsylvania",
+            "country":"United States",
+            "biography":"loves music idfk",
+            "avatar":"sebastian.png",
+            "online": true
+        },
+        "jim": {
+            "username":"sebhughes88"
+        }
+    },
+    {
+        "name":"Maya Cooper",
+        "gender":"female",
+        "age": 19,
+        "myface": {
+            "username":"mayacooper89",
+            "town":"Pittsburgh",
+            "state":"Pennsylvania",
+            "country":"United States",
+            "biography":"Hello",
+            "avatar":"maya.png",
+            "online": false
+        },
+        "jim": {
+            "username":"mayacooper89"
+        }
+    },
+    {
+        "name":"Patrick Marley",
+        "gender":"male",
+        "age": 46,
+        "myface": {
+            "username":"fishermanpat",
+            "town":"Pittsburgh",
+            "state":"Pennsylvania",
+            "country":"United States",
+            "biography":"fish fish fish",
+            "avatar":"patrick.png",
+            "online": false
+        }
+    },
+    {
+        "name":"Tj Marley",
+        "gender":"male",
+        "age": 19,
+        "myface": {
+            "username":"tj945",
+            "town":"Pittsburgh",
+            "state":"Pennsylvania",
+            "country":"United States",
+            "biography":"im epic",
+            "avatar":"patrick.png",
+            "online": false
+        },
+        "jim": {
+            "username":"tj945"
+        }
+    }
+]

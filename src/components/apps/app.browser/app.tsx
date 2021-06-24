@@ -5,7 +5,6 @@ import Sites from '../../../data/Sites.json'
 import Bar from './Bar'
 
 interface state {
-    link_descriptor: string
     active_sublink: string
     active_url: string
     htmlpage: any
@@ -17,6 +16,7 @@ const default_sublink = "user/sebhughes88";
 export default class app extends Component<{Consumer: Consumer<{}>}, state> {
     spanInputElement = createRef<HTMLSpanElement>();
     inputElement: HTMLSpanElement
+    linkDescriptor = createRef<HTMLSpanElement>();
 
     constructor(props) {
         super(props);
@@ -27,7 +27,6 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
         this.redirect = this.redirect.bind(this);
 
         this.state = {
-            link_descriptor: undefined,
             active_url: default_url,
             active_sublink: default_sublink,
             htmlpage: "fallback"
@@ -93,8 +92,8 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
 
     LinkDescriptor(e: MouseEvent<HTMLDivElement>) {
         const link = (e.target as HTMLElement).getAttribute("data-link");
-        if(link) this.setState({ link_descriptor: link });
-        else if(this.state.link_descriptor != undefined) this.setState({ link_descriptor: undefined });
+        if(link) this.linkDescriptor.current.innerText = link;
+        else this.linkDescriptor.current.innerText = "";
     }
 
     render() {
@@ -109,7 +108,7 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
                             )}
                         </this.props.Consumer>
                         <div className="link-descriptor">
-                            <span>{this.state.link_descriptor}</span>
+                            <span ref={this.linkDescriptor}></span>
                         </div>
                     </div>
                 </div>

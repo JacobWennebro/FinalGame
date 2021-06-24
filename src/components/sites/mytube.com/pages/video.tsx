@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Layout from '../../mytube.com/components/Layout'
 import VideoPlayer from '../components/VideoPlayer'
 import Videos from '../../../../data/Videos.json'
-import Users from '../../../../data/MyFaceUsers.json'
+import Users from '../../../../data/Profiles.json'
 import NotFound from '../../notfound/pages';
 import ReactStars from 'react-stars';
 import Comment from '../components/Comment';
@@ -35,7 +35,7 @@ export default class video extends Component<{ path: string, redirect: (url: str
 
     render() {
         const video = Videos.find(v => v.id === this.props.path.split("/")[1]);
-        const author = Users.find(u => u.username === video.author);
+        const author = Users.find(u => u.myface.username === video.author).myface;
         if (video && author) {
             return (
                 <Layout redirect={this.props.redirect}>

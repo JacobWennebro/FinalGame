@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Image from '../../../ui/Image'
-import Users from '../../../../data/MyFaceUsers.json'
+import Users from '../../../../data/Profiles.json'
 
 interface Props {
     user: string;
@@ -10,7 +10,7 @@ interface Props {
 
 export default class Comment extends Component<Props> {
     render() {
-        const user = Users.find(u => u.username === this.props.user);
+        const user = Users.find(u => u.myface.username === this.props.user).myface;
         if(user) return (
                 <div className="comment render-as-pixels">
                     <div className="hoverable" data-link={`myface.com/user/${user.username}`} onClick={() => this.props.redirect ? this.props.redirect(`myface.com/user/${user.username}`) : ""}>

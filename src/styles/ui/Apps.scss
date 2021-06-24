@@ -269,19 +269,27 @@
     }
 
     &#themesettings {
-        .themes {
+        display: grid;
+        grid-template-columns: 50% 50%;
+        overflow: auto !important;
+        .themes, .wallpapers {
             width: 90%;
-            margin: auto;
+            margin: 1rem auto;
+
+            h2 {
+                font-weight: 100;
+                margin-bottom: 0.5rem;
+            }
 
             &__grid {
                 display: grid;
-                grid-template-columns: repeat(4, auto);
-                height: 50px;
+                grid-template-columns: repeat(2, auto);
                 grid-gap: 2px;
 
-                .theme {
+                .theme, .wallpaper {
                     background-color: gray;
                     display: inline-block;
+                    height: 50px;
 
                     &:hover {
                         outline: 2px solid var(--secondary);

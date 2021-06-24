@@ -15,6 +15,10 @@ export default class app extends Component<{save: GameSave}> {
         if(theme) document.body.setAttribute("theme", theme);
     }
 
+    applyWallpaper(e: MouseEvent<HTMLDivElement>) {
+
+    }
+
     render() {
         return (
             <div className="app" id="themesettings">
@@ -27,6 +31,18 @@ export default class app extends Component<{save: GameSave}> {
                         <div onClick={this.applyTheme} className="theme" data-theme="red"></div>
                         <div onClick={this.applyTheme} className="theme" data-theme="green"></div>
                         <div onClick={this.applyTheme} className="theme" data-theme="pink"></div>
+                    </div>
+                </div>
+
+                <div className="wallpapers">
+                    <h2>Wallpaper</h2>
+                    <div className="wallpapers__grid">
+                        <div onClick={this.applyWallpaper} className="wallpaper"></div>
+                        <div onClick={this.applyWallpaper} className="wallpaper"></div>
+                        <div onClick={this.applyWallpaper} className="wallpaper"></div>
+                        <div onClick={this.applyWallpaper} className="wallpaper"></div>
+                        <div onClick={this.applyWallpaper} className="wallpaper"></div>
+                        <div onClick={this.applyWallpaper} className="wallpaper"></div>
                     </div>
                 </div>
 
