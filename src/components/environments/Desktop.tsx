@@ -11,6 +11,7 @@ import Browser from '../apps/app.browser/app'
 import Controlpanel from '../apps/app.controlpanel/app'
 import ThemeSettings from '../apps/app.themesettings/app'
 import Messenger from '../apps/app.messenger/app'
+import DemoApp from '../apps/app.demointerface/app'
 
 import HelpMonkey from '../ui/HelpMonkey';
 import FormatTime from '../../scripts/FormatTime';
@@ -102,6 +103,12 @@ export default class Desktop extends Component<props, state> {
                 },
                 "app.themesettings": {
                     content: (<ThemeSettings save={this.props.save}/>),
+                    active: false,
+                    visible: true,
+                    notifications: 0
+                },
+                "app.demointerface": {
+                    content: (<DemoApp/>),
                     active: false,
                     visible: true,
                     notifications: 0
@@ -304,7 +311,6 @@ export default class Desktop extends Component<props, state> {
             <this.props.Consumer>
                 {(data: ConfigTypes) => (
                     <div onMouseDown={this.DesktopClickEvent} className="desktop">
-
                         
                         {   /* Save Manager is only accessible when dev/debug mode is enabled. */
                             this.state.show_save_manager ? (<SaveManager save={this.props.save}/>) : ""

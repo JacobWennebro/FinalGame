@@ -9,6 +9,7 @@
     <main class="pokeranimals">
         <h1>Hello world</h1>
         <img source="picture.png"/>
+        
     </main>
 
 </gsml>

@@ -1,6 +1,7 @@
 {
     "titleScreen": false,
     "defaultSave": 0,
+    "demoInterface": true,
     "appDebugger": {
         "enabled": true,
         "app":"app.browser"

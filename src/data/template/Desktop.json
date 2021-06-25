@@ -57,6 +57,17 @@
             "minHeight":"30vh",
             "maxHeight":"30vh",
             "fullscreen": false
+        },
+        {
+            "title": "Demo Feedback",
+            "icon": "developer.png",
+            "id": "app.demointerface",
+            "show": true,
+            "maxWidth":"20vw",
+            "minWidth":"30vw",
+            "minHeight":"70vh",
+            "maxHeight":"30vh",
+            "fullscreen": false
         }
     ],
     "active_apps": [
