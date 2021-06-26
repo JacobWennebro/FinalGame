@@ -5,7 +5,7 @@
     height: 2.5rem;
     background: var(--gradient);
     display: grid;
-    grid-template-columns: 8rem auto 5rem;
+    grid-template-columns: 8rem auto 8rem;
 
     &__start__button {
         font-family: VT323;
@@ -55,14 +55,42 @@
         }
     }
 
-    &__time {
+    &__tray {
         background: rgba(255, 255, 255, 0.2);
         border-left: 1px solid var(--primary);
         color: #FFF;
-        text-align: center;
-        span {
-            display: block;
+        text-align: right;
+        display: grid;
+        grid-template-columns: auto auto;
+
+        &__icons .icon {
+            display: inline-block;
+            width: 24px;
+            height: 24px;
+            vertical-align: middle;
+            margin: 0 0.5rem;
+            padding: 0 0.2rem;
+            height: 100%;
+            box-sizing: content-box;
+            &:hover {
+                background-color: rgba(0,0,0,0.1);
+                cursor: $cr-pointer;
+            }
+            img {
+                width: 100%;
+                height: auto;
+            }
         }
+
+        &__time {
+            text-align: center;
+            span {
+                margin-right: 1rem;
+                display: block;
+                width: 100%;
+            }
+        }
+
     }
 
 }

@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import FormatTime from '../../scripts/FormatTime';
-import { App } from '../../types/ContextData';
-import StartMenu from './StartMenu';
+import FormatTime from '../../scripts/FormatTime'
+import { App } from '../../types/ContextData'
+import StartMenu from './StartMenu'
 import TaskbarApp from './TaskbarApp'
+import TrayIcon from './TrayIcon'
 
 interface Props { 
     active_apps: any, 
@@ -47,8 +48,15 @@ export default class Taskbar extends Component<Props, State> {
                     })}
                 </div>
     
-                <div className="taskbar__time">
-                    <span className="v-center">{FormatTime(this.props.time)}</span>
+                <div className="taskbar__tray">
+                    <div className="taskbar__tray__icons">
+                        
+                        <TrayIcon icon="wifi.png"/>
+
+                    </div>
+                    <div className="taskbar__tray__time">
+                        <span className="v-center">{FormatTime(this.props.time)}</span>
+                    </div>
                 </div>
             </div>
         )
