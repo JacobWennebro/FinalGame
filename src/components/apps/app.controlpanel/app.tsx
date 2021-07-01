@@ -1,5 +1,6 @@
 import React, { ChangeEvent, Component, MouseEvent } from 'react'
-import GameSave from '../../../scripts/SaveManager';
+import GameSave from '../../../scripts/SaveManager'
+import Category from './Category'
 
 interface Setting {
     id: string,
@@ -48,13 +49,14 @@ export default class app extends Component<{ save: GameSave }, SettingsState> {
         if (setting.onUpdate) setting.onUpdate(newValue);
     }
 
-    render() {
-        // Settings work, but the values in the settings menu are not persistent due to an issue with me not
-        // understanding how to write dynamic attributes into JSX.
-        // Meaning the you can set your click make sound, and it will next time the save is loaded.
-        // But when you open the settings app it will reset this value to false, because the values are not persistent
-        // MAJOR TODO:
+    selectCategory(id?: string) {
+        if(!id) return;
 
+        console.log(id);
+
+    }
+
+    render() {
         return (
             <div className="app" id="controlpanel">
                 <div className="controlpanel__sidebar">
@@ -79,7 +81,16 @@ export default class app extends Component<{ save: GameSave }, SettingsState> {
 
                 </div>
                 <div className="controlpanel__main">
-                    <h1>Pick a category</h1>
+                    <h1 className="text-style-1">Pick a category</h1>
+                    
+                    <div className="controlpanel__main__categories render-as-pixels">
+                        <Category onClick={() => this.selectCategory("personalize")} title={"Appearance and Themes"} icon="personalize.png"/>
+                        <Category onClick={() => this.selectCategory()} title={"Network and Internet Connections"} icon="browser.png"/>
+                        <Category onClick={() => this.selectCategory()} title={"Accessibility Options"} icon="computer.png"/>
+                        <Category onClick={() => this.selectCategory()} title={"User Accounts"} icon="computer.png"/>
+                        <Category onClick={() => this.selectCategory()} title={"Security Center"} icon="security.png"/>
+                    </div>
+
                 </div>
             </div>
         )

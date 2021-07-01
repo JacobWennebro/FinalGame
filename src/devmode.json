@@ -3,6 +3,6 @@
     "defaultSave": null,
     "appDebugger": {
         "enabled": false,
-        "app":"app.themesettings"
+        "app":"app.controlpanel"
     }
 }

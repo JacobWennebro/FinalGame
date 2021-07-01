@@ -6,7 +6,10 @@
             "icon": "browser.png",
             "id": "app.browser",
             "show": true,
-            "fullscreen": true
+            "fullscreen": true,
+            "minWidth":"40vw",
+            "minHeight":"50vh",
+            "height": "60vh"
         },
         {
             "title": "JIM",
@@ -44,6 +47,10 @@
             "title": "ExperienceOS - Control Panel",
             "icon": "settings.png",
             "id": "app.controlpanel",
+            "maxWidth":"40vw",
+            "minWidth":"40vw",
+            "minHeight":"50vh",
+            "maxHeight":"50vh",
             "show": false,
             "fullscreen": false
         },
@@ -56,6 +63,15 @@
             "minWidth":"20vw",
             "minHeight":"30vh",
             "maxHeight":"30vh",
+            "fullscreen": false
+        },
+        {
+            "title": "System Restore",
+            "icon": "settings.png",
+            "id": "app.restoration",
+            "show": false,
+            "maxWidth":"20vw",
+            "minWidth":"20vw",
             "fullscreen": false
         }
     ],
