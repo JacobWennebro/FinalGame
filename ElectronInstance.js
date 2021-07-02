@@ -82,6 +82,7 @@ app.on('ready', () => {
     const rpc = new DiscordRPC.Client({ transport: 'ipc' });
     const startTimestamp = new Date();
 
+    // Handle updating Discord rpc
     ipcMain.on("drpc", (event, arg) => {
         
         rpc.setActivity({

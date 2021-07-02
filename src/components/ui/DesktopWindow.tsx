@@ -29,6 +29,7 @@ export default function DesktopWindow(props: {
 
     function toggleZIndex(title: string) {
 
+        // Send Discord RPC update
         IPC.sendSync("drpc", {
             largeImageKey: 'monkey',
             smallImageKey: title.toLowerCase(),
