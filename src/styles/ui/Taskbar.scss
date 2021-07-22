@@ -38,6 +38,11 @@
             background: rgba(0, 0, 0, 0.1);
             padding: 0 0.5rem;
 
+            img {
+                width: 16px;
+                height: 16px;
+            }
+
             &:not(:last-child) {
                 border-right: rgba(0, 0, 0, 0.2) 1px solid;
             }

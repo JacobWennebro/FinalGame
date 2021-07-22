@@ -2,7 +2,7 @@
     "titleScreen": false,
     "defaultSave": 0,
     "appDebugger": {
-        "enabled": true,
-        "app":"app.browser"
+        "enabled": false,
+        "app":"app.controlpanel"
     }
 }

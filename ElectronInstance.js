@@ -82,13 +82,23 @@ app.on('ready', () => {
     const rpc = new DiscordRPC.Client({ transport: 'ipc' });
     const startTimestamp = new Date();
 
+    // Handle updating Discord rpc
+    ipcMain.on("drpc", (event, arg) => {
+        
+        rpc.setActivity({
+            ...arg,
+            startTimestamp,
+            instance: false,
+        });
+
+        return event.returnValue = "a";
+    });
+
     async function setActivity() {
         if (!rpc || !w) {
             return;
         }
 
-        // You'll need to have snek_large and snek_small assets uploaded to
-        // https://discord.com/developers/applications/<application_id>/rich-presence/assets
         rpc.setActivity({
             startTimestamp,
             largeImageKey: 'monkey',
@@ -100,11 +110,6 @@ app.on('ready', () => {
 
     rpc.on('ready', () => {
         setActivity();
-
-        // activity can only be set every 15 seconds
-        setInterval(() => {
-            setActivity();
-        }, 15e3);
     });
 
     rpc.login({ clientId }).catch(console.error);
