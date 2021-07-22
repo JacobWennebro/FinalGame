@@ -1,4 +1,4 @@
-import React, { Component, KeyboardEvent, MouseEvent, Suspense, useState } from 'react'
+import React, { Component, MouseEvent } from 'react'
 import Taskbar from '../ui/Taskbar'
 
 import DesktopAppIcon from '../ui/DesktopAppIcon';
@@ -11,6 +11,7 @@ import Browser from '../apps/app.browser/app'
 import Controlpanel from '../apps/app.controlpanel/app'
 import ThemeSettings from '../apps/app.themesettings/app'
 import Messenger from '../apps/app.messenger/app'
+import Restoration from '../apps/app.restoration/app'
 
 import HelpMonkey from '../ui/HelpMonkey';
 import FormatTime from '../../scripts/FormatTime';
@@ -18,7 +19,6 @@ import devmode from '../../devmode.json';
 import ContextMenu from '../ui/ContextMenu';
 import GameSave from '../../scripts/SaveManager';
 import SaveManager from '../ui/SaveManagerInterface';
-import Ad from '../webcomponents/Ad';
 
 interface props {
     Consumer: React.Consumer<{}>
@@ -105,6 +105,12 @@ export default class Desktop extends Component<props, state> {
                     active: false,
                     visible: true,
                     notifications: 0
+                },
+                "app.restoration": {
+                    content: (<Restoration save={this.props.save}/>),
+                    active: false,
+                    visible: true,
+                    notifications: 0
                 }
             }
         }
@@ -118,11 +124,11 @@ export default class Desktop extends Component<props, state> {
         const clickSoundEffect = new Audio('./assets/audio/UI_MOUSE_CLICK.mp3');
         clickSoundEffect.volume = 0.1;
         
-        //const clickSoundSetting = this.props.save.getSetting("clickSound");
         // If setting is undefined - default is true - or the setting is set to true play click sound
         if(this.props.save && this.props.save.getSetting("clickSound")) clickSoundEffect.play();
 
         const startmenu = document.getElementById("startmenu");
+        
         // When the user clicks close the start menu
         // Unless the user is clicking inside the start menu or the start menu button
         if(startmenu.style.display === "grid" 
@@ -266,6 +272,13 @@ export default class Desktop extends Component<props, state> {
             if(this.props.save.getSetting("fullWidth")) document.body.setAttribute("full-width", "");
         }
 
+        /* Open up restoration prompt if it's the first time loading up the save */
+        if(!this.props.save.hasHappened("restorationPrompt")) {
+            this.openApp("app.restoration");
+            this.props.save.addEvent("restorationPrompt");
+        }
+
+
         /* Game System time speed */
         this.setState({ time_speed: 2000 });
 
@@ -332,6 +345,8 @@ export default class Desktop extends Component<props, state> {
                                         maxHeight={app.maxHeight}
                                         minWidth={app.minWidth}
                                         minHeight={app.minHeight}
+                                        height={app.height}
+                                        width={app.width}
                                         fullscreen={app.fullscreen}
                                         time={this.state.time}
                                     />

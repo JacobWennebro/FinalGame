@@ -17,14 +17,25 @@ export default function DesktopWindow(props: {
         minWidth?: string,
         maxHeight?: string,
         minHeight?: string,
+        height?: string,
+        width?: string,
         fullscreen: boolean,
         Consumer: Consumer<{}>
         time: number
     }) {
 
     const windowRef = useRef<HTMLDivElement>();
+    const IPC = window.require('electron').ipcRenderer;
 
-    function toggleZIndex() {
+    function toggleZIndex(title: string) {
+
+        // Send Discord RPC update
+        IPC.sendSync("drpc", {
+            largeImageKey: 'monkey',
+            smallImageKey: title.toLowerCase(),
+            smallImageText: `Using ${title}`,
+        });
+
         const allAppWindows = document.getElementsByClassName("app-window");
         for(let i=0; i < allAppWindows.length; i++) {
             const w = allAppWindows[i] as HTMLDivElement;
@@ -39,18 +50,18 @@ export default function DesktopWindow(props: {
         handle=".app-window__bar"
         defaultPosition={{x: props.x || 200, y: props.y || 200}}
         scale={1}
-        onStart={() => toggleZIndex()}
+        onStart={() => toggleZIndex(props.title)}
         bounds="parent"
         >
             <div ref={windowRef} className="app-window" window-title={props.title} style={{
                 visibility: props.visibility ? "visible" : "hidden",
                 zIndex: props.visibility ? 4 : 0,
-                maxWidth: props.maxWidth || "100%",
-                maxHeight: props.maxHeight || "100%",
-                minWidth: props.minWidth || "50vw",
-                minHeight: props.minHeight || "50vh",
-                width: props.minWidth || "50vw",
-                height: props.minHeight || "60vh"
+                maxWidth: props.maxWidth || "auto",
+                maxHeight: props.maxHeight || "auto",
+                minWidth: props.minWidth || "auto",
+                minHeight: props.minHeight || "auto",
+                width: props.width || "auto",
+                height: props.height || "auto"
             }}>
                 
                 <div className="app-window__bar">
