@@ -69,9 +69,36 @@ export default class app extends Component<{Consumer: Consumer<{}>}, state> {
         /* is html type site */
         if(targetSite && targetSite.html && targetSite.paths.includes(props.path)) {
 
-                /* Imports .gtml with raw-loader */
-                import(`../../sites/${site}/${props.path || "index"}.gtml`).then(html => {
-                    document.getElementById("htmlBrowserRender").innerHTML = html.default;
+                /* Imports .gsml with raw-loader */
+                import(`../../sites/${site}/${props.path || "index"}.gsml`).then(html => {
+                    const renderer = document.getElementById("htmlBrowserRender");
+                    const gsmlCSS = document.getElementById("gsmlCSS");
+                    const path = `./assets/gsml/${site}/`;
+
+                    if(gsmlCSS) gsmlCSS.remove();
+
+                    console.log(html.default);
+
+                    const parent = document.createElement("div");
+                    parent.innerHTML = html.default;
+
+                    const style = parent.querySelector("style");
+                    const body = parent.querySelector("main");
+
+                    style.id = "gsmlCSS";
+
+                    document.head.appendChild(style);
+                    
+                    for(const c of Array.from(body.classList)) {
+                        renderer.classList.add(c);                        
+                    }
+
+                    for(const img of Array.from(body.querySelectorAll("img"))) {
+                        img.src = path + img.getAttribute("source");
+                    }
+
+                    renderer.innerHTML = body.innerHTML;
+                    
                 }).catch(e => {
                     this.updateSite(targetSite.url, props.path);
                 });

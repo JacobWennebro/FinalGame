@@ -1,6 +1,6 @@
 {
-    "titleScreen": true,
-    "defaultSave": null,
+    "titleScreen": false,
+    "defaultSave": 0,
     "appDebugger": {
         "enabled": false,
         "app":"app.controlpanel"
