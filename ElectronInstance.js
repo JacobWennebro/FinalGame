@@ -1,6 +1,5 @@
 const electron = require('electron');
 const path = require('path');
-const DiscordRPC = require('discord-rpc');
 
 const { app, BrowserWindow, globalShortcut, ipcMain, session } = electron;
 
@@ -73,44 +72,4 @@ app.on('ready', () => {
         w.isFocused() && w.webContents.toggleDevTools();
     });
 
-    // Set this to your Client ID.
-    const clientId = '817335112856764436';
-
-    // Only needed if you want to use spectate, join, or ask to join
-    DiscordRPC.register(clientId);
-
-    const rpc = new DiscordRPC.Client({ transport: 'ipc' });
-    const startTimestamp = new Date();
-
-    // Handle updating Discord rpc
-    ipcMain.on("drpc", (event, arg) => {
-        
-        rpc.setActivity({
-            ...arg,
-            startTimestamp,
-            instance: false,
-        });
-
-        return event.returnValue = "a";
-    });
-
-    async function setActivity() {
-        if (!rpc || !w) {
-            return;
-        }
-
-        rpc.setActivity({
-            startTimestamp,
-            largeImageKey: 'monkey',
-            smallImageKey: 'notepad',
-            smallImageText: 'Using notepad',
-            instance: false,
-        });
-    }
-
-    rpc.on('ready', () => {
-        setActivity();
-    });
-
-    rpc.login({ clientId }).catch(console.error);
 });

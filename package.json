@@ -6,7 +6,6 @@
   "dependencies": {
     "@loadable/babel-plugin": "^5.13.2",
     "@loadable/component": "^5.14.1",
-    "discord-rpc": "^3.2.0",
     "electron-squirrel-startup": "^1.0.0",
     "gulp": "^4.0.2",
     "original-fs": "^1.1.0",
