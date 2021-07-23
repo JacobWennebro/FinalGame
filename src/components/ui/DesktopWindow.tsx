@@ -28,14 +28,7 @@ export default function DesktopWindow(props: {
     const IPC = window.require('electron').ipcRenderer;
 
     function toggleZIndex(title: string) {
-
-        // Send Discord RPC update
-        IPC.sendSync("drpc", {
-            largeImageKey: 'monkey',
-            smallImageKey: title.toLowerCase(),
-            smallImageText: `Using ${title}`,
-        });
-
+        
         const allAppWindows = document.getElementsByClassName("app-window");
         for(let i=0; i < allAppWindows.length; i++) {
             const w = allAppWindows[i] as HTMLDivElement;
