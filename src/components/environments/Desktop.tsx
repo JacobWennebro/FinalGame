@@ -170,7 +170,7 @@ export default class Desktop extends Component<props, state> {
 
             this.setState({ cxm: {
                 visibility: true,
-                x: e.clientX - (document.body.clientWidth > 1028 ? (document.body.clientWidth * 0.05) : 0),
+                x: e.clientX - (this.props.save.constants["setting_fullWidth"] ? 0 : (document.body.clientWidth * 0.05)),
                 y: e.clientY
             } });
 
