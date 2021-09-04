@@ -262,10 +262,97 @@
 
         .controlpanel__main {
             padding: 1rem;
+            
             h1 {
                 font-weight: 100;
                 font-size: 2.25rem;
                 margin-bottom: 1.5rem;
+            }
+
+            span#CpReset {
+                font-size: 1rem;
+                &:hover {
+                    text-decoration: underline;
+                    cursor: $cr-pointer;
+                }
+            }
+
+            hr {
+                margin: 0.5rem 0;
+                border-color: var(--secondary);
+            }
+
+            &__page {
+
+                &__view {
+                    &__section {
+                        margin-top: 1rem;
+
+                        &-title {
+                            font-size: 1.2rem;
+                            margin-bottom: 0.5rem;
+                            display: block;
+                        }
+
+                        section {
+                            padding: 0.5rem;
+                            background-color: var(--secondary);
+                            border-radius: 2px;
+                        }
+                    }
+
+                    &#personalize {
+                        .personalize-themes, .personalize-wallpapers {
+                            display: grid;
+                            grid-template-columns: repeat(5, auto);
+                            grid-gap: 2px;
+                            padding: 0.5rem;
+                            background-color: rgba(0,0,0,0.4);
+                            border-radius: 2px;
+
+                            .theme, .wallpaper {
+                                background-color: gray;
+                                display: inline-block;
+                                height: 50px;
+            
+                                &:hover {
+                                    outline: 2px solid #fff;
+                                    cursor: $cr-pointer;
+                                }
+
+                                &#ActiveThemeDisplay, &#ActiveWallpaperDisplay {
+                                    outline: 2px solid #fff;
+                                }
+            
+                                &[data-theme="blue"] {
+                                    border-top: 50px solid $sc-primary-blue;
+                                    border-right: 50px solid $sc-secondary-blue;
+                                }
+            
+                                &[data-theme="black"] {
+                                    border-top: 50px solid $sc-primary-black;
+                                    border-right: 50px solid $sc-secondary-black;
+                                }
+            
+                                &[data-theme="red"] {
+                                    border-top: 50px solid $sc-primary-red;
+                                    border-right: 50px solid $sc-secondary-red;
+                                }
+            
+                                &[data-theme="green"] {
+                                    border-top: 50px solid $sc-primary-green;
+                                    border-right: 50px solid $sc-secondary-green;
+                                }
+            
+                                &[data-theme="pink"] {
+                                    border-top: 50px solid $sc-primary-pink;
+                                    border-right: 50px solid $sc-secondary-pink;
+                                }
+                            }
+                        }
+                    }
+                }
+
             }
 
             &__categories {
@@ -290,63 +377,6 @@
                 }
             }
 
-        }
-    }
-
-    &#themesettings {
-        display: grid;
-        grid-template-columns: 50% 50%;
-        overflow: auto !important;
-        .themes, .wallpapers {
-            width: 90%;
-            margin: 1rem auto;
-
-            h2 {
-                font-weight: 100;
-                margin-bottom: 0.5rem;
-            }
-
-            &__grid {
-                display: grid;
-                grid-template-columns: repeat(2, auto);
-                grid-gap: 2px;
-
-                .theme, .wallpaper {
-                    background-color: gray;
-                    display: inline-block;
-                    height: 50px;
-
-                    &:hover {
-                        outline: 2px solid var(--secondary);
-                        cursor: $cr-pointer;
-                    }
-
-                    &[data-theme="blue"] {
-                        border-top: 50px solid $sc-primary-blue;
-                        border-right: 50px solid $sc-secondary-blue;
-                    }
-
-                    &[data-theme="black"] {
-                        border-top: 50px solid $sc-primary-black;
-                        border-right: 50px solid $sc-secondary-black;
-                    }
-
-                    &[data-theme="red"] {
-                        border-top: 50px solid $sc-primary-red;
-                        border-right: 50px solid $sc-secondary-red;
-                    }
-
-                    &[data-theme="green"] {
-                        border-top: 50px solid $sc-primary-green;
-                        border-right: 50px solid $sc-secondary-green;
-                    }
-
-                    &[data-theme="pink"] {
-                        border-top: 50px solid $sc-primary-pink;
-                        border-right: 50px solid $sc-secondary-pink;
-                    }
-                }
-            }
         }
     }
 

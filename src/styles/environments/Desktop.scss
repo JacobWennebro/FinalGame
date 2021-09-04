@@ -47,6 +47,7 @@ body:not(.progress-state) {
 
         &#wallpaper {
             background: var(--wallpaper);
+            background-size: cover;
         }
     }
 

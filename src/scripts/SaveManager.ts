@@ -1,8 +1,7 @@
-import Save from "../components/ui/Save";
-import SaveManager from "../components/ui/SaveManagerInterface";
 
 const defaultConstants = {
     theme:"blue",
+    wallpaper: null,
     setting_fullWidth: false,
     setting_clickSound: true
 }

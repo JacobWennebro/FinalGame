@@ -55,17 +55,6 @@
             "fullscreen": false
         },
         {
-            "title": "Customize ExperienceOS",
-            "icon": "settings.png",
-            "id": "app.themesettings",
-            "show": false,
-            "maxWidth":"20vw",
-            "minWidth":"20vw",
-            "minHeight":"30vh",
-            "maxHeight":"30vh",
-            "fullscreen": false
-        },
-        {
             "title": "System Restore",
             "icon": "settings.png",
             "id": "app.restoration",

@@ -2,6 +2,9 @@ import React, { ChangeEvent, Component, MouseEvent } from 'react'
 import GameSave from '../../../scripts/SaveManager'
 import Category from './Category'
 
+// Pages
+import personalize from './pages/personalize';
+
 interface Setting {
     id: string,
     name: string,
@@ -12,7 +15,9 @@ interface Setting {
 
 interface SettingsState {
     // An array of objects
-    settings: Setting[]
+    settings: Setting[],
+    page: string|null,
+    title: string|null
 }
 
 export default class app extends Component<{ save: GameSave }, SettingsState> {
@@ -35,8 +40,12 @@ export default class app extends Component<{ save: GameSave }, SettingsState> {
                         value ? document.body.setAttribute("full-width", "") : document.body.removeAttribute("full-width");
                     }
                 }
-            ]
+            ],
+            page: null,
+            title: null
         }
+
+        this.pageRetriever = this.pageRetriever.bind(this);
     }
 
     updateSetting(setting: Setting, e: ChangeEvent<HTMLInputElement>) {
@@ -49,11 +58,26 @@ export default class app extends Component<{ save: GameSave }, SettingsState> {
         if (setting.onUpdate) setting.onUpdate(newValue);
     }
 
-    selectCategory(id?: string) {
-        if(!id) return;
+    pageRetriever(page: string) {
+        let Component = null;
 
-        console.log(id);
+        switch(page) {
+            case "personalize":
+                Component = personalize;
+            break;
+        }
 
+        if(!Component) return null;
+
+        return (
+            <div className="controlpanel__main__page">
+                <span id="CpReset" onClick={() => this.setState({page: null, title: null})}>&lt; Control Panel Home</span>
+                <hr/>
+                <div className="controlpanel__main__page__view" id={page}>
+                    <Component save={this.props.save}/>
+                </div>
+            </div>
+        );
     }
 
     render() {
@@ -81,15 +105,17 @@ export default class app extends Component<{ save: GameSave }, SettingsState> {
 
                 </div>
                 <div className="controlpanel__main">
-                    <h1 className="text-style-1">Pick a category</h1>
+                    <h1 className="text-style-1">{this.state.title ? this.state.title : "Pick a category"}</h1>
                     
-                    <div className="controlpanel__main__categories render-as-pixels">
-                        <Category onClick={() => this.selectCategory("personalize")} title={"Appearance and Themes"} icon="personalize.png"/>
-                        <Category onClick={() => this.selectCategory()} title={"Network and Internet Connections"} icon="browser.png"/>
-                        <Category onClick={() => this.selectCategory()} title={"Accessibility Options"} icon="computer.png"/>
-                        <Category onClick={() => this.selectCategory()} title={"User Accounts"} icon="computer.png"/>
-                        <Category onClick={() => this.selectCategory()} title={"Security Center"} icon="security.png"/>
-                    </div>
+                    {this.pageRetriever(this.state.page) ? this.pageRetriever(this.state.page) : (
+                        <div className="controlpanel__main__categories render-as-pixels">
+                            <Category onClick={() => this.setState({page: "personalize", title:"Appearance and Themes"})} title={"Appearance and Themes"} icon="personalize.png"/>
+                            <Category onClick={() => this.setState({page: "network", title:"Network and Internet Connections"})} title={"Network and Internet Connections"} icon="browser.png"/>
+                            <Category onClick={() => this.setState({page: "accessibility", title:"Accessibility Options"})} title={"Accessibility Options"} icon="accessibility.png"/>
+                            <Category onClick={() => this.setState({page: "users", title:"User Accounts"})} title={"User Accounts"} icon="users.png"/>
+                            <Category onClick={() => this.setState({page: "security", title:"Security Center"})} title={"Security Center"} icon="security.png"/>
+                        </div>
+                    )}
 
                 </div>
             </div>

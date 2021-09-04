@@ -9,10 +9,9 @@ export default class ContextMenu extends Component<{ openApp: (id: string) => vo
                 left: this.props.x+"px"
             }}>
                 <ul>
-                    <li>Test 123</li>
-                    <li>123 Test</li>
+                    <li id="cxmPictures">Picture Gallery</li>
+                    <li>My Computer</li>
                     <li className="cxm__spacer"><hr/></li>
-                    <li id="cxmPersonalize">Personalize Theme</li>
                     <li id="cxmSettings">Settings</li>
                 </ul>
             </div>

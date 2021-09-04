@@ -71,11 +71,11 @@ img {
     width: 100%;
     pointer-events: none;
     button {
-        background-color: var(--secondary);
+        background-color: #2ecc7071;
         color: #fff;
         padding: 0.25rem 1rem;
         margin: 0 0.5rem;
-        border: 0px;
+        border: 2px solid #2ecc71;
         border-radius: 4px;
         outline: none;
         pointer-events: all;

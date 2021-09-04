@@ -9,7 +9,6 @@ import Notepad from '../apps/app.notepad/app'
 import Webcam from '../apps/app.webcam/app'
 import Browser from '../apps/app.browser/app'
 import Controlpanel from '../apps/app.controlpanel/app'
-import ThemeSettings from '../apps/app.themesettings/app'
 import Messenger from '../apps/app.messenger/app'
 import Restoration from '../apps/app.restoration/app'
 
@@ -42,6 +41,7 @@ interface state {
 
 export default class Desktop extends Component<props, state> {
     timeInterval: NodeJS.Timeout
+    wallpaper = this.props.save.getConstant("wallpaper");
 
     constructor(props) {
         super(props);
@@ -100,12 +100,6 @@ export default class Desktop extends Component<props, state> {
                     visible: true,
                     notifications: 0
                 },
-                "app.themesettings": {
-                    content: (<ThemeSettings save={this.props.save}/>),
-                    active: false,
-                    visible: true,
-                    notifications: 0
-                },
                 "app.restoration": {
                     content: (<Restoration save={this.props.save}/>),
                     active: false,
@@ -141,8 +135,8 @@ export default class Desktop extends Component<props, state> {
         if (e.button == 0) {
             console.log("left click");
             switch((e.target as HTMLDivElement).id.substr(3).toLowerCase()) {
-                case "personalize":
-                    this.slowOpenApp("app.themesettings", 2000);
+                case "pictures":
+                    this.slowOpenApp("app.pictures", 2000);
                     break;
                 case "settings":
                     this.slowOpenApp("app.controlpanel", 2000);
@@ -324,8 +318,8 @@ export default class Desktop extends Component<props, state> {
                         }
 
                         {/* Desktop window container */}
-                        <div className="desktop__board" id="wallpaper">
-                            {!data.production ? (<span id="debugInfo"><b>Developer mode</b> | Game clock: {this.state.time} | Formatted clock {FormatTime(this.state.time)} | Save #{this.props.save.id} | <button onClick={() => this.setState({show_save_manager: !this.state.show_save_manager})}>Save manager</button></span>) : (<React.Fragment/>)}
+                        <div className="desktop__board render-as-pixels" id="wallpaper" data-wallpaper={this.wallpaper} style={{backgroundImage: this.wallpaper ? this.wallpaper : ""}}>
+                            {!data.production ? (<span id="debugInfo"><b>Developer mode</b> | Game clock: {this.state.time} | Formatted clock {FormatTime(this.state.time)} | Save #{this.props.save.id} | <button onClick={() => this.setState({show_save_manager: !this.state.show_save_manager})}>Save manager</button><button>Force App (coming)</button></span>) : (<React.Fragment/>)}
                             
                             <ContextMenu openApp={this.openApp} visibility={this.state.cxm.visibility} x={this.state.cxm.x} y={this.state.cxm.y}/>
                             
