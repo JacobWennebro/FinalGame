@@ -19,6 +19,7 @@ import ContextMenu from '../ui/ContextMenu';
 import GameSave from '../../scripts/SaveManager';
 import SaveManager from '../ui/dev/SaveManagerInterface';
 import ForceAppInterface from '../ui/dev/ForceAppInterface';
+import MusicDebugInterface from '../ui/dev/MusicDebugInterface';
 
 interface props {
     Consumer: React.Consumer<{}>
@@ -34,6 +35,7 @@ interface state {
     adware_popups: any[]
     show_save_manager: boolean
     show_force_app: boolean
+    show_music_debugger: boolean
     cxm: {
         visibility: boolean
         x: number
@@ -60,6 +62,7 @@ export default class Desktop extends Component<props, state> {
             time_speed: 2000,
             show_save_manager: false,
             show_force_app: false,
+            show_music_debugger: false,
             adware_popups: [],
             cxm: {
                 visibility: false,
@@ -322,12 +325,21 @@ export default class Desktop extends Component<props, state> {
                         }
 
                         {
-                            this.state.show_force_app ? (<ForceAppInterface openApp={this.openApp} save={this.props.save}/>) : ""
+                            this.state.show_force_app ? (<ForceAppInterface apps={Object.keys(this.state.apps)} openApp={this.openApp} save={this.props.save}/>) : ""
+                        }
+
+                        {
+                            this.state.show_music_debugger ? (<MusicDebugInterface/>) : ""
                         }
 
                         {/* Desktop window container */}
                         <div className="desktop__board render-as-pixels" id="wallpaper" data-wallpaper={this.wallpaper} style={{backgroundImage: this.wallpaper ? this.wallpaper : ""}}>
-                            {!data.production ? (<span id="debugInfo"><b>Developer mode</b> | Game clock: {this.state.time} | Formatted clock {FormatTime(this.state.time)} | Save #{this.props.save.id} | <button onClick={() => this.setState({show_save_manager: !this.state.show_save_manager})}>Save manager</button><button onClick={() => this.setState({show_force_app: !this.state.show_force_app})}>Force App</button></span>) : (<React.Fragment/>)}
+                            {!data.production ? (
+                            <span id="debugInfo"><b>Developer mode</b> | Game clock: {this.state.time} | Formatted clock {FormatTime(this.state.time)} | Save #{this.props.save.id} | 
+                                <button onClick={() => this.setState({show_save_manager: !this.state.show_save_manager})}>Save manager</button>
+                                <button onClick={() => this.setState({show_force_app: !this.state.show_force_app})}>Force App</button>
+                                <button onClick={() => this.setState({show_music_debugger: !this.state.show_music_debugger})}>Music Debugger</button>
+                            </span>) : (<React.Fragment/>)}
                             
                             <ContextMenu openApp={this.openApp} visibility={this.state.cxm.visibility} x={this.state.cxm.x} y={this.state.cxm.y}/>
                             
