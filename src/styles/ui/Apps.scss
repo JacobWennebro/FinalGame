@@ -388,6 +388,41 @@
         .sidebar {
             background-color: #d3d0c2;
             padding: 0.5rem;
+            position: relative;
+
+            &__footer {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                width: 100%;
+                padding: 0 0.5rem;
+                height: 3rem;
+                background-color: #ece9d8;
+                vertical-align: middle;
+                border-right: 2px solid #d3d0c2;
+                border-left: 3px solid #d3d0c2;
+
+                img {
+                    height: 80%;
+                    width: auto;
+                    outline: 2px solid #d3d0c2;
+                }
+
+                span {
+                    display: inline-block;
+                    transform: translateY(-50%);
+                    margin-left: 1rem;
+                    color: #86847d;
+                    text-transform: uppercase;
+                    border-bottom: 2px solid transparent;
+                    &:hover {
+                        border-bottom: 2px solid;
+                        cursor: $cr-pointer;
+                        color: var(--secondary);
+                    }
+                }
+
+            }
 
             &__contacts {
                 .contact {
@@ -525,6 +560,10 @@
                                 color: #fff;
                                 font-family: "VT323", sans-serif;
                                 font-size: 1rem;
+                                &:hover {
+                                    filter: brightness(90%);
+                                    cursor: $cr-pointer;
+                                }
                             }
                         }
 

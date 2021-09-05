@@ -17,7 +17,8 @@ import FormatTime from '../../scripts/FormatTime';
 import devmode from '../../devmode.json';
 import ContextMenu from '../ui/ContextMenu';
 import GameSave from '../../scripts/SaveManager';
-import SaveManager from '../ui/SaveManagerInterface';
+import SaveManager from '../ui/dev/SaveManagerInterface';
+import ForceAppInterface from '../ui/dev/ForceAppInterface';
 
 interface props {
     Consumer: React.Consumer<{}>
@@ -32,6 +33,7 @@ interface state {
     apps: any
     adware_popups: any[]
     show_save_manager: boolean
+    show_force_app: boolean
     cxm: {
         visibility: boolean
         x: number
@@ -57,6 +59,7 @@ export default class Desktop extends Component<props, state> {
             time: 850, // Ingame start time (later load from save file)
             time_speed: 2000,
             show_save_manager: false,
+            show_force_app: false,
             adware_popups: [],
             cxm: {
                 visibility: false,
@@ -201,6 +204,7 @@ export default class Desktop extends Component<props, state> {
 
     openApp(id: string) {
         let state = this.state;
+        if(!state.apps[id]) return alert(`Invalid application id [ID: ${id}]`);
         state.apps[id].active = true;
         this.setState(state);
     }
@@ -317,9 +321,13 @@ export default class Desktop extends Component<props, state> {
                             this.state.show_save_manager ? (<SaveManager save={this.props.save}/>) : ""
                         }
 
+                        {
+                            this.state.show_force_app ? (<ForceAppInterface openApp={this.openApp} save={this.props.save}/>) : ""
+                        }
+
                         {/* Desktop window container */}
                         <div className="desktop__board render-as-pixels" id="wallpaper" data-wallpaper={this.wallpaper} style={{backgroundImage: this.wallpaper ? this.wallpaper : ""}}>
-                            {!data.production ? (<span id="debugInfo"><b>Developer mode</b> | Game clock: {this.state.time} | Formatted clock {FormatTime(this.state.time)} | Save #{this.props.save.id} | <button onClick={() => this.setState({show_save_manager: !this.state.show_save_manager})}>Save manager</button><button>Force App (coming)</button></span>) : (<React.Fragment/>)}
+                            {!data.production ? (<span id="debugInfo"><b>Developer mode</b> | Game clock: {this.state.time} | Formatted clock {FormatTime(this.state.time)} | Save #{this.props.save.id} | <button onClick={() => this.setState({show_save_manager: !this.state.show_save_manager})}>Save manager</button><button onClick={() => this.setState({show_force_app: !this.state.show_force_app})}>Force App</button></span>) : (<React.Fragment/>)}
                             
                             <ContextMenu openApp={this.openApp} visibility={this.state.cxm.visibility} x={this.state.cxm.x} y={this.state.cxm.y}/>
                             

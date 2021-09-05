@@ -57,6 +57,11 @@ export default class app extends Component<{}, state> {
                         <Contact onClick={() => this.setState({active_contact: dBryant as any})} name={dBryant.username}/>
 
                     </div>
+
+                    <div className="sidebar__footer">
+                        <Image className="render-as-pixels v-center" src="images/avatars/sebastian.png"/>
+                        <span>My account &gt;</span>
+                    </div>
                 </div>
 
                 <div className="chat">
